@@ -8,8 +8,8 @@ matFile = data.FileInfo.MatFile;
 [~, fn1, ~] = fileparts(matFile);
 ffn = fullfile(dataPath, [fn1, '_Tumor_RGB.mat']);
 
-if ~exist(ffn, 'file')
-%     load(ffn)
+if exist(ffn, 'file')
+    load(ffn)
 %     if ~exist('CC_RC', 'var')
 %         [M, N, ~] = size(data.hPlotObj.snakeImage.CData);
 %         contRC = data.Tumor.refContour;
@@ -22,7 +22,7 @@ if ~exist(ffn, 'file')
 %         save(ffn, 'bwSum_*', 'mask_*', 'polyA_*', 'CC_*', 'M', 'N', 'nImages', 'bInd_*');
 %     end    
 %     
-% else
+else
     [M, N, ~] = size(data.Panel.View.Comp.hPlotObj.Image.CData);
     contGC = data.Tumor.gatedContour;
     [bwCAll_GC, mask_GC, bwSum_GC, polyA_GC, CC_GC, bInd_GC] = fun_getCC(contGC, M, N);

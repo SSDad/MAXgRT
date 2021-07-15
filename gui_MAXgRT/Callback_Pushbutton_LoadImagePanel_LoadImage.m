@@ -5,7 +5,7 @@ data = guidata(hFig);
 
 %% load image data
 td = tempdir;
-fd_info = fullfile(td, 'MAXIM');
+fd_info = fullfile(td, 'MAXgRT');
 fn_info = fullfile(fd_info, 'info.mat');
 if ~exist(fd_info, 'dir')
     [matFile, dataPath] = uigetfile('*.mat');

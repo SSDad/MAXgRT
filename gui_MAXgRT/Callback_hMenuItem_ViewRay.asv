@@ -1,0 +1,14 @@
+function Callback_hMenuItem_ViewRay(src, evnt)
+
+hFig = ancestor(src, 'Figure');
+data = guidata(hFig);
+hMenuItem = data.hMenuItem;
+
+if strcmp(src.Checked, 'off')
+    src.Checked = 'on';
+    hMenuItem.Cine.Checked = 'off';
+
+    data.Panel.LoadImage_Cine.hPanel.Visible = 'on';
+    data.Panel.LoadImage.hPanel.Visible = 'on';
+
+end

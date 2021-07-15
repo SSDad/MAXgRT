@@ -1,4 +1,4 @@
-function Callback_Slider_SliceSliderPanel_SliceSlider(src, evnt)
+ function Callback_Slider_SliceSliderPanel_SliceSlider(src, evnt)
 
 global hFig hFig2 contrastRectLim
 

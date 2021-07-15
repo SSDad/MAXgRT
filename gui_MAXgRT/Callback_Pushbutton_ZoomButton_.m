@@ -1,0 +1,23 @@
+function Callback_Pushbutton_ZoomButton_(src, evnt)
+
+hFig = ancestor(src, 'Figure');
+data = guidata(hFig);
+
+TagNo = str2num(src.Tag);
+hPanel = data.Panel.View_Cine.subPanel(TagNo).hPanel;
+if hPanel.Position(4) < 1
+    for n = 1:3
+        data.Panel.View_Cine.subPanel(n).hPanel.Visible = 'off';
+    end
+    hPanel.Position = [0 0 1 1];
+    hPanel.Visible = 'on';
+else
+    x = [0 0.5 0];
+    y = [0.5 0.5 0];
+    w = [.5 .5 1];
+    h = .5;
+    for n = 1:3
+        data.Panel.View_Cine.subPanel(n).hPanel.Position = [x(n) y(n) w(n) h];
+        data.Panel.View_Cine.subPanel(n).hPanel.Visible = 'on';
+    end
+end
