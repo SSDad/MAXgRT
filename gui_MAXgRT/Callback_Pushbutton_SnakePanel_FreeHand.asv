@@ -10,15 +10,16 @@ endSlice = str2double(data.Panel.Snake.Comp.Edit.EndSlice.String);
 
 
 %% Mode
-if strcmp(data.bMode, 'V') % ViewRay
-% if strcmp(data.hMenuItem.Cine.Checked, 'off')  % ViewRay
+bMode = 'V';
+if strcmp(data.hMenuItem.Cine.Checked, 'off')  % ViewRay
     hSlider = data.Panel.SliceSlider.Comp.hSlider.Slice;
     iSlice = round(hSlider.Value);
 else % Cine
     TagNo = data.CineActiveTagNo;
+    bMode = 'C';
 end
 
-if strcmp(data.bMode, 'V') % ViewRay
+if strcmp(bMode, 'V') % ViewRay
     if iSlice < startSlice || iSlice > endSlice
         iSlice = startSlice;
         hSlider.Value = iSlice;
@@ -72,13 +73,13 @@ if strcmp(data.bMode, 'V') % ViewRay
     %     'Closed', 0);
     draw(L);
 
-elseif strcmp(data.bMode, 'C') % Cine
-    hA = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hAxis.Image;
+elseif strcmp(bMode, 'C')
+    hA = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image;
     % uistack(hA, 'top');
 
     axis(hA);
     L = images.roi.AssistedFreehand(hA,...
-        'Image', data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image, ...
+        'Image', data.Panel.View.Comp.hPlotObj.Image, ...
         'Closed', 0);
     % L = images.roi.AssistedFreehand('Image', data.Panel.View.Comp.hPlotObj.Image, ...
     %     'Closed', 0);

@@ -53,12 +53,22 @@ data.cine(3).v = cat(2, cineData.sag, cineData.cor);
 [data.cine(3).mImg, data.cine(3).nImg, data.cine(3).nSlice] = size(data.cine(3).v);
 clearvars cineData;
 
+for n = 1:3
+    data.cine(n).x0 = 0;
+    data.cine(n).y0 = 0;
+    data.cine(n).dx = 1;
+    data.cine(n).dy = 1;
+end
+
 guidata(hFig, data);
 
 %% view
 data.cine(1).iSlice = 1;
 data.cine(2).iSlice = 1;
 data.cine(3).iSlice = 1;
+
+data.CineActiveTagNo = [];
+
 % cineImg{1} = data.cine.sag(:, :, data.cine.iSlice(1));
 % [~, ~, data.cine.nSlice(1)] = size(data.cine.sag);
 % cineImg{2} = data.cine.cor(:, :, data.cine.iSlice(2));
