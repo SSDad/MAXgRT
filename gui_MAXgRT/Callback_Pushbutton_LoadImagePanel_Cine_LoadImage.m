@@ -24,6 +24,7 @@ end
 
 matPath = fullfile(cinePath, 'mat', dataFolder);
 dcmPath = fullfile(cinePath, 'dicom', dataFolder);
+data.FileInfo.CineMatPath = matPath;
 
 if ~exist(matPath, 'dir')
     mkdir(matPath);
@@ -31,7 +32,22 @@ if ~exist(matPath, 'dir')
 end
 
 %% cine view
-fileList = dir(fullfile(matPath, '*.mat'));
+allFileList = dir(fullfile(matPath, '*.mat'));
+idx = find(contains({allFileList.name}','sag.mat'));
+if ~isempty(idx)
+    fileList{1} = 'sag.mat';
+end
+
+idx = find(contains({allFileList.name}','cor.mat'));
+if ~isempty(idx)
+    fileList{2} = 'cor.mat';
+end
+
+idx = find(contains({allFileList.name}','sc.mat'));
+if ~isempty(idx)
+    fileList{3} = 'sc.mat';
+end
+
 data.Panel.View_Cine.subPanel = addComponents2Panel_View_Cine(data.Panel.View_Cine.hPanel, fileList);
 
 %% load data
@@ -85,6 +101,7 @@ for n = 1:3
         imshow(I, [], 'parent', hA);
     hPlotObj = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj;
     hPlotObj.Snake = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
+    axis(hA, 'tight', 'equal');
    
     % slider
     hSS =  data.Panel.View_Cine.subPanel(n).ssPanel(4).Comp.hSlider.Slice;
@@ -117,7 +134,7 @@ for n = 1:3
     dy = data.cine(n).dy;
     mImgSize = data.cine(n).mImg;
     nImgSize = data.cine(n).nImg;
-    xWL(1) = x0-dx/2;
+    xWL(1) = x0;
     xWL(2) = xWL(1)+dx*nImgSize;
     yWL(1) = y0-dy/2;
     yWL(2) = yWL(1)+dy*mImgSize;
@@ -146,7 +163,7 @@ for n = 1:3
 %     addlistener(hPlotObj.AbRectCLine, 'MovingROI', @Callback_AbRectCLine);
   
      data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
-
+     
 end
 
 guidata(hFig, data);

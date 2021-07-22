@@ -14,6 +14,8 @@ if hPanel.Position(4) < 1
 
     % Snake panel on
     data.Panel.Selection.hPanel.Visible = 'on';
+    data.Panel.Body.hPanel.Visible = 'on';
+
     data.Panel.Snake.hPanel.Visible = 'off';
     
     data.CineActiveTagNo = TagNo;
@@ -44,6 +46,8 @@ else
     % Snake panel off
     data.Panel.Selection.hPanel.Visible = 'off';
     data.Panel.Snake.hPanel.Visible = 'off';
+
+    data.Panel.Body.hPanel.Visible = 'off';
 
     data.CineActiveTagNo = TagNo;
 

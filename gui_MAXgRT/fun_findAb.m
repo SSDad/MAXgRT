@@ -22,10 +22,10 @@ end
 [M, N] = size(JC);
 mask = zeros(M, N);
 
-bw = imbinarize(JC, 0.001/2);%, 'adaptive', 'Sensitivity', 0.8);
+bw = imbinarize(JC, 0.25);%, 'adaptive', 'Sensitivity', 0.8);
 [~, col] = find(bw, 1);
 mask (1:M, 1:col-2) = 1;
-bw = activecontour(JC, mask, 100, 'Chan-Vese', 'SmoothFactor', 2);
+bw = activecontour(JC, mask, 100, 'Chan-Vese', 'SmoothFactor', 0.4);
 if bPlot
     figure(103)
     imshow(bw)

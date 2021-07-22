@@ -24,6 +24,7 @@ end
 
 matPath = fullfile(cinePath, 'mat', dataFolder);
 dcmPath = fullfile(cinePath, 'dicom', dataFolder);
+data.FileInfo.CineMatPath = matPath;
 
 if ~exist(matPath, 'dir')
     mkdir(matPath);
@@ -33,6 +34,11 @@ end
 %% cine view
 fileList = dir(fullfile(matPath, '*.mat'));
 data.Panel.View_Cine.subPanel = addComponents2Panel_View_Cine(data.Panel.View_Cine.hPanel, fileList);
+
+idx = find(contains({fileList.name}','sag.mat'));
+if isempty(idx)
+    fileList{1} = 'sag.mat';
+end
 
 %% load data
 ffn = fullfile(matPath, 'sag.mat');
@@ -79,12 +85,13 @@ data.CineActiveTagNo = [];
 % [~, ~, data.cine.nSlice(3)] = size(data.cine.sc.sag);
 
 for n = 1:3
-    hA(n) = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
+    hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     I = data.cine(n).v(:, :, data.cine(n).iSlice);
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...
-        imshow(I, [], 'parent', hA(n));
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.Snake =...
-        line(hA(n), 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
+        imshow(I, [], 'parent', hA);
+    hPlotObj = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj;
+    hPlotObj.Snake = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
+    axis(hA, 'tight', 'equal');
    
     % slider
     hSS =  data.Panel.View_Cine.subPanel(n).ssPanel(4).Comp.hSlider.Slice;
@@ -109,7 +116,44 @@ for n = 1:3
 
      data.Panel.View_Cine.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.XData = xc;
      data.Panel.View_Cine.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.YData = yc;
+     
+     % body
+    x0 = data.cine(n).x0;
+    y0 = data.cine(n).y0;
+    dx = data.cine(n).dx;
+    dy = data.cine(n).dy;
+    mImgSize = data.cine(n).mImg;
+    nImgSize = data.cine(n).nImg;
+    xWL(1) = x0;
+    xWL(2) = xWL(1)+dx*nImgSize;
+    yWL(1) = y0-dy/2;
+    yWL(2) = yWL(1)+dy*mImgSize;
 
+    hPlotObj.Body = line(hA, 'XData', [], 'YData', [], 'Color', 'g', 'LineStyle', '-', 'LineWidth', 0.5);
+
+    hPlotObj.Ab = line(hA,  'XData', [], 'YData', [], 'Color', 'g', 'LineStyle', '-', 'LineWidth', 3, 'Marker', '.');
+
+%     pos = [x0 y0+yWL(2)*2/3
+%             xWL(2) y0+yWL(2)*2/3];
+%     hPlotObj.AbLine1 = images.roi.Line(hA, 'Color', 'g', 'Position', pos, 'LineWidth', 0.5,...
+%         'Tag', 'L1', 'InteractionsAllowed', 'Translate');
+%    addlistener(hPlotObj.AbLine1, 'MovingROI', @Callback_Line_AbL1);
+
+    pos = [ x0  y0+yWL(2)/3 xWL(2) yWL(2)/3];
+    hPlotObj.AbRect = images.roi.Rectangle(hA, 'Position', pos, 'Color', 'g',...
+        'LineWidth', .5, 'FaceAlpha', 0.1, 'Tag', 'AbRec', 'Visible', 'off');
+    addlistener(hPlotObj.AbRect, 'MovingROI', @Callback_AbRect_Cine_);
+    
+    x1 = pos(1);
+    x2 = x1+pos(3);
+    y1 = pos(2)+pos(4)/2;
+    y2 = y1;
+    hPlotObj.AbRectCLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c',...
+        'LineWidth', 1, 'Tag', 'AbRecCLine', 'Visible', 'off');
+%     addlistener(hPlotObj.AbRectCLine, 'MovingROI', @Callback_AbRectCLine);
+  
+     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
+     
 end
 
 guidata(hFig, data);

@@ -41,7 +41,7 @@ for iSlice = 1:nSlices
     J = data.cine(TagNo).v(:,:,iSlice);
 %     if data.Tumor.indC(iSlice) > 1 % gating or tracking contour on image
         
-        [abC2] = fun_findAb(J, mBound);
+        [abC2] = fun_findAb_Cine(J, mBound, TagNo);
         
 %         sC = data.Snake.Snakes{iSlice}; % diaphragm Contour, 1 - column, 2 - row
         data.cine(TagNo).Body.AbsContours{iSlice} = abC2; % 1 - row, 2 - column

@@ -61,18 +61,18 @@ end
         AbsContours =  data.cine(TagNo).Body.AbsContours;
 
         %% .mat
-        ffn_Cine = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(TagNo), '.mat']);
+        ffn_Cine = fullfile(data.FileInfo.CineMatPath, '_AbsContour.mat');
         save(ffn_Cine, 'AbsContours');
-        data.FileInfo.ffn_AbsContour_Cine = ffn_Cine;
+        data.FileInfo.ffn_AbsContour_Cine = ffn_AbsContour_Cine;
 
         %% .csv
-        ffn_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(TagNo), '.csv']);
+        ffn_csv = fullfile(data.FileInfo.CineMatPath, '_AbsContourMatrix2.csv');
         data.FileInfo.ffn_csv_AbsContour_Cine = ffn_csv;
 
-        x0 = data.cine(TagNo).x0;
-        y0 = data.cine(TagNo).y0;
-        dx = data.cine(TagNo).dx;
-        dy = data.cine(TagNo).dy;
+    x0 = data.cine(TagNo).x0;
+    y0 = data.cine(TagNo).y0;
+    dx = data.cine(TagNo).dx;
+    dy = data.cine(TagNo).dy;
 
         nSlice = length(AbsContours);
         nP = max(cellfun(@length, AbsContours));
