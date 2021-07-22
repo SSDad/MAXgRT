@@ -13,7 +13,7 @@ data.cine(TagNo).iSlice = round(get(src, 'Value'));
 
 I = data.cine(TagNo).v(:, :, data.cine(TagNo).iSlice);
 
-data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I.
+% data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I.
        
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
         = [num2str(data.cine(TagNo).iSlice), ' / ', num2str(data.cine(TagNo).nSlice)];
@@ -27,7 +27,17 @@ cL2 = minI+wI*contrastRectLim_Cine(TagNo, 2);
 I(I<cL1) = cL1;
 I(I>cL2) = cL2;
 
-data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I.
+% hist
+yc = histcounts(I, max(I(:))+1);
+yc = log10(yc);
+yc = yc/max(yc);
+xc = 1:length(yc);
+xc = xc/max(xc);
+data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.XData = xc;
+data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.YData = yc;
+
+
+data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
 % hPlotObj = data.Panel.View.Comp.hPlotObj;
 % hPlotObj.Image.CData = I;
 
@@ -68,14 +78,6 @@ data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I.
 % % data.Panel.View.Comp.hPlotObj.TumorCent.YData = data.Tumor.cent.y(iSlice);
 % 
 % 
-% % hist
-% yc = histcounts(I, max(I(:))+1);
-% yc = log10(yc);
-% yc = yc/max(yc);
-% xc = 1:length(yc);
-% xc = xc/max(xc);
-% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.XData = xc;
-% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.YData = yc;
 % 
 % % snake
 % x0 = data.Image.x0;

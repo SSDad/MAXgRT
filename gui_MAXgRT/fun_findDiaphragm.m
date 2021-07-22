@@ -2,7 +2,7 @@ function [sC] =  fun_findDiaphragm(J, Rect, C)
 
 % clear cC sC
 
-bPlot = 0;
+bPlot = 1;
 
 JC = imcrop(J, Rect);
 cC(:, 1) = C(:, 1)-Rect(1);
@@ -16,12 +16,12 @@ framelen = min(framelen, 25);
 cC(:, 2) = sgolayfilt(cC(:, 2), 3, framelen);
 
 if bPlot
-    figure(101), clf
+    figure(201), clf
     imshow(J, []); hold on
     rectangle('Position', Rect, 'EdgeColor', 'c');
     line('XData', C(:, 1), 'YData', C(:, 2), 'Color', 'g');
 
-    figure(102), clf
+    figure(202), clf
     imshow(JC); hold on
     line('XData', cC(:, 1), 'YData', cC(:, 2), 'Color', 'r');
 end
@@ -45,7 +45,7 @@ sC(:,1) = [cC(:, 1); xx1; xx2; xx3];
 sC(:,2) = [cC(:, 2); yy1; yy2; yy3];
 
 if bPlot
-    figure(102)
+    figure(202)
     line('XData', sC(:, 1), 'YData', sC(:, 2), 'Color', 'g', 'LineWidth', 2);
 end    
 
@@ -63,7 +63,7 @@ end
 
 sC = fliplr(B{idx});
 if bPlot
-    figure(102)
+    figure(202)
     line('XData', sC(:, 1), 'YData', sC(:, 2), 'Color', 'r', 'LineWidth', 2);
 end    
 sC(:, 1) = sC(:, 1)+Rect(1);
@@ -91,7 +91,7 @@ else
 end
  
 if bPlot
-    figure(101)
+    figure(201)
     line('XData', sC(:, 1), 'YData', sC(:, 2), 'Color', 'r', 'LineWidth', 2);
 end    
 

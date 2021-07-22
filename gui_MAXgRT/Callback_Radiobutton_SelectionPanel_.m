@@ -35,8 +35,12 @@ else
 %     [~, fn1, ~] = fileparts(matFile);
 %     ffn_snakes = fullfile(dataPath, [fn1, '_Snake.mat']);
 %     data.FileInfo.ffn_AbsContour = ffn_Abs;
+
+if strcmp(data.bMode, 'V')
     if exist(data.FileInfo.ffn_AbsContour, 'file')
         data.Panel.Body.Comp.Pushbutton.LoadContour.Enable = 'on';
     end
+else
+end
 
 end

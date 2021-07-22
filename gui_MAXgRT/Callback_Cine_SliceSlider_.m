@@ -9,12 +9,10 @@ data = guidata(hFig);
 % endSlice = str2double(data.Panel.Snake.Comp.Edit.EndSlice.String);
 
 TagNo = str2num(src.Tag);
-data.cine(TagNo).iSlice = round(get(src, 'Value'));
+iSlice = round(get(src, 'Value'));
+data.cine(TagNo).iSlice = iSlice;
+I = data.cine(TagNo).v(:, :, iSlice);
 
-I = data.cine(TagNo).v(:, :, data.cine(TagNo).iSlice);
-
-% data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I.
-       
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
         = [num2str(data.cine(TagNo).iSlice), ' / ', num2str(data.cine(TagNo).nSlice)];
 
@@ -28,6 +26,44 @@ I(I<cL1) = cL1;
 I(I>cL2) = cL2;
 
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
+
+% hist
+yc = histcounts(I, max(I(:))+1);
+yc = log10(yc);
+yc = yc/max(yc);
+xc = 1:length(yc);
+xc = xc/max(xc);
+% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.XData = xc;
+% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.YData = yc;
+     data.Panel.View_Cine.subPanel(TagNo).ssPanel(2).Comp.hPlotObj.Hist.XData = xc;
+     data.Panel.View_Cine.subPanel(TagNo).ssPanel(2).Comp.hPlotObj.Hist.YData = yc;
+
+% xy info
+x0 = data.cine(TagNo).x0;
+y0 = data.cine(TagNo).y0;
+dx = data.cine(TagNo).dx;
+dy = data.cine(TagNo).dy;
+     
+% Body Contour
+if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).Body, 'AbsContours')
+    abC2 = data.cine(TagNo).Body.AbsContours{iSlice};
+    hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
+%     if data.Body.ContourDone 
+        if isempty(abC2)
+            hPlotObj.Body.XData = [];
+            hPlotObj.Body.YData = [];
+            hPlotObj.Ab.XData = [];
+            hPlotObj.Ab.YData = [];
+        else
+%             hPlotObj.Body.YData = (bC(:, 1)-1)*dy+y0;
+%             hPlotObj.Body.XData = (bC(:, 2)-1)*dx+x0;
+            hPlotObj.Ab.YData = (abC2(:, 1)-1)*dy+y0;
+            hPlotObj.Ab.XData = (abC2(:, 2)-1)*dx+x0;
+        end
+%     end
+end
+
+
 % hPlotObj = data.Panel.View.Comp.hPlotObj;
 % hPlotObj.Image.CData = I;
 
@@ -68,14 +104,6 @@ data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
 % % data.Panel.View.Comp.hPlotObj.TumorCent.YData = data.Tumor.cent.y(iSlice);
 % 
 % 
-% % hist
-% yc = histcounts(I, max(I(:))+1);
-% yc = log10(yc);
-% yc = yc/max(yc);
-% xc = 1:length(yc);
-% xc = xc/max(xc);
-% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.XData = xc;
-% data.Panel.ContrastBar.Comp.Panel.Constrast.hPlotObj.Hist.YData = yc;
 % 
 % % snake
 % x0 = data.Image.x0;
@@ -125,25 +153,6 @@ data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
 % 
 % end
 % 
-% % if data.Body.ContourDone
-% if data.Panel.Selection.Comp.Radiobutton.Body.Value    
-%     bC = data.Body.Contours{iSlice};
-%     abC2 = data.Body.AbsContours{iSlice};
-%     hPlotObj = data.Panel.View.Comp.hPlotObj;
-% %     if data.Body.ContourDone 
-%         if isempty(abC2)
-%             hPlotObj.Body.XData = [];
-%             hPlotObj.Body.YData = [];
-%             hPlotObj.Ab.XData = [];
-%             hPlotObj.Ab.YData = [];
-%         else
-% %             hPlotObj.Body.YData = (bC(:, 1)-1)*dy+y0;
-% %             hPlotObj.Body.XData = (bC(:, 2)-1)*dx+x0;
-%             hPlotObj.Ab.YData = (abC2(:, 1)-1)*dy+y0;
-%             hPlotObj.Ab.XData = (abC2(:, 2)-1)*dx+x0;
-%         end
-% %     end
-% end
 % 
 % data.Point.Data.iSlice = iSlice;
 % guidata(hFig, data);
