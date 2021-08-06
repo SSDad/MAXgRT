@@ -26,7 +26,7 @@ else
     data.Panel.Snake.hPanel.Visible = 'off';
     data.Panel.Point.hPanel.Visible = 'off';
     data.Panel.Body.hPanel.Visible = 'on';
-    
+end    
 %     data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'on';
 %     data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'on';
 
@@ -41,6 +41,6 @@ if strcmp(data.bMode, 'V')
         data.Panel.Body.Comp.Pushbutton.LoadContour.Enable = 'on';
     end
 else
+    data.Panel.Point.hPanel.Visible = 'off';
 end
 
-end

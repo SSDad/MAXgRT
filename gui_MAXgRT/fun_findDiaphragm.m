@@ -2,7 +2,7 @@ function [sC] =  fun_findDiaphragm(J, Rect, C)
 
 % clear cC sC
 
-bPlot = 1;
+bPlot = 0;
 
 JC = imcrop(J, Rect);
 cC(:, 1) = C(:, 1)-Rect(1);

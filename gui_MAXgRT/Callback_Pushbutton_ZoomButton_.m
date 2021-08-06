@@ -14,6 +14,10 @@ if hPanel.Position(4) < 1
 
     % Snake panel on
     data.Panel.Selection.hPanel.Visible = 'on';
+
+    data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 0;
+    data.Panel.Selection.Comp.Radiobutton.Body.Value = 1;
+
     data.Panel.Body.hPanel.Visible = 'on';
 
     data.Panel.Snake.hPanel.Visible = 'off';
@@ -21,13 +25,13 @@ if hPanel.Position(4) < 1
     data.CineActiveTagNo = TagNo;
 
 %     % enable buttons on Snake
-%     data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
-%     data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
-%     data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
-%     data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
-%     data.Panel.Snake.Comp.Edit.EndSlice.String = num2str(data.cine(TagNo).nSlice);
-%     data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
-%     data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
+    data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
+    data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
+    data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
+    data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
+    data.Panel.Snake.Comp.Edit.EndSlice.String = num2str(data.cine(TagNo).nSlice);
+    data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
+    data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
 
     data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
     data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
