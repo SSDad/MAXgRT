@@ -65,7 +65,9 @@ clearvars cineData;
 
 ffn = fullfile(matPath, 'sc.mat');
 load(ffn)
-data.cine(3).v = cat(2, cineData.sag, cineData.cor);
+% data.cine(3).v = cat(2, cineData.sag, cineData.cor);
+data.cine(3).sag = cineData.sag;
+data.cine(3).cor = cineData.cor;
 [data.cine(3).mImg, data.cine(3).nImg, data.cine(3).nSlice] = size(data.cine(3).v);
 clearvars cineData;
 
@@ -166,6 +168,16 @@ for n = 1:3
      
 end
 
+%buttons on Snake
+data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
+data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
+data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
+data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
+data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
+
+%buttons on Body
+data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
+data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
 
 
 guidata(hFig, data);

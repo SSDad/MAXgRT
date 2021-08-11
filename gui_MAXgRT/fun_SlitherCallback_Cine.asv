@@ -145,8 +145,8 @@ for iSlice = startSlice:endSlice
 %         sC = [];
 %     end    
 
-%     data.Snake.Snakes{iSlice} = sC;
-    data.cine(TagNo).Snake.Snakes{iSlice} = sC;
+    data.Snake.Snakes{iSlice} = sC;
+    data.cine(TagNo).Snake
    
 %     % tumor snake
 %     set(data.Panel.View.Comp.hPlotObj.RGBContour, 'XData', Tumor.eContXY{iSlice}(:, 1),...
@@ -217,7 +217,7 @@ end
         hPlotObj.Snake.YData = [];
         
     else
-        data.cine(TagNo).Snake.SlitherDone = true;
+        data.Snake.SlitherDone = true;
 
         % enable buttons
         data.Panel.Snake.Comp.Togglebutton.ReDraw.Enable = 'on';

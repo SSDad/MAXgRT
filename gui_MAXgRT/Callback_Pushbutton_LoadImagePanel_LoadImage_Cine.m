@@ -66,6 +66,8 @@ clearvars cineData;
 ffn = fullfile(matPath, 'sc.mat');
 load(ffn)
 data.cine(3).v = cat(2, cineData.sag, cineData.cor);
+% data.cine(3).sag = cineData.sag;
+% data.cine(3).cor = cineData.cor;
 [data.cine(3).mImg, data.cine(3).nImg, data.cine(3).nSlice] = size(data.cine(3).v);
 clearvars cineData;
 

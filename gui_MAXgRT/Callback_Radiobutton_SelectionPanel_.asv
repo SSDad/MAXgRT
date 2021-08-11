@@ -27,15 +27,14 @@ if data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value
     data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'off';
     data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'off';
 
-%     data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'off';
-%     data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'off';
+    data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'off';
+    data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'on';
 else
     data.Panel.Snake.hPanel.Visible = 'off';
     data.Panel.Point.hPanel.Visible = 'off';
     data.Panel.Body.hPanel.Visible = 'on';
-    
-%     data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'on';
-%     data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'on';
+    data.Panel.View.Comp.hPlotObj.AbRect.Visible = 'on';
+    data.Panel.View.Comp.hPlotObj.AbRectCLine.Visible = 'on';
 end    
 
     

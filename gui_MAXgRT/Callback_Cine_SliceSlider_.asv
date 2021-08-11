@@ -64,14 +64,13 @@ if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).
 end
 
 if data.cine(TagNo).Snake.SlitherDone
-    hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
     CB = data.cine(TagNo).Snake.Snakes{iSlice};
     if isempty(CB)
-        hPlotObj.Snake.XData = [];
-        hPlotObj.Snake.YData = [];
+        data.Panel.View.Comp.hPlotObj.Snake.XData = [];
+        data.Panel.View.Comp.hPlotObj.Snake.YData = [];
     else
-        hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
-        hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
+        data.Panel.View.Comp.hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
+        data.Panel.View.Comp.hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
     end
 end
 
