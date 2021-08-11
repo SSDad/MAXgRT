@@ -1,12 +1,16 @@
 function Callback_Radiobutton_SelectionPanel_(src, evnt)
 
+global bZoomSelect
+
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 
 if strcmp(src.Tag, 'Body')
     hRB = data.Panel.Selection.Comp.Radiobutton.Diaphragm;
+    bZoomSelect = 'B';
 else
     hRB = data.Panel.Selection.Comp.Radiobutton.Body;
+    bZoomSelect = 'D';
 end
 
 if src.Value
@@ -36,11 +40,13 @@ end
 %     ffn_snakes = fullfile(dataPath, [fn1, '_Snake.mat']);
 %     data.FileInfo.ffn_AbsContour = ffn_Abs;
 
+%  ViewRay/Cine
 if strcmp(data.bMode, 'V')
     if exist(data.FileInfo.ffn_AbsContour, 'file')
         data.Panel.Body.Comp.Pushbutton.LoadContour.Enable = 'on';
     end
 else
     data.Panel.Point.hPanel.Visible = 'off';
+    
 end
 

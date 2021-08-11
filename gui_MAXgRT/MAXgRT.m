@@ -2,6 +2,7 @@ function MAXgRT
 
 %% global 
 global hFig hFig2
+global bZoomSelect
 
 % global stopSlither
 % global reContL
@@ -42,6 +43,7 @@ data.FC = [255 255 102]/255;
 data.ActiveAxis.MovePoints = 0;
 
 data.bMode = 'V';
+bZoomSelect = 'D';
 
 guidata(hFig, data);
 

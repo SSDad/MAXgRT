@@ -1,4 +1,4 @@
-function Callback_Pushbutton_LoadImagePanel_Cine_LoadImage(src, evnt)
+function Callback_Pushbutton_LoadImagePanel_LoadImage_Cine(src, evnt)
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
@@ -165,6 +165,18 @@ for n = 1:3
      data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
      
 end
+
+%buttons on Snake
+data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
+data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
+data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
+data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
+data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
+
+%buttons on Body
+data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
+data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
+
 
 guidata(hFig, data);
 
