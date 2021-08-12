@@ -60,14 +60,16 @@ end
         TagNo = data.CineActiveTagNo;
         AbsContours =  data.cine(TagNo).Body.AbsContours;
 
-        %% .mat
-        ffn_Cine = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(TagNo), '.mat']);
+        % .mat
+        ffn_Cine = data.cine(TagNo).ffn_Body_mat;
+%         ffn_Cine = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(TagNo), '.mat']);
         save(ffn_Cine, 'AbsContours');
-        data.FileInfo.ffn_AbsContour_Cine = ffn_Cine;
+%         data.FileInfo.ffn_AbsContour_Cine = ffn_Cine;
 
-        %% .csv
-        ffn_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(TagNo), '.csv']);
-        data.FileInfo.ffn_csv_AbsContour_Cine = ffn_csv;
+        % .csv
+%         ffn_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(TagNo), '.csv']);
+        ffn_csv = data.cine(TagNo).ffn_Body_csv;
+%         data.FileInfo.ffn_csv_AbsContour_Cine = ffn_csv;
 
         x0 = data.cine(TagNo).x0;
         y0 = data.cine(TagNo).y0;

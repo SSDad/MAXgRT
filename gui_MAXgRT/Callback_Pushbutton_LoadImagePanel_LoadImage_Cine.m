@@ -165,7 +165,21 @@ for n = 1:3
 %     addlistener(hPlotObj.AbRectCLine, 'MovingROI', @Callback_AbRectCLine);
   
      data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
+
+     % save file names
+     if n ~=3
+         data.cine(n).ffn_Snake_mat = fullfile(data.FileInfo.CineMatPath, ['Snake_', num2str(n), '.mat']);
+         data.cine(n).ffn_Snake_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2_', num2str(n), '.csv']);
+     else
+         data.cine(n).ffn_SnakeL_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeL_', num2str(n), '.mat']);
+         data.cine(n).ffn_SnakeR_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeR_', num2str(n), '.mat']);
+         data.cine(n).ffn_SnakeL_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2L_', num2str(n), '.csv']);
+         data.cine(n).ffn_SnakeR_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2R_', num2str(n), '.csv']);
+     end
      
+     data.cine(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(n), '.mat']);
+     data.cine(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(n), '.csv']);
+
 end
 
 %buttons on Snake
