@@ -1,5 +1,7 @@
 function Callback_Pushbutton_SnakePanel_SaveSnake(src, evnt)
 
+global bLR
+
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 if strcmp(data.bMode, 'V')
@@ -121,12 +123,24 @@ end
         TagNo = data.CineActiveTagNo;
         
         % mat
-        ffn_mat = data.cine(TagNo).ffn_Snake_mat;
-        Snakes = data.cine(TagNo).Snake.Snakes;
+        if TagNo == 3
+            if strcmp(bLR, 'L')
+                ffn_mat = data.cine(TagNo).ffn_SnakeL_mat;
+                Snakes = data.cine(TagNo).SnakeL.Snakes;
+                ffn_csv = data.cine(TagNo).ffn_SnakeL_csv;
+            else
+                ffn_mat = data.cine(TagNo).ffn_SnakeR_mat;
+                Snakes = data.cine(TagNo).SnakeR.Snakes;
+                ffn_csv = data.cine(TagNo).ffn_SnakeR_csv;
+            end
+        else
+            ffn_mat = data.cine(TagNo).ffn_Snake_mat;
+            Snakes = data.cine(TagNo).Snake.Snakes;
+            ffn_csv = data.cine(TagNo).ffn_Snake_csv;
+        end
         save(ffn_mat, 'Snakes');
 
         % csv
-        ffn_csv = data.cine(TagNo).ffn_Snake_csv;
         
         x0 = data.cine(TagNo).x0;
         y0 = data.cine(TagNo).y0;

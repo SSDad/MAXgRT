@@ -121,9 +121,12 @@ end
         TagNo = data.CineActiveTagNo;
         
         % mat
-        ffn_mat = data.cine(TagNo).ffn_Snake_mat;
-        Snakes = data.cine(TagNo).Snake.Snakes;
-        save(ffn_mat, 'Snakes');
+        if TagNo == 3
+        else
+            ffn_mat = data.cine(TagNo).ffn_Snake_mat;
+            Snakes = data.cine(TagNo).Snake.Snakes;
+            save(ffn_mat, 'Snakes');
+        end
 
         % csv
         ffn_csv = data.cine(TagNo).ffn_Snake_csv;

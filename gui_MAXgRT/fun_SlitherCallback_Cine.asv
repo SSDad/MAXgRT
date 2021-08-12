@@ -3,7 +3,6 @@ function fun_SlitherCallback_Cine(src, evnt)
 bPlot = 0;
 
 global stopSlither 
-global bLR
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
@@ -160,7 +159,6 @@ if TagNo == 3
     if strcmp(bLR, 'L')
         data.cine(TagNo).SnakeL.Snakes{iSlice} = sC;
     else
-        data.cine(TagNo).SnakeR.Snakes{iSlice} = sC;
     end
 else
     data.cine(TagNo).Snake.Snakes{iSlice} = sC;
