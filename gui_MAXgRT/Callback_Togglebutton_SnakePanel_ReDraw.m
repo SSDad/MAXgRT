@@ -1,6 +1,6 @@
 function Callback_Togglebutton_SnakePanel_ReDraw(src, evnt)
 
-global reContL
+global reContL reContL2
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
@@ -135,43 +135,42 @@ end
         y0 = data.cine(TagNo).y0;
         dx = data.cine(TagNo).dx;
         dy = data.cine(TagNo).dy;
-        
-         iSlice = data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value;
 
-        if TagNo == 3
-        else
-            if strcmp(str, 'reDraw')
+        iSlice = data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value;
+        iSlice = round(iSlice);
+
+        if strcmp(str, 'reDraw')
             src.String = 'Done';
             src.ForegroundColor = 'r';
             src.BackgroundColor = [1 1 1]*0.25;
-
-            hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj;
             hA =data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hAxis.Image;
-            
-            C = data.cine(TagNo).Snake.Snakes{round(iSlice)};
 
-            if isempty(C)
-                axis(hA);
-                L = images.roi.AssistedFreehand(hA,...
-                    'Image', data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image, ...
-                    'Closed', 0);
-                draw(L);
-                reContL = L;
-            else
+            if TagNo == 3
+                C = data.cine(TagNo).SnakeL.Snakes{iSlice};
                 % convert to xy
                 C(:, 1) = (C(:, 1)-1)*dx+x0;
                 C(:, 2) = (C(:, 2)-1)*dy+y0;
+                reContL = drawfreehand(hA, 'Position', C, 'Closed', 0);
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake,...
+                    'YData', [], 'XData', []);
 
-                nWP = size(C, 1);
-                WP = false(nWP, 1);
-                WP(round(linspace(1, nWP-nWP/14, 14))) = true;
-
-                reContL = drawfreehand(hA,...
-                    'Position', C, 'Closed', 0);%, 'Waypoints', WP);
-
-                data.Panel.View.Comp.hPlotObj.Snake.YData = [];
-                data.Panel.View.Comp.hPlotObj.Snake.XData = [];
+                C2 = data.cine(TagNo).SnakeR.Snakes{iSlice};
+                % convert to xy
+                C2(:, 1) = (C2(:, 1)-1)*dx+x0;
+                C2(:, 2) = (C2(:, 2)-1)*dy+y0;
+                reContL2 = drawfreehand(hA, 'Position', C2, 'Closed', 0);
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake2,...
+                    'YData', [], 'XData', []);
+            else
+                C = data.cine(TagNo).Snake.Snakes{iSlice};
+                % convert to xy
+                C(:, 1) = (C(:, 1)-1)*dx+x0;
+                C(:, 2) = (C(:, 2)-1)*dy+y0;
+                reContL = drawfreehand(hA, 'Position', C, 'Closed', 0);
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake,...
+                    'YData', [], 'XData', []);
             end
+            
             % disable buttons
             data.Panel.Snake.Comp.Pushbutton.LoadSnake.Enable = 'off';
             data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'off';
@@ -179,66 +178,64 @@ end
             data.Panel.Snake.Comp.Pushbutton.SaveSnake.Enable = 'off';
             data.Panel.Snake.Comp.Togglebutton.Slither.Enable = 'off';
 
-    else % Done
-        src.String = 'reDraw';
-        src.ForegroundColor = 'g';
-        src.BackgroundColor = [1 1 1]*0.25;
+        else % Done
+            src.String = 'reDraw';
+            src.ForegroundColor = 'g';
+            src.BackgroundColor = [1 1 1]*0.25;
 
-        data.cine(TagNo).Snake.Snakes{iSlice} = [];
-        C = reContL.Position;
-        % convert to ij
-        jj = (C(:, 1)-x0)/dx+1;
-        ii = (C(:, 2)-y0)/dy+1;
-        jj = sgolayfilt(jj, 3, 75);
+    %         data.cine(TagNo).Snake.Snakes{iSlice} = [];
 
-        jj2 = ceil(jj(1)):floor(jj(end));
-        ii2 = interp1(jj, ii, jj2);
+            if TagNo == 3
+                C = reContL.Position;
+                C = fun_convert2ij(C, x0, y0, dx, dy);     % convert to ij
+                data.cine(TagNo).SnakeL.Snakes{iSlice} = C;
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake,...
+                    'YData', (C(:, 2)-1)*dy+y0, 'XData', (C(:, 1)-1)*dx+x0);
+                reContL.Visible = 'off';
 
-        C = [jj2' ii2'];
+                C2 = reContL2.Position;
+                C2 = fun_convert2ij(C2, x0, y0, dx, dy);     % convert to ij
+                data.cine(TagNo).SnakeR.Snakes{iSlice} = C2;
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake2,...
+                    'YData', (C2(:, 2)-1)*dy+y0, 'XData', (C2(:, 1)-1)*dx+x0);
+                reContL2.Visible = 'off';
 
-        data.cine(TagNo).Snake.Snakes{iSlice} = C;
+            else
+                C = reContL.Position;
+                C = fun_convert2ij(C, x0, y0, dx, dy);     % convert to ij
+                data.cine(TagNo).Snake.Snakes{iSlice} = C;
+                set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake,...
+                    'YData', (C(:, 2)-1)*dy+y0, 'XData', (C(:, 1)-1)*dx+x0);
+                reContL.Visible = 'off';
+            end
 
-        % show
-        set(data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Snake,...
-            'YData', (C(:, 2)-1)*dy+y0, 'XData', (C(:, 1)-1)*dx+x0);
+            % enable buttons
+            data.Panel.Snake.Comp.Pushbutton.LoadSnake.Enable = 'off';
+            data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
+            data.Panel.Snake.Comp.Pushbutton.Delete.Enable = 'off';
+            data.Panel.Snake.Comp.Pushbutton.SaveSnake.Enable = 'on';
+            data.Panel.Snake.Comp.Togglebutton.Slither.Enable = 'on';
 
-%         % points
-%         if data.Point.InitDone
-%             xi = data.Point.Data.xi;
-%             ixm = data.Point.Data.ixm;
-%             NP = data.Point.Data.NP;
-%             yi = data.Point.Data.yi;
-% 
-%             [~, yi(iSlice, :)] = fun_PointOnCurve(C, dx, dy, x0, y0, xi, yi(iSlice, :));
-%             data.Point.Data.yi = yi;
-% 
-%             hPlotObj = data.Panel.View.Comp.hPlotObj;
-%             hPlotObj.Point.XData = xi(ixm);
-%             hPlotObj.Point.YData = yi(iSlice, ixm);
-%             hPlotObj.LeftPoints.XData = xi(ixm-NP:ixm-1);
-%             hPlotObj.LeftPoints.YData = yi(iSlice, ixm-NP:ixm-1);
-%             hPlotObj.RightPoints.XData = xi(ixm+1:ixm+NP);
-%             hPlotObj.RightPoints.YData = yi(iSlice, ixm+1:ixm+NP);
-% 
-%             guidata(hFig, data)
-%             updatePlotPoint;
-%         end
-
-        reContL.Visible = 'off';
-
-        % enable buttons
-        data.Panel.Snake.Comp.Pushbutton.LoadSnake.Enable = 'on';
-        data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
-        data.Panel.Snake.Comp.Pushbutton.Delete.Enable = 'on';
-        data.Panel.Snake.Comp.Pushbutton.SaveSnake.Enable = 'on';
-        data.Panel.Snake.Comp.Togglebutton.Slither.Enable = 'on';
-
-        guidata(hFig, data)
+            guidata(hFig, data)
 
         end
 
     end
 
-end
+    function Cout = fun_convert2ij(C, x0, y0, dx, dy)
+        jj = (C(:, 1)-x0)/dx+1;
+        ii = (C(:, 2)-y0)/dy+1;
+
+        winLen = min(round(length(jj)/4), 25);
+        if mod(winLen, 2) == 0
+            winLen = winLen - 1;
+        end
+        jj = sgolayfilt(jj, 3, winLen);
+
+        jj2 = ceil(jj(1)):floor(jj(end));
+        ii2 = interp1(jj, ii, jj2);
+
+        Cout = [jj2' ii2'];
+    end
 
 end

@@ -263,7 +263,7 @@ end
 
         % enable buttons
         data.Panel.Snake.Comp.Togglebutton.ReDraw.Enable = 'on';
-        data.Panel.Snake.Comp.Pushbutton.Delete.Enable = 'on';
+        data.Panel.Snake.Comp.Pushbutton.Delete.Enable = 'off';
         data.Panel.Snake.Comp.Pushbutton.SaveSnake.Enable = 'on';
 
         data.Panel.Point.Comp.Popup.Neighbour.Enable = 'on';
@@ -299,6 +299,8 @@ end
             hPlotObj.Snake2.YData = (sC2(:, 2)-1)*dy+y0;
             hPlotObj.Snake2.XData = (sC2(:, 1)-1)*dx+x0;
         end
+        
+        hPlotObj.Snake2.Color = 'm';
     else
         sC = data.cine(TagNo).Snake.Snakes{iSlice};
     end
