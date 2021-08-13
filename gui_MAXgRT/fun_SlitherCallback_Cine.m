@@ -156,16 +156,6 @@ for iSlice = startSlice:endSlice
 
 %     data.Snake.Snakes{iSlice} = sC;
 
-if TagNo == 3
-    if strcmp(bLR, 'L')
-        data.cine(TagNo).SnakeL.Snakes{iSlice} = sC;
-    else
-        data.cine(TagNo).SnakeR.Snakes{iSlice} = sC;
-    end
-else
-    data.cine(TagNo).Snake.Snakes{iSlice} = sC;
-end
-   
 %     % tumor snake
 %     set(data.Panel.View.Comp.hPlotObj.RGBContour, 'XData', Tumor.eContXY{iSlice}(:, 1),...
 %         'YData', Tumor.eContXY{iSlice}(:, 2), 'Color', CLR(Tumor.indC(iSlice)));
@@ -183,8 +173,7 @@ end
 %     end
 
     
-    % snake on gui
-%     hPlotObj.Image.CData = rot90(data.Image.Images{iSlice}, 3);
+    % snake on image
     hPlotObj.Image.CData = J;
     if isempty(sC)
         hPlotObj.Snake.YData = [];
@@ -193,7 +182,32 @@ end
         hPlotObj.Snake.YData = (sC(:, 2)-1)*dy+y0;
         hPlotObj.Snake.XData = (sC(:, 1)-1)*dx+x0;
     end
-%     data.Panel.SliceSlider.Comp.hText.nImages.String = [num2str(iSlice), ' / ', num2str(nSlices)];
+    
+    if TagNo == 3
+        sC2 = [];
+        if strcmp(bLR, 'L')
+            data.cine(TagNo).SnakeL.Snakes{iSlice} = sC;
+            if data.cine(TagNo).SnakeR.SlitherDone
+                sC2 = data.cine(TagNo).SnakeR.Snakes{iSlice};
+            end
+        else
+            data.cine(TagNo).SnakeR.Snakes{iSlice} = sC;
+            if data.cine(TagNo).SnakeL.SlitherDone
+                sC2 = data.cine(TagNo).SnakeL.Snakes{iSlice};
+            end
+        end
+        if isempty(sC2)
+            hPlotObj.Snake2.YData = [];
+            hPlotObj.Snake2.XData = [];
+        else
+            hPlotObj.Snake2.YData = (sC2(:, 2)-1)*dy+y0;
+            hPlotObj.Snake2.XData = (sC2(:, 1)-1)*dx+x0;
+        end
+    else
+        data.cine(TagNo).Snake.Snakes{iSlice} = sC;
+    end
+
+    % update slider
     data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value = iSlice;
     data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
         = [num2str(iSlice), ' / ', num2str(data.cine(TagNo).nSlice)];
@@ -235,7 +249,17 @@ end
         hPlotObj.Snake.YData = [];
         
     else
-        data.cine(TagNo).Snake.SlitherDone = true;
+        
+        % slther done
+        if TagNo == 3
+            if strcmp(bLR, 'L')
+                data.cine(TagNo).SnakeL.SlitherDone = true;
+            else
+                data.cine(TagNo).SnakeR.SlitherDone = true;
+            end
+        else
+            data.cine(TagNo).Snake.SlitherDone = true;
+        end
 
         % enable buttons
         data.Panel.Snake.Comp.Togglebutton.ReDraw.Enable = 'on';
@@ -249,6 +273,50 @@ end
         data.Panel.Point.Comp.Radiobutton.Dome.Enable = 'on';
     end
 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % slice 1
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    iSlice = startSlice;
+    hPlotObj.Image.CData = data.cine(TagNo).v(:,:,iSlice);
+    if TagNo == 3
+        sC2 = [];
+        if strcmp(bLR, 'L')
+            sC = data.cine(TagNo).SnakeL.Snakes{iSlice};
+            if data.cine(TagNo).SnakeR.SlitherDone
+                % snake on image
+                sC2 = data.cine(TagNo).SnakeR.Snakes{iSlice};
+            end
+        else
+            sC = data.cine(TagNo).SnakeR.Snakes{iSlice};
+            if data.cine(TagNo).SnakeL.SlitherDone
+                sC2 = data.cine(TagNo).SnakeL.Snakes{iSlice};
+            end
+        end
+        if isempty(sC2)
+            hPlotObj.Snake2.YData = [];
+            hPlotObj.Snake2.XData = [];
+        else
+            hPlotObj.Snake2.YData = (sC2(:, 2)-1)*dy+y0;
+            hPlotObj.Snake2.XData = (sC2(:, 1)-1)*dx+x0;
+        end
+    else
+        sC = data.cine(TagNo).Snake.Snakes{iSlice};
+    end
+
+    if isempty(sC)
+        hPlotObj.Snake.YData = [];
+        hPlotObj.Snake.XData = [];
+    else
+        hPlotObj.Snake.YData = (sC(:, 2)-1)*dy+y0;
+        hPlotObj.Snake.XData = (sC(:, 1)-1)*dx+x0;
+    end
+    % update slider
+    data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value = iSlice;
+    data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
+        = [num2str(iSlice), ' / ', num2str(data.cine(TagNo).nSlice)];
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
     guidata(hFig, data);
 
     src.String = 'Slither';
