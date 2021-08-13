@@ -63,42 +63,18 @@ if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).
 %     end
 end
 
-if TagNo == 3
-    if data.cine(TagNo).SnakeL.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).SnakeL.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake.XData = [];
-            hPlotObj.Snake.YData = [];
-        else
-            hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
-        end
-    end
-    if data.cine(TagNo).SnakeR.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).SnakeR.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake2.XData = [];
-            hPlotObj.Snake2.YData = [];
-        else
-            hPlotObj.Snake2.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake2.XData = (CB(:, 1)-1)*dx+x0;
-        end
-    end
-else
-    if data.cine(TagNo).Snake.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).Snake.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake.XData = [];
-            hPlotObj.Snake.YData = [];
-        else
-            hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
-        end
+if data.cine(TagNo).Snake.SlitherDone
+    hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
+    CB = data.cine(TagNo).Snake.Snakes{iSlice};
+    if isempty(CB)
+        hPlotObj.Snake.XData = [];
+        hPlotObj.Snake.YData = [];
+    else
+        hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
+        hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
     end
 end
+
 % hPlotObj = data.Panel.View.Comp.hPlotObj;
 % hPlotObj.Image.CData = I;
 
