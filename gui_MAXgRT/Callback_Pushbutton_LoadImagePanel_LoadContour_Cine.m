@@ -3,6 +3,14 @@ function Callback_Pushbutton_LoadImagePanel_LoadContour_Cine(src, evnt)
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 
+fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect', 'on');
+% idx = find(contains(fileList,'sag.txt', 'IgnoreCase', true));
+
+%% single sag txt
+ffn = fullfile(data.FileInfo.CineDataPath, fileList);
+
+contData = fun_readContourTxt(ffn);
+
 %% load cine data
 td = tempdir;
 fd_info = fullfile(td, 'MAXgRT');
@@ -103,6 +111,7 @@ end
 %     data.cine(n).dx = 1;
 %     data.cine(n).dy = 1;
 % end
+data.bSC = bSC;
 
 guidata(hFig, data);
 
