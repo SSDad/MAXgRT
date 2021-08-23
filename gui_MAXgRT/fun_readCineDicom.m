@@ -28,9 +28,9 @@ for idx = 1:size(dcmC,1)
 %     catch ME
 %         nFile = length(dicomFileName);
 %         if nFile > 1 % cine
-            junk = dcmC.SeriesDescription{idx};
-            bSag = contains(junk, 'sag', 'IgnoreCase',true);
-            bCor = contains(junk, 'cor', 'IgnoreCase',true);
+%             junk = dcmC.SeriesDescription{idx};
+%             bSag = contains(junk, 'sag', 'IgnoreCase',true);
+%             bCor = contains(junk, 'cor', 'IgnoreCase',true);
             
             [cineData] = fun_dicomreadCine(bSag, bCor, dicomFileName);
 

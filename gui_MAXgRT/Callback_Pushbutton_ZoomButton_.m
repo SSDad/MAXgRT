@@ -55,4 +55,10 @@ else
 
 end
 
+%% all off
+data.Panel.Selection.hPanel.Visible = 'off';
+data.Panel.Body.hPanel.Visible = 'off';
+data.Panel.Snake.hPanel.Visible = 'off';
+
+
 guidata(hFig, data);

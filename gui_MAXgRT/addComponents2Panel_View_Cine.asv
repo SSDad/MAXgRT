@@ -3,8 +3,8 @@ function subPanel = addComponents2Panel_View_Cine(hPanel, fileList)
 FC = [255 255 102]/255;
 
 
-%% sag, cor, sag+cor
-% if numel(fileList) == 3 
+%% % sag, cor, sag+cor
+if numel(fileList) == 3 
     x = [0 0.5 0];
     y = [0.5 0.5 0];
     w = [.5 .5 1];
@@ -55,7 +55,7 @@ FC = [255 255 102]/255;
         subPanel(n).ssPanel(3).Comp =...
                  addComponents2Panel_View(subPanel(n).ssPanel(3).hPanel);
     end
-% end
+end
                             
 %                             
 %     Comp.hAxis.Image = axes('Parent',                   hPanel, ...

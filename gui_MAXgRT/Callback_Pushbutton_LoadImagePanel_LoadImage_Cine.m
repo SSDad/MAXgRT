@@ -22,8 +22,9 @@ else
     [~, dataFolder] = fileparts(dataPath);
 end
 
-matPath = fullfile(cinePath, 'mat', dataFolder);
-dcmPath = fullfile(cinePath, 'dicom', dataFolder);
+matPath = fullfile(dataPath, 'mat');
+dcmPath = fullfile(dataPath, 'dicom');
+data.FileInfo.CineDataPath = dataPath;
 data.FileInfo.CineMatPath = matPath;
 
 if ~exist(matPath, 'dir')
@@ -49,41 +50,66 @@ if ~isempty(idx)
 end
 
 data.Panel.View_Cine.subPanel = addComponents2Panel_View_Cine(data.Panel.View_Cine.hPanel, fileList);
-
+% data.cine = [];
 %% load data
+bSC = false(3,1);
 ffn = fullfile(matPath, 'sag.mat');
-load(ffn)
-data.cine(1).v = cineData.v;
-[data.cine(1).mImg, data.cine(1).nImg, data.cine(1).nSlice] = size(cineData.v);
-clearvars cineData;
+% data.cine(1) = [];
+if exist(ffn, 'file')
+    bSC(1) = 1;
+    load(ffn)
+    data.cine(1).v = cineData.v;
+    [data.cine(1).mImg, data.cine(1).nImg, data.cine(1).nSlice] = size(cineData.v);
+    data.cine(1).x0 = cineData.IMP(1);
+    data.cine(1).y0 = cineData.IMP(2);
+    data.cine(1).dx = cineData.PS(1);
+    data.cine(1).dy = cineData.PS(2);
+    clearvars cineData;
+end
 
 ffn = fullfile(matPath, 'cor.mat');
-load(ffn)
-data.cine(2).v = cineData.v;
-[data.cine(2).mImg, data.cine(2).nImg, data.cine(2).nSlice] = size(cineData.v);
-clearvars cineData;
+% data.cine(2) = [];
+if exist(ffn, 'file')
+    bSC(2) = 1;
+    load(ffn)
+    data.cine(2).v = cineData.v;
+    [data.cine(2).mImg, data.cine(2).nImg, data.cine(2).nSlice] = size(cineData.v);
+    data.cine(2).x0 = cineData.IMP(1);
+    data.cine(2).y0 = cineData.IMP(2);
+    data.cine(2).dx = cineData.PS(1);
+    data.cine(2).dy = cineData.PS(2);
+    clearvars cineData;
+end
 
 ffn = fullfile(matPath, 'sc.mat');
-load(ffn)
-data.cine(3).v = cat(2, cineData.sag, cineData.cor);
-% data.cine(3).sag = cineData.sag;
-% data.cine(3).cor = cineData.cor;
-[data.cine(3).mImg, data.cine(3).nImg, data.cine(3).nSlice] = size(data.cine(3).v);
-clearvars cineData;
-
-for n = 1:3
-    data.cine(n).x0 = 0;
-    data.cine(n).y0 = 0;
-    data.cine(n).dx = 1;
-    data.cine(n).dy = 1;
+% data.cine(3) = [];
+if exist(ffn, 'file')
+    bSC(3) = 1;
+    load(ffn)
+    data.cine(3).v = cat(2, cineData.sag, cineData.cor);
+    % data.cine(3).sag = cineData.sag;
+    % data.cine(3).cor = cineData.cor;
+    [data.cine(3).mImg, data.cine(3).nImg, data.cine(3).nSlice] = size(data.cine(3).v);
+    data.cine(3).x0 = cineData.IMP(1);
+    data.cine(3).y0 = cineData.IMP(2);
+    data.cine(3).dx = cineData.PS(1);
+    data.cine(3).dy = cineData.PS(2);
+    clearvars cineData;
 end
+
+% for n = 1:3
+%     data.cine(n).x0 = 0;
+%     data.cine(n).y0 = 0;
+%     data.cine(n).dx = 1;
+%     data.cine(n).dy = 1;
+% end
 
 guidata(hFig, data);
 
 %% view
-data.cine(1).iSlice = 1;
-data.cine(2).iSlice = 1;
-data.cine(3).iSlice = 1;
+% data.cine(1).iSlice = 1;
+% data.cine(2).iSlice = 1;
+% data.cine(3).iSlice = 1;
 
 data.CineActiveTagNo = [];
 
@@ -96,7 +122,8 @@ data.CineActiveTagNo = [];
 % cineImg{3} = [J1 J2];
 % [~, ~, data.cine.nSlice(3)] = size(data.cine.sc.sag);
 
-for n = 1:3
+ for n = find(bSC)'
+    data.cine(n).iSlice = 1;
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     I = data.cine(n).v(:, :, data.cine(n).iSlice);
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...
@@ -186,6 +213,7 @@ for n = 1:3
      data.cine(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(n), '.mat']);
      data.cine(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(n), '.csv']);
 
+%     end
 end
 
 %buttons on Snake
@@ -199,6 +227,8 @@ data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
 data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
 data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
 
+% LoadContour button
+data.Panel.LoadImage_Cine.Comp.Pushbutton.LoadContour.Enable = 'on';
 
 guidata(hFig, data);
 
