@@ -192,8 +192,11 @@ data.CineActiveTagNo = [];
     hPlotObj.AbRectCLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c',...
         'LineWidth', 1, 'Tag', 'AbRecCLine', 'Visible', 'off');
 %     addlistener(hPlotObj.AbRectCLine, 'MovingROI', @Callback_AbRectCLine);
-  
-     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
+
+    % tumor
+    hPlotObj.Tumor = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
+
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
 
      % save file names
      if n ~=3

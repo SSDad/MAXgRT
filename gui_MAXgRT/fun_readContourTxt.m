@@ -22,7 +22,33 @@ end
 fclose(fid);
 
 k = strfind(tt{1}, '=');
-ratio = eval(tt{1}(k+2:k+8));
+contData.ratio = eval(tt{1}(k+2:k+8));
 
+nLine = length(tt);
 tt = tt(1:end-1);
 ind_img = find(contains(tt, 'Image Id', 'IgnoreCase', true));%, 'IgnoreCase', true));
+
+for n = 1:length(ind_img)-1
+    m1 = ind_img(n)+1;
+    m2 = ind_img(n+1)-1;
+    if m2 > m1
+        imgTxt = tt(m1:m2);
+        contData.data(n).cont = fun_readImgContour(imgTxt);
+    end
+end
+
+end
+
+function cont =  fun_readImgContour(imgTxt)
+    ind = find(contains(imgTxt, 'Color = ', 'IgnoreCase', true));%, 'IgnoreCase', true));
+    for n = 1:length(ind)
+        idx = strfind(imgTxt{ind(n)}, '#');
+        cont(n).CLR = imgTxt{ind(n)}(idx:idx+8);
+        
+        junk = imgTxt{ind(n)+1}(3:end-2);
+        junk1 = strrep(junk, ',', ' ');
+        junk2 = str2num(junk1);
+        cont(n).pt = (reshape(junk2, 2, []))';
+        
+    end
+end

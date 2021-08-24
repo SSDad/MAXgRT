@@ -16,7 +16,7 @@ I = data.cine(TagNo).v(:, :, iSlice);
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
         = [num2str(data.cine(TagNo).iSlice), ' / ', num2str(data.cine(TagNo).nSlice)];
 
-% contrast limit
+%% contrast limit
 maxI = max(I(:));
 minI = min(I(:));
 wI = maxI-minI;
@@ -27,7 +27,7 @@ I(I>cL2) = cL2;
 
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
 
-% hist
+%% hist
 yc = histcounts(I, max(I(:))+1);
 yc = log10(yc);
 yc = yc/max(yc);
@@ -43,62 +43,116 @@ x0 = data.cine(TagNo).x0;
 y0 = data.cine(TagNo).y0;
 dx = data.cine(TagNo).dx;
 dy = data.cine(TagNo).dy;
-     
-% Body Contour
-if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).Body, 'AbsContours')
-    abC2 = data.cine(TagNo).Body.AbsContours{iSlice};
-    hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
-%     if data.Body.ContourDone 
-        if isempty(abC2)
-            hPlotObj.Body.XData = [];
-            hPlotObj.Body.YData = [];
-            hPlotObj.Ab.XData = [];
-            hPlotObj.Ab.YData = [];
-        else
-%             hPlotObj.Body.YData = (bC(:, 1)-1)*dy+y0;
-%             hPlotObj.Body.XData = (bC(:, 2)-1)*dx+x0;
-            hPlotObj.Ab.YData = (abC2(:, 1)-1)*dy+y0;
-            hPlotObj.Ab.XData = (abC2(:, 2)-1)*dx+x0;
-        end
-%     end
-end
 
-if TagNo == 3
-    if data.cine(TagNo).SnakeL.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).SnakeL.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake.XData = [];
-            hPlotObj.Snake.YData = [];
-        else
-            hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
-        end
-    end
-    if data.cine(TagNo).SnakeR.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).SnakeR.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake2.XData = [];
-            hPlotObj.Snake2.YData = [];
-        else
-            hPlotObj.Snake2.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake2.XData = (CB(:, 1)-1)*dx+x0;
-        end
-    end
+%% contours
+hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
+% Snake
+if iSlice > length(data.cine(TagNo).Snake.Snakes)
+    S = [];
 else
-    if data.cine(TagNo).Snake.SlitherDone
-        hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
-        CB = data.cine(TagNo).Snake.Snakes{iSlice};
-        if isempty(CB)
-            hPlotObj.Snake.XData = [];
-            hPlotObj.Snake.YData = [];
-        else
-            hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
-            hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
-        end
-    end
+    S = data.cine(TagNo).Snake;
 end
+showContour(iSlice, S, hPlotObj.Snake)
+
+% Tumor
+if iSlice > length(data.cine(TagNo).Tumor.Snakes)
+    S = [];
+else
+    S = data.cine(TagNo).Tumor;
+end
+showContour(iSlice, S, hPlotObj.Tumor)
+
+% Ab
+if iSlice > length(data.cine(TagNo).Ab.Snakes)
+    S = [];
+else
+    S = data.cine(TagNo).Ab;
+end
+showContour(iSlice, S, hPlotObj.Ab)
+
+ end
+ 
+ function showContour(iSlice, S, hPlotObj)
+ 
+ if isempty(S)
+     set(hPlotObj, 'XData', [], 'YData', []);
+ else
+    C = S.Snakes{iSlice};
+    if isempty(C)
+        set(hPlotObj, 'XData', [], 'YData', []);
+    else
+        set(hPlotObj, 'XData', C(:, 1), 'YData', C(:, 2));
+%         CLR = sscanf(S.CLR, '%2x%2x%2x', [1 3])/255;
+        CLR = validatecolor(S.CLR(1:7));
+        set(hPlotObj, 'Color',  CLR);
+    end
+ end
+ 
+ end
+
+ 
+ 
+% %% Body Contour
+% if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).Body, 'AbsContours')
+%     abC2 = data.cine(TagNo).Body.AbsContours{iSlice};
+%     hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
+% %     if data.Body.ContourDone 
+%         if isempty(abC2)
+%             hPlotObj.Body.XData = [];
+%             hPlotObj.Body.YData = [];
+%             hPlotObj.Ab.XData = [];
+%             hPlotObj.Ab.YData = [];
+%         else
+% %             hPlotObj.Body.YData = (bC(:, 1)-1)*dy+y0;
+% %             hPlotObj.Body.XData = (bC(:, 2)-1)*dx+x0;
+%             hPlotObj.Ab.YData = (abC2(:, 1)-1)*dy+y0;
+%             hPlotObj.Ab.XData = (abC2(:, 2)-1)*dx+x0;
+%         end
+% %     end
+% end
+% 
+% if TagNo == 3
+%     if data.cine(TagNo).SnakeL.SlitherDone
+%         hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
+%         CB = data.cine(TagNo).SnakeL.Snakes{iSlice};
+%         if isempty(CB)
+%             hPlotObj.Snake.XData = [];
+%             hPlotObj.Snake.YData = [];
+%         else
+%             hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
+%             hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
+%         end
+%     end
+%     if data.cine(TagNo).SnakeR.SlitherDone
+%         hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
+%         CB = data.cine(TagNo).SnakeR.Snakes{iSlice};
+%         if isempty(CB)
+%             hPlotObj.Snake2.XData = [];
+%             hPlotObj.Snake2.YData = [];
+%         else
+%             hPlotObj.Snake2.YData = (CB(:, 2)-1)*dy+y0;
+%             hPlotObj.Snake2.XData = (CB(:, 1)-1)*dx+x0;
+%         end
+%     end
+% else
+%     if data.cine(TagNo).Snake.SlitherDone
+%         hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; 
+%         CB = data.cine(TagNo).Snake.Snakes{iSlice};
+%         if isempty(CB)
+%             hPlotObj.Snake.XData = [];
+%             hPlotObj.Snake.YData = [];
+%         else
+%             hPlotObj.Snake.YData = (CB(:, 2)-1)*dy+y0;
+%             hPlotObj.Snake.XData = (CB(:, 1)-1)*dx+x0;
+%         end
+%     end
+% end
+
+
+
+
+
+
 % hPlotObj = data.Panel.View.Comp.hPlotObj;
 % hPlotObj.Image.CData = I;
 
