@@ -7,6 +7,8 @@ fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect
 % idx = find(contains(fileList,'sag.txt', 'IgnoreCase', true));
 
 %% single sag txt
+
+TagNo = 1;
 ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 
 contData = fun_readContourTxt(ffn);
@@ -17,20 +19,81 @@ for n = 1:nSliceC
         for m = 1:length(contData.data(n).cont)
             CLR = contData.data(n).cont(m).CLR;
             if strcmp(CLR, '#FFFF0000')
-                data.cine(1).Tumor.CLR = CLR;
-                data.cine(1).Tumor.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
+                data.cine(TagNo).Tumor.CLR = CLR;
+                data.cine(TagNo).Tumor.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
             elseif strcmp(CLR, '#FFA52A2A')
-                data.cine(1).Ab.CLR = CLR;
-                data.cine(1).Ab.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
+                data.cine(TagNo).Ab.CLR = CLR;
+                data.cine(TagNo).Ab.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
             elseif strcmp(CLR, '#FF00FFFF')
-                data.cine(1).Snake.CLR = CLR;
-                data.cine(1).Snake.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
+                data.cine(TagNo).Snake.CLR = CLR;
+                data.cine(TagNo).Snake.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
             end
         end
     end
 end
 
 guidata(hFig, data);
+
+%% save .mat .csv
+x0 = data.cine(TagNo).x0;
+y0 = data.cine(TagNo).y0;
+dx = data.cine(TagNo).dx;
+dy = data.cine(TagNo).dy;
+
+if TagNo ~=3
+    Snakes =  data.cine(TagNo).Tumor.Snakes;
+    dataFileName.mat = data.cine(TagNo).ffn_Tumor_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Tumor_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
+
+    Snakes =  data.cine(TagNo).Snake.Snakes;
+    dataFileName.mat = data.cine(TagNo).ffn_Snake_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Snake_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
+
+    Snakes =  data.cine(TagNo).Ab.Snakes;
+    dataFileName.mat = data.cine(TagNo).ffn_Body_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Body_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
+end
+
+end
+
+%% save as .mat and .csv
+function saveContourMatCsv(Snakes, ffn, x0, y0, dx, dy)
+
+% .mat
+save(ffn.mat, 'Snakes');
+
+% .csv
+nSlice = length(Snakes);
+nP = max(cellfun(@length, Snakes));
+CPM2 = [];  % Contour Points Matrix2
+
+varNames = {'Slice#'};
+for iX = 1:nP
+    xname = ['x', num2str(iX)];
+    yname = ['y', num2str(iX)];
+    varNames = [varNames, {xname, yname}];
+end
+
+for iSlice = 1:nSlice
+    junk = nan(1, nP*2);
+    gC = Snakes{iSlice};
+    if ~isempty(gC)
+        junk(1:2:length(gC)*2-1) = (gC(:, 2)'-1)*dx+x0;
+        junk(2:2:length(gC)*2) = (gC(:, 1)-1)'*dy+y0;
+        CPM2 = [CPM2; [iSlice junk]];
+    end
+end
+TT2 = array2table(CPM2, 'VariableNames', varNames);
+writetable(TT2, ffn.csv);
+
+msg = {'Contour data have been saved in:'; ffn.csv};
+fun_messageBox(msg);
+
+end
+
 % %% load cine data
 % td = tempdir;
 % fd_info = fullfile(td, 'MAXgRT');

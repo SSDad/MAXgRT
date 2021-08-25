@@ -202,11 +202,11 @@ data.CineActiveTagNo = [];
      if n ~=3
          data.cine(n).ffn_Snake_mat = fullfile(data.FileInfo.CineMatPath, ['Snake_', num2str(n), '.mat']);
          data.cine(n).ffn_Snake_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2_', num2str(n), '.csv']);
-
-         data.cine(n).Snake.SlitherDone = 0;
          
          data.cine(n).ffn_Tumor_mat = fullfile(data.FileInfo.CineMatPath, ['Tumor_', num2str(n), '.mat']);
-         data.cine(n).ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2_', num2str(n), '.csv']);
+         data.cine(n).ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumoPointsMatrix2_', num2str(n), '.csv']);
+
+         data.cine(n).Snake.SlitherDone = 0;
      else
          data.cine(n).ffn_SnakeL_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeL_', num2str(n), '.mat']);
          data.cine(n).ffn_SnakeR_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeR_', num2str(n), '.mat']);
@@ -215,11 +215,6 @@ data.CineActiveTagNo = [];
 
          data.cine(n).SnakeL.SlitherDone = 0;
          data.cine(n).SnakeR.SlitherDone = 0;
-
-         data.cine(n).ffn_TumorL_mat = fullfile(data.FileInfo.CineMatPath, ['TumorL_', num2str(n), '.mat']);
-         data.cine(n).ffn_TumorR_mat = fullfile(data.FileInfo.CineMatPath, ['TumorR_', num2str(n), '.mat']);
-         data.cine(n).ffn_TumorL_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2L_', num2str(n), '.csv']);
-         data.cine(n).ffn_TumorR_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2R_', num2str(n), '.csv']);
      end
      
      data.cine(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(n), '.mat']);
