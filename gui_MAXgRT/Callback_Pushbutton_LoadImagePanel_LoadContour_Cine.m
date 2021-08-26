@@ -14,17 +14,25 @@ ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 contData = fun_readContourTxt(ffn);
 
 nSliceC = length(contData.data);
+hexCLR.Tumor =  '#FFFF0000';
+hexCLR.Ab =  '#FFA52A2A';
+hexCLR.Snake =   '#FF00FFFF';
+
+hexCLR.Tumor =  '#FF8A2BE2';
+hexCLR.Ab =  '#FF00008B';
+hexCLR.Snake =   '#FFE9967A';
+
 for n = 1:nSliceC
     if ~isempty(contData.data(n).cont)
         for m = 1:length(contData.data(n).cont)
             CLR = contData.data(n).cont(m).CLR;
-            if strcmp(CLR, '#FFFF0000')
+            if strcmp(CLR, hexCLR.Tumor)
                 data.cine(TagNo).Tumor.CLR = CLR;
                 data.cine(TagNo).Tumor.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
-            elseif strcmp(CLR, '#FFA52A2A')
+            elseif strcmp(CLR, hexCLR.Ab)
                 data.cine(TagNo).Ab.CLR = CLR;
                 data.cine(TagNo).Ab.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
-            elseif strcmp(CLR, '#FF00FFFF')
+            elseif strcmp(CLR, hexCLR.Snake)
                 data.cine(TagNo).Snake.CLR = CLR;
                 data.cine(TagNo).Snake.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
             end
@@ -33,6 +41,14 @@ for n = 1:nSliceC
 end
 
 guidata(hFig, data);
+
+%% show on slice 1
+hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
+
+cineData = data.cine(TagNo);
+bShow = [1 1 1];
+showAllContours(hPlotObj, cineData, 1, bShow)
+
 
 %% save .mat .csv
 x0 = data.cine(TagNo).x0;

@@ -14,6 +14,8 @@ ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 contData = fun_readContourTxt(ffn);
 
 nSliceC = length(contData.data);
+
+
 for n = 1:nSliceC
     if ~isempty(contData.data(n).cont)
         for m = 1:length(contData.data(n).cont)
@@ -42,9 +44,19 @@ dy = data.cine(TagNo).dy;
 
 if TagNo ~=3
     Snakes =  data.cine(TagNo).Tumor.Snakes;
-    dataFileName.mat = data.cine(TagNo).ffn_tumor_mat;
-    dataFileName.csv = data.cine(TagNo).ffn_tumor_csv;
-    saveContour(Snakes, dataFileName, x0, y0, dx, dy);
+    dataFileName.mat = data.cine(TagNo).ffn_Tumor_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Tumor_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
+
+    Snakes =  data.cine(TagNo).Snake.Snakes;
+    dataFileName.mat = data.cine(TagNo).ffn_Snake_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Snake_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
+
+    Snakes =  data.cine(TagNo).Ab.Snakes;
+    dataFileName.mat = data.cine(TagNo).ffn_Body_mat;
+    dataFileName.csv = data.cine(TagNo).ffn_Body_csv;
+    saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
 end
 
 end
@@ -53,11 +65,11 @@ end
 function saveContourMatCsv(Snakes, ffn, x0, y0, dx, dy)
 
 % .mat
-save(ffn.mat, 'AbsContours');
+save(ffn.mat, 'Snakes');
 
 % .csv
-nSlice = length(AbsContours);
-nP = max(cellfun(@length, AbsContours));
+nSlice = length(Snakes);
+nP = max(cellfun(@length, Snakes));
 CPM2 = [];  % Contour Points Matrix2
 
 varNames = {'Slice#'};
@@ -69,7 +81,7 @@ end
 
 for iSlice = 1:nSlice
     junk = nan(1, nP*2);
-    gC = AbsContours{iSlice};
+    gC = Snakes{iSlice};
     if ~isempty(gC)
         junk(1:2:length(gC)*2-1) = (gC(:, 2)'-1)*dx+x0;
         junk(2:2:length(gC)*2) = (gC(:, 1)-1)'*dy+y0;
@@ -77,9 +89,9 @@ for iSlice = 1:nSlice
     end
 end
 TT2 = array2table(CPM2, 'VariableNames', varNames);
-writetable(TT2, ffn_csv);
+writetable(TT2, ffn.csv);
 
-msg = {'Abdomen data have been saved in:'; ffn_csv};
+msg = {'Contour data have been saved in:'; ffn.csv};
 fun_messageBox(msg);
 
 end

@@ -24,7 +24,6 @@ fclose(fid);
 k = strfind(tt{1}, '=');
 contData.ratio = eval(tt{1}(k+2:k+8));
 
-nLine = length(tt);
 tt = tt(1:end-1);
 ind_img = find(contains(tt, 'Image Id', 'IgnoreCase', true));%, 'IgnoreCase', true));
 
@@ -36,6 +35,12 @@ for n = 1:length(ind_img)-1
         contData.data(n).cont = fun_readImgContour(imgTxt);
     end
 end
+% last slice
+nLine = length(tt);
+if nLine >  ind_img(end)
+    imgTxt = tt(ind_img(end)+1:nLine);
+    contData.data(n+1).cont = fun_readImgContour(imgTxt);
+end    
 
 end
 
