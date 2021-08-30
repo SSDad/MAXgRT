@@ -46,15 +46,12 @@ else
         data.Panel.View_Cine.subPanel(n).hPanel.Visible = 'on';
     end
     
-    % panel off
+    % Snake panel off
     data.Panel.Selection.hPanel.Visible = 'off';
     data.Panel.Snake.hPanel.Visible = 'off';
 
     data.Panel.Body.hPanel.Visible = 'off';
 
-    data.Panel.OLView_Cine.hPanel.Visible = 'off';
-
-    
     data.CineActiveTagNo = TagNo;
 
 end
