@@ -43,7 +43,8 @@ end
     else
         set(hPlotObj, 'XData', C(:, 1), 'YData', C(:, 2));
 %         CLR = sscanf(S.CLR, '%2x%2x%2x', [1 3])/255;
-        CLR = validatecolor(S.CLR(1:7));
+        junk = [S.CLR(1) S.CLR(4:9)];
+        CLR = validatecolor(junk);
         set(hPlotObj, 'Color',  CLR);
     end
  end
