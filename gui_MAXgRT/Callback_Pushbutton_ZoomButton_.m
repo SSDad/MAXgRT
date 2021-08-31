@@ -16,7 +16,6 @@ if hPanel.Position(4) < 1
 
     % Snake panel on
     data.Panel.Selection.hPanel.Visible = 'on';
-    data.Panel.OLView_Cine.hPanel.Visible = 'on';
 
     if strcmp(bZoomSelect, 'B')
         data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 0;
@@ -52,7 +51,7 @@ else
 
     data.Panel.Body.hPanel.Visible = 'off';
 
-    data.Panel.OLView_Cine.hPanel.Visible = 'off';
+%     data.Panel.OLView_Cine.hPanel.Visible = 'off';
 
     
     data.CineActiveTagNo = TagNo;
