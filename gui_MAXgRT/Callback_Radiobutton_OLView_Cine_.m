@@ -32,8 +32,22 @@ if strcmp(src.Tag, 'Tumor')
     end
 elseif strcmp(src.Tag, 'Diaphragm')
     hRB = data.Panel.OLView_Cine.Comp.Radiobutton.OLView_Cine(2);
+    if hRB.Value
+        n = 1;
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'on';
+    else
+        n = 1;
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'off';
+    end
 elseif strcmp(src.Tag, 'Ab')
     hRB = data.Panel.OLView_Cine.Comp.Radiobutton.OLView_Cine(3);
+    if hRB.Value
+        n = 1;
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'on';
+    else
+        n = 1;
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
+    end
 end
 
 % if src.Value

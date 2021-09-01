@@ -70,18 +70,44 @@ if TagNo ~=3
     saveContourMatCsv(Snakes, dataFileName, x0, y0, dx, dy);
 end
 
-%% tumor OLView
+%% OLView
 for n = 1:1
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
-%     hPlotObj = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj;
+    
+    % tumor
     I = zeros(data.cine(n).mImg, data.cine(n).mImg);
     red = cat(3, I, I, I);
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView = ...
-         imshow(red, 'parent', hA);
-    set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I) 
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView = imshow(red, 'parent', hA);
+    set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
+    
+    % diaphragm
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake = hggroup(hA);
+    for iSlice = 1:length(data.cine(n).Snake.Snakes)
+        pt = data.cine(n).Snake.Snakes{iSlice};
+        if ~isempty(pt)
+            line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
+            data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake);
+        end
+    end
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'off';
+    
+    % ab
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb = hggroup(hA);
+    for iSlice = 1:length(data.cine(n).Ab.Snakes)
+        pt = data.cine(n).Ab.Snakes{iSlice};
+        if ~isempty(pt)
+            line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
+            data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb);
+        end
+    end
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
+    
 end
 
 data.bCineTumorOLDone = false;
+
+
+
 data.Panel.OLView_Cine.hPanel.Visible = 'on';
 
 guidata(hFig, data);
