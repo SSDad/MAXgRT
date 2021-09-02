@@ -34,19 +34,20 @@ elseif strcmp(src.Tag, 'Diaphragm')
     hRB = data.Panel.OLView_Cine.Comp.Radiobutton.OLView_Cine(2);
     if hRB.Value
         n = 1;
-        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'on';
+%         data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'on';
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'on';
     else
         n = 1;
-        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'off';
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
     end
 elseif strcmp(src.Tag, 'Ab')
     hRB = data.Panel.OLView_Cine.Comp.Radiobutton.OLView_Cine(3);
     if hRB.Value
         n = 1;
-        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'on';
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'on';
     else
         n = 1;
-        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'off';
     end
 end
 

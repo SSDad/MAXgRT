@@ -81,26 +81,43 @@ for n = 1:1
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
     
     % diaphragm
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake = hggroup(hA);
-    for iSlice = 1:length(data.cine(n).Snake.Snakes)
-        pt = data.cine(n).Snake.Snakes{iSlice};
-        if ~isempty(pt)
-            line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
-            data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake);
-        end
-    end
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'off';
+    cont = data.cine(n).Snake.Snakes;
+    I = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'D');
+    green = cat(3, zeros(size(I)), I, zeros(size(I))); 
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.DiaphragmOLView =...
+        imshow(green, 'parent', hA);
+    set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.DiaphragmOLView,...
+        'AlphaData', rescale(I), 'Visible', 'off');
+    
+%     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake = hggroup(hA);
+%     for iSlice = 1:length(data.cine(n).Snake.Snakes)
+%         pt = data.cine(n).Snake.Snakes{iSlice};
+%         if ~isempty(pt)
+%             line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
+%             data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake);
+%         end
+%     end
+%     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'off';
     
     % ab
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb = hggroup(hA);
-    for iSlice = 1:length(data.cine(n).Ab.Snakes)
-        pt = data.cine(n).Ab.Snakes{iSlice};
-        if ~isempty(pt)
-            line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
-            data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb);
-        end
-    end
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
+    cont = data.cine(n).Ab.Snakes;
+    I = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'A');
+    blue = cat(3, zeros(size(I)), zeros(size(I)), I); 
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView =...
+        imshow(blue, 'parent', hA);
+    set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView,...
+        'AlphaData', rescale(I), 'Visible', 'off');
+    
+    
+%     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb = hggroup(hA);
+%     for iSlice = 1:length(data.cine(n).Ab.Snakes)
+%         pt = data.cine(n).Ab.Snakes{iSlice};
+%         if ~isempty(pt)
+%             line('XData', pt(:, 1), 'YData', pt(:, 2), 'Color', 'w', 'Parent',...
+%             data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb);
+%         end
+%     end
+%     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
     
 end
 
