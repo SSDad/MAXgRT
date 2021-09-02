@@ -241,6 +241,7 @@ data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
 
 % LoadContour button
 data.Panel.LoadImage_Cine.Comp.Pushbutton.LoadContour.Enable = 'on';
+data.bCineContourLoaded = 0;
 
 guidata(hFig, data);
 

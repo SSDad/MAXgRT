@@ -45,12 +45,13 @@ dx = data.cine(TagNo).dx;
 dy = data.cine(TagNo).dy;
 
 %% contours
-hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
+if data.bCineContourLoaded
+    hPlotObj = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
 
-cineData = data.cine(TagNo);
-bShow = [1 1 1];
-showAllContours(hPlotObj, cineData, iSlice, bShow)
- 
+    cineData = data.cine(TagNo);
+    bShow = [1 1 1];
+    showAllContours(hPlotObj, cineData, iSlice, bShow)
+end
  
 % %% Body Contour
 % if data.Panel.Selection.Comp.Radiobutton.Body.Value && isfield(data.cine(TagNo).Body, 'AbsContours')

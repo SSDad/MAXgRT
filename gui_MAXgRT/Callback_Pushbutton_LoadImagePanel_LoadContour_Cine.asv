@@ -21,10 +21,10 @@ hexCLR.Snake =   '#FF00FFFF';
 hexCLR.Tumor =  '#FF8A2BE2';
 hexCLR.Ab =  '#FF00008B';
 hexCLR.Snake =   '#FFE9967A';
-% 
+
 hexCLR.Tumor =  '#FFFF0000';
-hexCLR.Snake =  '#FF7FFF00';
-hexCLR.Ab =   '#FF00FFFF';
+hexCLR.Ab =  '#FF7FFF00';
+hexCLR.Snake =   '#FF00FFFF';
 
 
 for n = 1:nSliceC
