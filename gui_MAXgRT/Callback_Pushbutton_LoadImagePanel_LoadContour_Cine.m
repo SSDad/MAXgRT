@@ -102,7 +102,7 @@ for n = 1:1
     % ab
     cont = data.cine(n).Ab.Snakes;
     I = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'A');
-    blue = cat(3, zeros(size(I)), zeros(size(I)), I); 
+    blue = cat(3, zeros(size(I)), I, I); 
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView =...
         imshow(blue, 'parent', hA);
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView,...
