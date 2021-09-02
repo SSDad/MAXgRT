@@ -22,6 +22,11 @@ hexCLR.Tumor =  '#FF8A2BE2';
 hexCLR.Ab =  '#FF00008B';
 hexCLR.Snake =   '#FFE9967A';
 
+hexCLR.Tumor =  '#FFFF0000';
+hexCLR.Ab =  '#FF00008B';
+hexCLR.Snake =   '#FFE9967A';
+
+
 for n = 1:nSliceC
     if ~isempty(contData.data(n).cont)
         for m = 1:length(contData.data(n).cont)
