@@ -14,14 +14,18 @@ ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 contData = fun_readContourTxt(ffn);
 
 nSliceC = length(contData.data);
+
+% test_1
 hexCLR.Tumor =  '#FFFF0000';
 hexCLR.Ab =  '#FFA52A2A';
 hexCLR.Snake =   '#FF00FFFF';
 
+% contours_TK
 hexCLR.Tumor =  '#FF8A2BE2';
 hexCLR.Ab =  '#FF00008B';
 hexCLR.Snake =   '#FFE9967A';
-% 
+
+%  test_2
 hexCLR.Tumor =  '#FFFF0000';
 hexCLR.Snake =  '#FF7FFF00';
 hexCLR.Ab =   '#FF00FFFF';
@@ -33,7 +37,9 @@ for n = 1:nSliceC
             CLR = contData.data(n).cont(m).CLR;
             if strcmp(CLR, hexCLR.Tumor)
                 data.cine(TagNo).Tumor.CLR = CLR;
-                data.cine(TagNo).Tumor.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;
+                junk = contData.data(n).cont(m).pt;
+                junk = [junk; junk(1,:)];
+                data.cine(TagNo).Tumor.Snakes{n} = junk*contData.ratio;
             elseif strcmp(CLR, hexCLR.Ab)
                 data.cine(TagNo).Ab.CLR = CLR;
                 data.cine(TagNo).Ab.Snakes{n} = contData.data(n).cont(m).pt*contData.ratio;

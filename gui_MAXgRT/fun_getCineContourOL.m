@@ -42,7 +42,7 @@ for c = xp(1):xp(end)
     r1 = ceil(min(yc));
     r2 = floor(max(yc));
     for r = r1:r2
-        I(r, c) = sum(yc <= r);
+        I(r, c) = sum(yc >= r);
     end
 end
 
