@@ -225,7 +225,8 @@ data.CineActiveTagNo = [];
      data.cine(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', num2str(n), '.mat']);
      data.cine(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(n), '.csv']);
 
-%     end
+     % enable zoom button
+    data.Panel.View_Cine.subPanel(n).ssPanel(1).Comp.Pushbutton.Zoom.Enable = 'on';
 end
 
 %buttons on Snake
