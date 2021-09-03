@@ -138,7 +138,7 @@ data.CineActiveTagNo = [];
     RA = imref2d([data.cine(n).mImg data.cine(n).nImg], xWL, yWL);
     data.cine(n).RA = RA;
     
-    % axis and image
+    % ha
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     I = data.cine(n).v(:, :, data.cine(n).iSlice);
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...

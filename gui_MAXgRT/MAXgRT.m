@@ -22,7 +22,7 @@ hFig = figure('MenuBar',            'none', ...
                     'Visible',               'on');
 
 [data.hMenu, data.hMenuItem] = addMenu(hFig);
-addToolbar(hFig);
+[data.tbb] = addToolbar(hFig);
                 
 data.Panel = addPanel(hFig);
 data.Panel.LoadImage.Comp = addComponents2Panel_LoadImage(data.Panel.LoadImage.hPanel);
