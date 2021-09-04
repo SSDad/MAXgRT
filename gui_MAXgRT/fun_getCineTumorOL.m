@@ -9,9 +9,9 @@ for n = 1:length(cineData)
     for m = 1:length(s)
         c = s{m};
         if ~isempty(c)
-%             xx = c(:, 1) - LimN(1) +1;
-%             yy = c(:, 2) - LimM(1) +1;
-            ov = ov + poly2mask(c(:, 1), c(:, 2), M, N);
+            xx = (c(:, 1) - cineData.x0)/cineData.dx +1;
+            yy = (c(:, 2) -cineData.y0)/cineData.dy +1;
+            ov = ov + poly2mask(xx, yy, M, N);
         end
     end
 
