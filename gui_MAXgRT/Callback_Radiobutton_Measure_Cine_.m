@@ -1,0 +1,26 @@
+function Callback_Radiobutton_Measure_Cine_(src, evnt)
+
+hFig = ancestor(src, 'Figure');
+data = guidata(hFig);
+
+if strcmp(src.Tag, 'Wave')
+        hRB = data.Panel.Measure_Cine.Comp.Radiobutton.Measure_Cine(1);
+        if hRB.Value
+            data.hFig_Measure = figure('MenuBar',            'none', ...
+                                                    'Toolbar',              'none', ...
+                                                    'Name',                'Wave', ...
+                                                    'NumberTitle',      'off', ...
+                                                    'Units',                 'normalized',...
+                                                    'Position',             [0.2 0.2 0.6 0.6],...
+                                                    'Color',                 'black', ...
+                                                    'CloseRequestFcn', @figCloseReq_Measure_Cine, ...
+                                                    'Visible',               'on');
+                                                
+            guidata(hFig, data);
+        else
+            close(data.hFig_Measure);
+            
+            a = 1;
+        end
+    
+end
