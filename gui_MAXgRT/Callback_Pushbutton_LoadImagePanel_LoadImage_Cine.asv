@@ -144,6 +144,12 @@ data.CineActiveTagNo = [];
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...
         imshow(I, RA, [], 'parent', hA);
     
+    % 
+    hPlotObj = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj;
+    hPlotObj.Snake = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
+    hPlotObj.Snake2 = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
+    axis(hA, 'tight', 'equal', 'on');
+   
     % slider
     hSS =  data.Panel.View_Cine.subPanel(n).ssPanel(4).Comp.hSlider.Slice;
     hSS.Min = 1;
@@ -168,13 +174,7 @@ data.CineActiveTagNo = [];
      data.Panel.View_Cine.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.XData = xc;
      data.Panel.View_Cine.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.YData = yc;
      
-    % snake
-    hPlotObj = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj;
-    hPlotObj.Snake = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
-    hPlotObj.Snake2 = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
-    axis(hA, 'tight', 'equal', 'on');
-   
-    % body
+     % body
     x0 = data.cine(n).x0;
     y0 = data.cine(n).y0;
     dx = data.cine(n).dx;
@@ -187,6 +187,7 @@ data.CineActiveTagNo = [];
     yWL(2) = yWL(1)+dy*mImgSize;
 
     hPlotObj.Body = line(hA, 'XData', [], 'YData', [], 'Color', 'g', 'LineStyle', '-', 'LineWidth', 0.5);
+
     hPlotObj.Ab = line(hA,  'XData', [], 'YData', [], 'Color', 'g', 'LineStyle', '-', 'LineWidth', 3, 'Marker', '.');
 
 %     pos = [x0 y0+yWL(2)*2/3
@@ -210,7 +211,6 @@ data.CineActiveTagNo = [];
 
     % tumor
     hPlotObj.Tumor = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
-
 
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
 

@@ -73,7 +73,7 @@ showAllContours(hPlotObj, cineData, 1, bShow)
 %% Measure marks
 for n = 1:1
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = ...
+    data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj = ...
         addMeasureMarks_Cine(hA, cineData);
 end
 %% save .mat .csv
