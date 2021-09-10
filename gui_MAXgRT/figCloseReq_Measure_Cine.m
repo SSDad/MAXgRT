@@ -9,4 +9,5 @@ data.Measure_Cine.hFig.Visible = 'off';
 
 TagNo = 1;
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'off';
+data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'off';
 

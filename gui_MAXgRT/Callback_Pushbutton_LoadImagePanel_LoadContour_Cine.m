@@ -107,9 +107,11 @@ for n = 1:1
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
  
     % tumor OL
-    CineTumorOL = fun_getCineTumorOL(data.cine);
+    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine);
     for nn = 1:length(CineTumorOL)
         data.cine(nn).TumorOL = CineTumorOL{nn};
+        data.cine(nn).TumorCent = CineTumorCent{nn};
+        data.cine(nn).TumorLim = CineTumorLim{nn};
     end
     data.bCineTumorOLDone = 1;
     

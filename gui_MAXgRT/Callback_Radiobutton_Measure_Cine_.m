@@ -10,6 +10,7 @@ if strcmp(src.Tag, 'Wave')
                 if ishandle(data.hFig_Measure_Cine)
                     data.Measure_Cine.hFig.Visible = 'on';
                     data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'on';
+                    data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'on';
                 else
                     data.Measure_Cine.hFig.Visible = 'off';
                 end
@@ -54,9 +55,11 @@ if strcmp(src.Tag, 'Wave')
                                                             'Position',                 [0.05 0.05 0.9 0.9]);
 
                         data.Measure_Cine.hPlotObj(n) = line(data.Measure_Cine.hAxis(n),  'XData', [], 'YData', [], ...
-                                        'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 24);
+                                        'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 32);
 
                     end
+                    
+                    %Snake wave
                     data.Measure_Cine.hAxis(1).YLim =  data.cine(TagNo).Snake.xyLim(:, 2);
                     guidata(hFig, data);
                     
@@ -66,6 +69,18 @@ if strcmp(src.Tag, 'Wave')
                     S = hLine.UserData;
                     updateSnakeMarkWave_Cine(xp, S);
                     data.Measure_Cine.hAxis(1).XLim =  [1 length(S)];
+
+                    %Ab wave
+                    data.Measure_Cine.hAxis(2).YLim =  data.cine(TagNo).Ab.xyLim(:, 1);
+                    guidata(hFig, data);
+                    
+                    hLine = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine;
+                    hLine.Visible = 'on';
+                    yp = hLine.Position(2);
+                    S = hLine.UserData;
+                    updateAbMarkWave_Cine(yp, S);
+                    data.Measure_Cine.hAxis(2).XLim =  data.Measure_Cine.hAxis(1).XLim;
+                    
                     linkaxes([data.Measure_Cine.hAxis], 'x')
                     guidata(hFig, data);
 
@@ -73,5 +88,6 @@ if strcmp(src.Tag, 'Wave')
         else
             data.Measure_Cine.hFig.Visible = 'off';
             data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'off';
+            data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'off';
         end
 end
