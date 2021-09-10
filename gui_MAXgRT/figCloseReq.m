@@ -6,10 +6,11 @@ if ishandle(hFig2)
 end
 
 data = guidata(hFig);
-if ishandle(data.hFig_Measure_Cine)
-    delete(data.hFig_Measure_Cine)
+if isfield(data, 'Measure_Cine')
+    if ishandle(data.Measure_Cine.hFig)
+        delete(data.Measure_Cine.hFig)
+    end
 end
-
 delete(src)
 
 

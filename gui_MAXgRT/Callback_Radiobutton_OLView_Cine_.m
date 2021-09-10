@@ -6,15 +6,15 @@ data = guidata(hFig);
 if strcmp(src.Tag, 'Tumor')
     hRB = data.Panel.OLView_Cine.Comp.Radiobutton.OLView_Cine(1);
     if hRB.Value
-        if ~data.bCineTumorOLDone
-            % Calculate TumorOL
-            CineTumorOL = fun_getCineTumorOL(data.cine);
-            for n = 1:length(CineTumorOL)
-                data.cine(n).TumorOL = CineTumorOL{n};
-            end
-            data.bCineTumorOLDone = 1;
-            guidata(hFig, data);
-        end
+%         if ~data.bCineTumorOLDone
+%             % Calculate TumorOL
+%             CineTumorOL = fun_getCineTumorOL(data.cine);
+%             for n = 1:length(CineTumorOL)
+%                 data.cine(n).TumorOL = CineTumorOL{n};
+%             end
+%             data.bCineTumorOLDone = 1;
+%             guidata(hFig, data);
+%         end
         % TumorOL on
         for n = 1:1
             h = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView;

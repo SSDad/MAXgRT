@@ -1,4 +1,4 @@
-function I = fun_getCineContourOL(cont, M, N, DA, x0, y0, dx, dy)
+function [I, xyLim] = fun_getCineContourOL(cont, M, N, DA, x0, y0, dx, dy)
 
 if strcmp(DA, 'A')
     [M, N] = deal(N, M);
@@ -7,12 +7,19 @@ if strcmp(DA, 'A')
 end
 
 m = 0;
+xymin = [inf inf];
+xymax = [-inf -inf];
+
 for iSlice = 1:length(cont)
     pt = cont{iSlice};
     if strcmp(DA, 'A')
         pt = flip(pt, 2);
     end
     if ~isempty(pt)
+        
+        xymin = min([xymin; min(pt)]);
+        xymax = max([xymax; max(pt)]);
+        
         m = m+1;
         pt1 = (pt(:, 1) - x0)/dx+1;
         pt2 = (pt(:, 2) -y0)/dy+1;
@@ -26,6 +33,8 @@ for iSlice = 1:length(cont)
 
     end
 end
+
+xyLim = [xymin; xymax];
 
 x1 = max(xmin);
 x2 = min(xmax);
@@ -52,4 +61,5 @@ end
 
 if strcmp(DA, 'A')
     I = I';
+    xyLim = flip(xyLim, 2);
 end

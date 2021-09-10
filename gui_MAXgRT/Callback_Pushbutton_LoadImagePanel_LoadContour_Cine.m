@@ -105,10 +105,17 @@ for n = 1:1
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView =...
         imshow(red, data.cine(n).RA, 'parent', hA);
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
+ 
+    % tumor OL
+    CineTumorOL = fun_getCineTumorOL(data.cine);
+    for nn = 1:length(CineTumorOL)
+        data.cine(nn).TumorOL = CineTumorOL{nn};
+    end
+    data.bCineTumorOLDone = 1;
     
     % diaphragm
     cont = data.cine(n).Snake.Snakes;
-    I = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'D', x0, y0, dx, dy);
+    [I,  data.cine(n).Snake.xyLim] = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'D', x0, y0, dx, dy);
     green = cat(3, zeros(size(I)), I, zeros(size(I))); 
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.DiaphragmOLView =...
         imshow(green, data.cine(n).RA, 'parent', hA);
@@ -127,7 +134,7 @@ for n = 1:1
     
     % ab
     cont = data.cine(n).Ab.Snakes;
-    I = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'A', x0, y0, dx, dy);
+    [I, data.cine(n).Ab.xyLim] = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'A', x0, y0, dx, dy);
     blue = cat(3, zeros(size(I)), I, I); 
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.AbOLView =...
         imshow(blue, data.cine(n).RA, 'parent', hA);
@@ -150,6 +157,7 @@ end
 data.bCineTumorOLDone = false;
 
 data.Panel.OLView_Cine.hPanel.Visible = 'on';
+data.Panel.Measure_Cine.hPanel.Visible = 'on';
 
 data.bCineContourLoaded = 1;
 

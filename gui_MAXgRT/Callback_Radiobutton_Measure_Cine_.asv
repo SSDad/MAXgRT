@@ -58,6 +58,8 @@ if strcmp(src.Tag, 'Wave')
 
                     end
                     data.Measure_Cine.hAxis(1).YLim =  data.cine(TagNo).Snake.xyLim(:, 2);
+                    linkaxes([data.Measure_Cine.hAxis], 'x')
+
                     guidata(hFig, data);
                     
                     hLine = data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine;
@@ -65,10 +67,7 @@ if strcmp(src.Tag, 'Wave')
                     xp = hLine.Position(1);
                     S = hLine.UserData;
                     updateSnakeMarkWave_Cine(xp, S);
-                    data.Measure_Cine.hAxis(1).XLim =  [1 length(S)];
-                    linkaxes([data.Measure_Cine.hAxis], 'x')
-                    guidata(hFig, data);
-
+                    data.Measure_Cine.hAxis(1).XLim =  1:length(S);
             end
         else
             data.Measure_Cine.hFig.Visible = 'off';

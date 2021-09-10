@@ -24,8 +24,8 @@ x2 = xc;
 y1 = yc - yr/2;
 y2 = yc + yr/2;
 h.SnakeMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c', 'LineWidth', 1,...
-    'UserData', cineData.Snake, 'Tag', 'SnakeMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'on');
-addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_SnakeMarkLine_Cine);
+    'UserData', cineData.Snake.Snakes, 'Tag', 'SnakeMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
+addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
 
 
 %% Ab
@@ -52,5 +52,5 @@ x2 = xc + xr/2;
 y1 = yc;
 y2 = yc;
 h.AbMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c',...
-        'LineWidth', 1, 'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'on');
+        'LineWidth', 1, 'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 %     addlistener(hPlotObj.AbRectCLine, 'MovingROI', @Callback_AbRectCLine);

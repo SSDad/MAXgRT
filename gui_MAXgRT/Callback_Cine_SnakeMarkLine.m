@@ -4,4 +4,4 @@ pos = src.Position;
 xp = pos(1);
 S = src.UserData;
 
-updateSnakeMarkWave_Cine(S);
+updateSnakeMarkWave_Cine(xp, S);

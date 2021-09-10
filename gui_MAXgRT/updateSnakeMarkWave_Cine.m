@@ -1,16 +1,23 @@
-function updateSnakeMarkWave_Cine(S)
+function updateSnakeMarkWave_Cine(xp, S)
 
 global hFig
 data = guidata(hFig);
 
-
-for n = 1:length(S)
-    yp(n) = [];
+nS = length(S);
+yp = nan(nS, 1);
+for n = 1:nS
     if ~isempty(S{n})
         xx = S{n}(:,1);
         yy = S{n}(:,2);
         if min(xx) <= xp && max(xx) >= xp
-            yp(n) = interp1(xx, yy, xp);
+            [xu, ia, ~] = unique(xx);
+            yu = yy(ia);
+            
+            yp(n) = interp1(xu, yu, xp);
         end
     end
 end
+
+t = 1:nS;
+
+set(data.Measure_Cine.hPlotObj(1), 'XData', t, 'YData', yp);
