@@ -76,8 +76,8 @@ for n = 1:1
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = ...
         addMeasureMarks_Cine(hA, cineData);
 end
-%% save .mat .csv
 
+%% save .mat .csv
 if TagNo ~=3
     Snakes =  data.cine(TagNo).Tumor.Snakes;
     dataFileName.mat = data.cine(TagNo).ffn_Tumor_mat;
@@ -107,12 +107,19 @@ for n = 1:1
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
  
     % tumor OL
-    [CineTumorOL, CineTumorPos] = fun_getCineTumorOL(data.cine);
+    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine);
     for nn = 1:length(CineTumorOL)
         data.cine(nn).TumorOL = CineTumorOL{nn};
+        data.cine(nn).TumorCent = CineTumorCent{nn};
+        data.cine(nn).TumorLim = CineTumorLim{nn};
     end
     data.bCineTumorOLDone = 1;
     
+    % Tumor center
+     data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorCenter = ...
+                line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineWidth', 1,...
+                'Marker', '+', MarkerSize, 100, 'Tag', 'TumorCenter', 'Visible', 'off');
+
     % diaphragm
     cont = data.cine(n).Snake.Snakes;
     [I,  data.cine(n).Snake.xyLim] = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'D', x0, y0, dx, dy);

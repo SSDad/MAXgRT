@@ -70,14 +70,7 @@ cineData = data.cine(TagNo);
 bShow = [1 1 1];
 showAllContours(hPlotObj, cineData, 1, bShow)
 
-%% Measure marks
-for n = 1:1
-    hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = ...
-        addMeasureMarks_Cine(hA, cineData);
-end
 %% save .mat .csv
-
 if TagNo ~=3
     Snakes =  data.cine(TagNo).Tumor.Snakes;
     dataFileName.mat = data.cine(TagNo).ffn_Tumor_mat;
@@ -96,6 +89,16 @@ if TagNo ~=3
 end
 
 %% OLView
+    % tumor OL
+    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine);
+    for nn = 1:length(CineTumorOL)
+        data.cine(nn).Tumor.OL = CineTumorOL{nn};
+        data.cine(nn).Tumor.Cent = CineTumorCent{nn};
+        data.cine(nn).Tumor.Lim = CineTumorLim{nn};
+    end
+    data.bCineTumorOLDone = 1;
+    
+
 for n = 1:1
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     
@@ -106,15 +109,11 @@ for n = 1:1
         imshow(red, data.cine(n).RA, 'parent', hA);
     set(data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView, 'AlphaData', I);
  
-    % tumor OL
-    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine);
-    for nn = 1:length(CineTumorOL)
-        data.cine(nn).TumorOL = CineTumorOL{nn};
-        data.cine(nn).TumorCent = CineTumorCent{nn};
-        data.cine(nn).TumorLim = CineTumorLim{nn};
-    end
-    data.bCineTumorOLDone = 1;
-    
+    % Tumor center
+     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorCenter = ...
+                line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineWidth', 1,...
+                'Marker', '+', 'MarkerSize', 100, 'Tag', 'TumorCenter', 'Visible', 'on');
+
     % diaphragm
     cont = data.cine(n).Snake.Snakes;
     [I,  data.cine(n).Snake.xyLim] = fun_getCineContourOL(cont, data.cine(n).mImg, data.cine(n).nImg, 'D', x0, y0, dx, dy);
@@ -154,7 +153,12 @@ for n = 1:1
 %     end
 %     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
     
+%% Measure marks
+    hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = ...
+        addMeasureMarks_Cine(hA, data.cine(n));
 end
+
 
 data.bCineTumorOLDone = false;
 

@@ -18,9 +18,9 @@ if strcmp(src.Tag, 'Tumor')
         % TumorOL on
         for n = 1:1
             h = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.TumorOLView;
-            if isfield(data.cine(n), 'TumorOL')
-                h.CData(:, :, 1) = data.cine(n).TumorOL;
-                h.AlphaData = rescale(data.cine(n).TumorOL);
+            if isfield(data.cine(n).Tumor, 'OL')
+                h.CData(:, :, 1) = data.cine(n).Tumor.OL;
+                h.AlphaData = rescale(data.cine(n).Tumor.OL);
                 h.Visible = 'on';
             end
         end

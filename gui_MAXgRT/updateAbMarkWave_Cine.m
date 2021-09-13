@@ -20,4 +20,4 @@ end
 
 t = 1:nS;
 
-set(data.Measure_Cine.hPlotObj(2), 'XData', t, 'YData', xp);
+set(data.Measure_Cine.hPlotObj.DA(2), 'XData', t, 'YData', xp);
