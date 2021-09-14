@@ -53,6 +53,7 @@ if data.bCineContourLoaded
     showAllContours(hPlotObj, cineData, iSlice, bShow)
     showTumorCenter(hPlotObj, cineData, iSlice)
     updateAbTumorLine(hPlotObj, cineData, iSlice)
+    updateSnakeTumorLine(hPlotObj, cineData, iSlice)
 end
  
 % %% Body Contour

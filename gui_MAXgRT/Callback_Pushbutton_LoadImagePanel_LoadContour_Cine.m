@@ -155,8 +155,7 @@ for n = 1:1
     
 %% Measure marks
     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
-    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = ...
-        addMeasureMarks_Cine(hA, data.cine(n));
+    data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = addMeasureMarks_Cine(hA, data.cine(n));
 end
 
 

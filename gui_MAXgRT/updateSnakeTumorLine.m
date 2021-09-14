@@ -1,23 +1,22 @@
-function     updateAbTumorLine(hPlotObj, cineData, iSlice)
+function     updateSnakeTumorLine(hPlotObj, cineData, iSlice)
 
 TC =  cineData.Tumor.Cent;  % Tumor Center
-hL = hPlotObj.MarkLines.AbTumorLine;
+hL = hPlotObj.MarkLines.SnakeTumorLine;
 
 if iSlice <= size(TC, 1) && ~isnan(TC(iSlice, 1))
 
-    pos = hPlotObj.MarkLines.AbMarkLine.Position;
-    yq = pos(1,2);
-    S = cineData.Ab.Snakes{iSlice};
+    pos = hPlotObj.MarkLines.SnakeMarkLine.Position;
+    xq = pos(1,1);
+    S = cineData.Snake.Snakes{iSlice};
     if ~isempty(S)
         xx = S(:, 1);
         yy = S(:, 2);
-        [yu, ia, ~] = unique(yy);
-        xu = xx(ia);
-        xq = interp1(yu, xu, yq);
+        [xu, ia, ~] = unique(xx);
+        yu = yy(ia);
+        yq = interp1(xu, yu, xq);
         
         junk = [TC(iSlice, 1) TC(iSlice, 2)
                     xq yq];
-        
         hL.Position = junk;
         hL.Visible = 'on';
         

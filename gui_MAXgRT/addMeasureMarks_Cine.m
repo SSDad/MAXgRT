@@ -27,6 +27,8 @@ h.SnakeMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'g', '
     'UserData', cineData.Snake.Snakes, 'Tag', 'SnakeMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
 
+h.SnakeTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'LineWidth', 1,...
+   'UserData', cineData.Ab.Snakes,  'Label', 'SnakeTumor', 'Tag', 'SnakeTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
 
 %% Ab
 m = 0;
