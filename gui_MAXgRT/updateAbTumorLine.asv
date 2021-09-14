@@ -10,16 +10,17 @@ if iSlice <= size(TC, 1)
     if ~isempty(S)
         xx = S(:, 1);
         yy = S(:, 2);
-        [xu, ia, ~] = unique(xx);
-        yu = yy(ia);
-        xq = interp1(xu. yu, yq);
+        [yu, ia, ~] = unique(yy);
+        xu = xx(ia);
+        xq = interp1(yu, xu, yq);
         
-        junk = [TC(1) xq
-                   TC(2) yq];
-        set( hPlotObj.MarkLines.AbTumorLine.Position, jumk);
-        hPlotObj.MarkLines.AbTumorLine.Visible = 'on';
+        junk = [TC(iSlice, 1) TC(iSlice, 2)
+                    xq yq];
+        
+        hL = hPlotObj.MarkLines.AbTumorLine;
+        hL.Position = junk;
+        hL.Visible = 'on';
     end
 else
-        set(hPlotObj.TumorCenter, 'XData', [], 'YData', []);
-        hPlotObj.MarkLines.AbTumorLine.Visible = 'on';
+        hPlotObj.MarkLines.AbTumorLine.Visible = 'off';
 end

@@ -1,6 +1,7 @@
 function     updateAbTumorLine(hPlotObj, cineData, iSlice)
 
 TC =  cineData.Tumor.Cent;  % Tumor Center
+hL = hPlotObj.MarkLines.AbTumorLine;
 
 if iSlice <= size(TC, 1)
 
@@ -16,9 +17,15 @@ if iSlice <= size(TC, 1)
         
         junk = [TC(iSlice, 1) TC(iSlice, 2)
                     xq yq];
-        hPlotObj.MarkLines.AbTumorLine.Position = junk;
-        hPlotObj.MarkLines.AbTumorLine.Visible = 'on';
+        
+        hL.Position = junk;
+        hL.Visible = 'on';
+        
+        dx = abs(diff(hL.Position(:, 1)));
+        dy = abs(diff(hL.Position(:, 2)));
+        hL.Label = ['dX = ', num2str(dx, '%.1f'), ',  dY = ', num2str(dy, '%.1f')];
+        
     end
 else
-        hPlotObj.MarkLines.AbTumorLine.Visible = 'off';
+        hL.Visible = 'off';
 end
