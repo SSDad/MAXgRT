@@ -1,9 +1,5 @@
 function h = addMeasureMarks_Cine(hA, cineData)
 
-%% Tumor
-h.TumorCenter = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineWidth', 1,...
-                'Marker', '+', MarkerSize, 100, 'Tag', 'TumorCenter'', 'Visible', 'off');
-
 %% snake
 m = 0;
 for n = 1:length(cineData.Snake.Snakes)
@@ -56,5 +52,9 @@ x2 = xc + xr;
 y1 = yc;
 y2 = yc;
 h.AbMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c', 'LineWidth', 1,...
-   'UserData', cineData.Ab.Snakes,  'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
+   'UserData', cineData.Ab.Snakes, 'Tag', 'AbMarkLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
+addlistener(h.AbMarkLine, 'MovingROI', @Callback_Cine_AbMarkLine);
+
+h.AbTumorLine = images.roi.Line(hA, 'Position',[nan nan; nan nan], 'Color', 'y', 'LineWidth', 1,...
+   'UserData', cineData.Ab.Snakes,  'Label', '', 'Tag', 'AbTumorLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.AbMarkLine, 'MovingROI', @Callback_Cine_AbMarkLine);

@@ -52,6 +52,7 @@ if data.bCineContourLoaded
     bShow = [1 1 1];
     showAllContours(hPlotObj, cineData, iSlice, bShow)
     showTumorCenter(hPlotObj, cineData, iSlice)
+    updateAbTumorLine(hPlotObj, cineData, iSlice)
 end
  
 % %% Body Contour

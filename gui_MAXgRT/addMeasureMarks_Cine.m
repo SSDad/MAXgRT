@@ -52,5 +52,9 @@ x2 = xc + xr;
 y1 = yc;
 y2 = yc;
 h.AbMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c', 'LineWidth', 1,...
-   'UserData', cineData.Ab.Snakes,  'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
+   'UserData', cineData.Ab.Snakes, 'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.AbMarkLine, 'MovingROI', @Callback_Cine_AbMarkLine);
+
+h.AbTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'LineWidth', 1,...
+   'UserData', cineData.Ab.Snakes,  'Label', 'AbTumor', 'Tag', 'AbTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
+% addlistener(h.TumorLine, 'MovingROI', @Callback_Cine_AbMarkLine);
