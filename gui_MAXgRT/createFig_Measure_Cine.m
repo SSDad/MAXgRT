@@ -28,8 +28,8 @@ data.Measure_Cine.hFig = figure('MenuBar',            'none', ...
                                 'Tag', 'TumorWavePanel');
                             
 %                     tFC{1} = [159 43 104]/255;
-                    tFC{1} = [1 0 0];
-                    tFC{2} = [1 0 1];
+                    tFC{1} = [0 1 0];
+                    tFC{2} = [0 1 1];
                     yLoc{1} = 'left';
                     yLoc{2} = 'right';
                     yLB{1} = 'Horizontal (X) Coordiante (mm)';

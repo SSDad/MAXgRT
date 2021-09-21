@@ -9,11 +9,11 @@
 FS = 11;
 
 str{1} = 'Wave';
-str{2} = '';
+str{2} = 'Distance';
 str{3} = '';
 
 y = 1;
-for n = 1:1%nButton
+for n = 1:2%nButton
     y = y - h_Gap-h_Button;
     Comp.Radiobutton.Measure_Cine(n) = uicontrol('parent', hPanel, ...
                                 'Style', 'radiobutton',...

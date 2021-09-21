@@ -1,5 +1,7 @@
 function h = addMeasureMarks_Cine(hA, cineData)
 
+global SnakeMarkLinePos AbMarkLinePos
+
 %% snake
 m = 0;
 for n = 1:length(cineData.Snake.Snakes)
@@ -23,7 +25,8 @@ x1 = xc;
 x2 = xc;
 y1 = yc - yr/2;
 y2 = yc + yr/2;
-h.SnakeMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'g', 'LineWidth', 1,...
+SnakeMarkLinePos = [x1 y1; x2 y2];
+h.SnakeMarkLine = images.roi.Line(hA, 'Position', SnakeMarkLinePos, 'Color', 'g', 'LineWidth', 1,...
     'UserData', cineData.Snake.Snakes, 'Tag', 'SnakeMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
 
@@ -53,7 +56,8 @@ x1 = xc - xr;
 x2 = xc + xr;
 y1 = yc;
 y2 = yc;
-h.AbMarkLine = images.roi.Line(hA, 'Position',[x1 y1; x2 y2], 'Color', 'c', 'LineWidth', 1,...
+AbMarkLinePos = [x1 y1; x2 y2];
+h.AbMarkLine = images.roi.Line(hA, 'Position', AbMarkLinePos, 'Color', 'c', 'LineWidth', 1,...
    'UserData', cineData.Ab.Snakes, 'Tag', 'AbMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.AbMarkLine, 'MovingROI', @Callback_Cine_AbMarkLine);
 

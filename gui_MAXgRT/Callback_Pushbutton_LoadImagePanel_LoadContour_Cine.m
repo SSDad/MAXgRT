@@ -90,7 +90,7 @@ end
 
 %% OLView
     % tumor OL
-    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine);
+    [CineTumorOL, CineTumorCent, CineTumorLim] = fun_getCineTumorOL(data.cine(TagNo));
     for nn = 1:length(CineTumorOL)
         data.cine(nn).Tumor.OL = CineTumorOL{nn};
         data.cine(nn).Tumor.Cent = CineTumorCent{nn};
