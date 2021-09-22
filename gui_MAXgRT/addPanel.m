@@ -118,7 +118,7 @@ Panel.Measure_Cine.hPanel = uipanel('parent', hFig,...
                                 'ShadowColor',            'k');
 
 %% cine mri/cbct panel
-h_mri = 0.15;
+h_mri = 0.2;
 Panel.mri_Cine.hPanel = uipanel('parent', hFig,...
                                 'Unit', 'Normalized',...
                                 'Position', [0, 1-h_LoadImage-h_OLView-h_Measure-h_mri, w_Left, h_mri], ...
@@ -132,15 +132,16 @@ Panel.mri_Cine.hPanel = uipanel('parent', hFig,...
                                 'ShadowColor',            'k');
                             
 txt.FirstRow = {'', 'X', 'Y'};                            
-txt.FirstColumn = {'MRI'; 'CBCT'};
-nR = 2;
+txt.FirstColumn = {'CBCT EoE'; 'CBCT EoI'; 'MRI EoE'; 'MRI EoI'};
+nR = 4;
 nC = 2;
 for iR = 1:nR
     for iC = 1:nC
         txt.DataStr{iR, iC} = 'xy';
     end
 end
- [hEdit] = fun_myTable(Panel.mri_Cine.hPanel, nR, [1 1], txt, 12);
+ColRatio = [1 1];
+ [hEdit] = fun_myTable(Panel.mri_Cine.hPanel, nR, ColRatio, txt, 12);
  
 %% Selection
 Panel.Selection.hPanel = uipanel('parent', hFig,...
