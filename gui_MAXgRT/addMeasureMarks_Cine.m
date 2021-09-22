@@ -33,7 +33,8 @@ addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
 h.SnakeTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'LineWidth', 1,...
    'UserData', cineData.Ab.Snakes,  'Label', '', 'Tag', 'SnakeTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
 
-h.SnakeTumorText = text(hA, 'Position', [inf inf], 'String', ' ', 'Color', 'k', 'FontSize', 12, 'BackgroundColor', 'y');
+h.SnakeTumorText = text(hA, 'Position', [inf inf], 'String', ' ',...
+    'Color', 'k', 'FontSize', 12, 'BackgroundColor', 'y', 'Visible', 'off');
 
 %% Ab
 m = 0;
@@ -64,7 +65,8 @@ h.AbMarkLine = images.roi.Line(hA, 'Position', AbMarkLinePos, 'Color', 'c', 'Lin
 addlistener(h.AbMarkLine, 'MovingROI', @Callback_Cine_AbMarkLine);
 
 h.AbTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'LineWidth', 1,...
-   'UserData', cineData.Ab.Snakes,  'Label', 'AbTumor', 'Tag', 'AbTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
+   'UserData', cineData.Ab.Snakes,  'Label', '', 'Tag', 'AbTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
 % addlistener(h.TumorLine, 'MovingROI', @Callback_Cine_AbMarkLine);
 
-h.AbTumorText = text(hA, 'Position', [inf inf], 'String', ' ', 'Color', 'k', 'FontSize', 12, 'BackgroundColor', 'y');
+h.AbTumorText = text(hA, 'Position', [inf inf], 'String', ' ',...
+    'Color', 'k', 'FontSize', 12, 'BackgroundColor', 'y', 'Visible', 'off');

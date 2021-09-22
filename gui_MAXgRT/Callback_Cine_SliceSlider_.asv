@@ -53,7 +53,7 @@ if data.bCineContourLoaded
     showAllContours(hPlotObj, cineData, iSlice, bShow)
     showTumorCenter(hPlotObj, cineData, iSlice)
     
-    bDist = data.Panel.Measure_Cine.Comp.Radiobutton.Measure_Cine(2).Value;
+    bDist = data.Panel.Measure_Cine.Comp.Radiobutton.Measure_Cine(2)
     updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
     updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
 end

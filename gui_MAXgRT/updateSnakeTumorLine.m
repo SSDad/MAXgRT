@@ -1,4 +1,4 @@
-function     updateSnakeTumorLine(hPlotObj, cineData, iSlice)
+function     updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
 
 TC =  cineData.Tumor.Cent;  % Tumor Center
 hL = hPlotObj.MarkLines.SnakeTumorLine;
@@ -19,7 +19,10 @@ if iSlice <= size(TC, 1) && ~isnan(TC(iSlice, 1))
         junk = [TC(iSlice, 1) TC(iSlice, 2)
                     xq yq];
         hL.Position = junk;
-        hL.Visible = 'on';
+        if bDist
+            hL.Visible = 'on';
+            hT.Visible = 'on';
+        end
         
         dx = abs(diff(hL.Position(:, 1)));
         dy = abs(diff(hL.Position(:, 2)));
@@ -33,4 +36,5 @@ if iSlice <= size(TC, 1) && ~isnan(TC(iSlice, 1))
     end
 else
         hL.Visible = 'off';
+        hT.Visible = 'off';
 end

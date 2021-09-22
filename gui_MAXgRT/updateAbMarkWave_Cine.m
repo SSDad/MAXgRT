@@ -28,7 +28,7 @@ hL = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumor
 hT = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText;
 
 if isnan(xp(iSlice))
-    hL.Visible = 'off';
+%     hL.Visible = 'off';
 else
     hL.Position(2, :) = [xp(iSlice) yp];
 
@@ -42,5 +42,5 @@ else
 
     
     hL.Label = ''; %['dX = ', num2str(dx, formatSpec), ',  dY = ', num2str(dy, formatSpec)];
-    hL.Visible = 'on';
+%     hL.Visible = 'on';
 end

@@ -28,7 +28,7 @@ hL = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTu
 hT = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText;
 
 if isnan(yp(iSlice))
-    hL.Visible = 'off';
+%     hL.Visible = 'off';
 else
     hL.Position(2, :) = [xp yp(iSlice)];
 
@@ -36,11 +36,11 @@ else
     dy = abs(diff(hL.Position(:, 2)));
     formatSpec = '%.1f';
     hT.Position = [xp+10 yp(iSlice)-20];
-        hT.String = {['\DeltaX = ', num2str(dx, formatSpec)],...
+    hT.String = {['\DeltaX = ', num2str(dx, formatSpec)],...
                             ['\DeltaY = ', num2str(dy, formatSpec)], ...
                             ['D = ', num2str(sqrt(dx^2+dy^2), formatSpec)]};
 
     
     hL.Label = ''; % ['dX = ', num2str(dx, formatSpec), ',  dY = ', num2str(dy, formatSpec)];
-    hL.Visible = 'on';
+%     hL.Visible = 'on';
 end
