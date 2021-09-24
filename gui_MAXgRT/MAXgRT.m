@@ -30,6 +30,7 @@ data.Panel.LoadImage_Cine.Comp = addComponents2Panel_LoadImage_Cine(data.Panel.L
 data.Panel.Selection.Comp = addComponents2Panel_Selection(data.Panel.Selection.hPanel);
 data.Panel.OLView_Cine.Comp = addComponents2Panel_OLView_Cine(data.Panel.OLView_Cine.hPanel);
 data.Panel.Measure_Cine.Comp = addComponents2Panel_Measure_Cine(data.Panel.Measure_Cine.hPanel);
+data.Panel.MCI_Cine.Comp = addComponents2Panel_MCI_Cine(data.Panel.MCI_Cine.hPanel);
 data.Panel.View.Comp = addComponents2Panel_View(data.Panel.View.hPanel);
 % data.Panel.View_Cine.Comp = addComponents2Panel_View_Cine(data.Panel.View_Cine.hPanel);
 data.Panel.Snake.Comp = addComponents2Panel_Snake(data.Panel.Snake.hPanel);

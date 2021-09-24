@@ -1,17 +1,19 @@
 function figCloseReq(src, callbackdata)     % Close all figures
+% global hFig hFig2
 
-global hFig hFig2
-if ishandle(hFig2)
-    delete(hFig2)
-end
+delete(findall(groot))
 
-data = guidata(hFig);
-if isfield(data, 'Measure_Cine')
-    if ishandle(data.Measure_Cine.hFig)
-        delete(data.Measure_Cine.hFig)
-    end
-end
-delete(src)
+% if ishandle(hFig2)
+%     delete(hFig2)
+% end
+% 
+% data = guidata(hFig);
+% if isfield(data, 'Measure_Cine')
+%     if ishandle(data.Measure_Cine.hFig)
+%         delete(data.Measure_Cine.hFig)
+%     end
+% end
+% delete(src)
 
 
 %    selection = questdlg('Close This Figure?',...
