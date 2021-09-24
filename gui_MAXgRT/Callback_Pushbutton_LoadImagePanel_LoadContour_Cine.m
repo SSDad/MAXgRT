@@ -153,9 +153,16 @@ for n = 1:1
 %     end
 %     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgAb.Visible = 'off';
     
-%% Measure marks
-    hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
+    %% Measure marks
+%     hA = data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MarkLines = addMeasureMarks_Cine(hA, data.cine(n));
+
+    %% MCI crosshair
+    for iM = 1:3
+        data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.MRICH(iM) =...
+                    line(hA, 'XData', [], 'YData', [], 'Color', 'g', 'LineWidth', 2,...
+                    'Marker', '+', 'MarkerSize', 25, 'Tag', ['mr', num2str(iM)], 'Visible', 'on');
+    end
 end
 
 
@@ -169,6 +176,7 @@ data.bCineContourLoaded = 1;
 guidata(hFig, data);
 
 end
+
 
 %% save as .mat and .csv
 function saveContourMatCsv(Snakes, ffn)
