@@ -47,7 +47,7 @@ data.MCI_Cine.hPanel.MRI = uipanel('parent', data.MCI_Cine.hPanel.MCITable,...
 
 
 w_1 = 1/10;
-w_2 = 6/10;
+w_2 = 7/10;
 w_3 = 1-w_1-w_2;
 
 % MRI first column                
@@ -115,7 +115,7 @@ end
 % MRI ID Table                
 data.MCI_Cine.hPanel.MRIID = uipanel('parent', data.MCI_Cine.hPanel.MRI,...
             'Unit', 'Normalized',...
-            'Position', [w_1+w_2 0 w_3 1], ...
+            'Position', [w_mri 0 w_id 1], ...
             'FontSize',                 12,...
             'Units',                     'normalized', ...
             'visible',                      'on', ...
@@ -125,7 +125,7 @@ data.MCI_Cine.hPanel.MRIID = uipanel('parent', data.MCI_Cine.hPanel.MRI,...
             'ShadowColor',            'k', ...
             'Tag', 'MRITablePanel');
         
-txt.FirstRow = {'Vertical', 'dVertical'};                            
+txt.FirstRow = {'Vertical', 'delVertical'};                            
 txt.FirstColumn = {'IDENTIFY1'
                               'IDENTIFY2'
                               'IDENTIFY3'};
@@ -136,7 +136,7 @@ for iR = 1:nR
         txt.DataStr{iR, iC} = 'id';
     end
 end
-RowRatio = 2*ones(1, nR);
+RowRatio = ones(1, nR);
 ColRatio = ones(1, nC);
 [data.MCI_Cine.Table.MRIID.hEdit] = fun_myTable(data.MCI_Cine.hPanel.MRIID, RowRatio, ColRatio, txt, 12);
 
