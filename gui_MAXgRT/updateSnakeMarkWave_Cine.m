@@ -3,6 +3,7 @@ function updateSnakeMarkWave_Cine(xp, S)
 global hFig
 data = guidata(hFig);
 
+nA = 10; % number of points average on each side
 nS = length(S);
 yp = nan(nS, 1);
 for n = 1:nS
@@ -12,14 +13,23 @@ for n = 1:nS
         if min(xx) <= xp && max(xx) >= xp
             [xu, ia, ~] = unique(xx);
             yu = yy(ia);
+
+            dx = data.cine.dx;
+            xA = xp-dx*nA:dx:xp+dx*nA;
+            yA = nan(1, nA*2+1);
             
-            yp(n) = interp1(xu, yu, xp);
+            for iP = 1:length(xA)
+                 if min(xx) <= xA(iP) && max(xx) >= xA(iP)
+                     yA(iP) =  interp1(xu, yu, xA(iP));
+                 end
+            end
+            yp(n) = mean(yA, 'omitnan');;
+
         end
     end
 end
 
 t = 1:nS;
-
 set(data.Measure_Cine.hPlotObj.DA(1), 'XData', t, 'YData', yp);
 
 % SnakeTumorLine
