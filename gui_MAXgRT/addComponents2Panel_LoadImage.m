@@ -26,10 +26,11 @@ nR = 3;
 txt.FirstRow = {'Name', 'Value'};
 txt.FirstColumn = {'FoV'; 'Image Size'; 'Pixel Size'};
 columnRatio = [1]; % width ratio to first column
+rowRatio = [1 1 1]; % width ratio to first column
 txt.DataStr = {'350'; ''; ''};
 FS = 10;
 
-[Comp.hEdit.ImageInfo] = fun_myTable(Comp.hPanel.ImageInfo, nR, columnRatio, txt, FS);
+[Comp.hEdit.ImageInfo] = fun_myTable(Comp.hPanel.ImageInfo, rowRatio, columnRatio, txt, FS);
 
 % load image
 h = h-h_Gap-h_Button;
