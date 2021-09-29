@@ -4,6 +4,7 @@ global hFig
 data = guidata(hFig);
 
 nA = 10; % number of points average on each side
+nA = str2double(data.Panel.Measure_Cine.Comp.Edit.NoP.String);
 
 nS = length(S);
 xp = nan(nS, 1);
