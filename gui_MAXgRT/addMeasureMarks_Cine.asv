@@ -36,11 +36,10 @@ h.SnakeTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'Lin
 h.SnakeTumorText = text(hA, 'Position', [inf inf], 'String', ' ',...
     'Color', 'k', 'FontSize', 12, 'BackgroundColor', 'y', 'Visible', 'off');
 
-y4 = [y1 y2 y2 y1];
-xL = cineData.dx*10;
-x4 = [xc-xL xc-xL xc+xL xc+xL];
-h.SnakeMarkPatch = patch(hA, 'XData', x4, 'YData', y4,'FaceColor', 'red', 'FaceAlpha', 0.25, 'Visible', 'off');
-
+x4 = [x1 x2 x2 x1];
+yL = cineData.dy*10;
+y4 = [yc-yL yc-yL yc+yL yc+yL];
+h.AbMarkPatch = patch(hA, 'XData', x4, 'YData', y4,'FaceColor', 'red', 'FaceAlpha', 0.5);
 %% Ab
 m = 0;
 for n = 1:length(cineData.Ab.Snakes)
@@ -79,4 +78,4 @@ h.AbTumorText = text(hA, 'Position', [inf inf], 'String', ' ',...
 x4 = [x1 x2 x2 x1];
 yL = cineData.dy*10;
 y4 = [yc-yL yc-yL yc+yL yc+yL];
-h.AbMarkPatch = patch(hA, 'XData', x4, 'YData', y4,'FaceColor', 'red', 'FaceAlpha', 0.25, 'Visible', 'off');
+h.AbMarkPatch = patch(hA, 'XData', x4, 'YData', y4,'FaceColor', 'red', 'FaceAlpha', 0.5);

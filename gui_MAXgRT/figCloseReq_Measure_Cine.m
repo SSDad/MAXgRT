@@ -11,6 +11,12 @@ TagNo = 1;
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'off';
 data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'off';
 
+% mark patch off
+data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch.Visible = 'off';
+data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkPatch.Visible = 'off';
+
+data.Panel.Measure_Cine.Comp.Edit.NoP.Enable = 'off';
+
 % Distance off
 data.Panel.Measure_Cine.Comp.Radiobutton.Measure_Cine(2).Enable = 'off';
 data.Panel.Measure_Cine.Comp.Radiobutton.Measure_Cine(2).Value = 0;

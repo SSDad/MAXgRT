@@ -1,17 +1,16 @@
-function Callback_Cine_AbMarkLine(src, evnt)
+function Callback_Cine_SnakeMarkLine(src, evnt)
 
 global hFig
-
-global AbMarkLinePos
-xp = AbMarkLinePos(1:2, 1);
+global SnakeMarkLinePos
+yp = SnakeMarkLinePos(1:2, 2);
 
 pos = src.Position;
-yp = pos(1, 2);
+xp = pos(1);
 S = src.UserData;
 
-updateAbMarkWave_Cine(yp, S);
+updateSnakeMarkWave_Cine(xp, S);
 
-src.Position(1:2, 1) = xp;
+src.Position(1:2, 2) = yp;
 
 % updateAbMarkPatch
 data = guidata(hFig);
@@ -19,6 +18,6 @@ TagNo = data.CineActiveTagNo;
 
 nA = str2double(data.Panel.Measure_Cine.Comp.Edit.NoP.String);
 hP = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch;
-yL = data.cine(TagNo).dy*nA;
-y4 = [yp-yL yp-yL yp+yL yp+yL];
+xL = data.cine(TagNo).dx*nA;
+x4 = [xp-xL xc-xL xc+xL xc+xL];
 hP.YData = y4;
