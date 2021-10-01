@@ -38,6 +38,10 @@ data.Panel.Body.Comp = addComponents2Panel_Body(data.Panel.Body.hPanel);
 data.Panel.ContrastBar.Comp = addComponents2Panel_ContrastBar(data.Panel.ContrastBar.hPanel);
 data.Panel.SliceSlider.Comp = addComponents2Panel_SliceSlider(data.Panel.SliceSlider.hPanel);
 
+% Table mode
+data.Panel.Table.Table.Comp = addComponents2Panel_Table_Table(data.Panel.Table.Table.hPanel);
+
+
 data.Panel.Point.Comp = addComponents2Panel_Point(data.Panel.Point.hPanel);
 
 data.Panel.About.Comp = addComponents2Panel_About(data.Panel.About.hPanel);
