@@ -18,8 +18,7 @@ if n~=3
         data.Measure_Cine.hPlotObj.DA(n).Visible = 'off';
     end
 else
-    if ~src.Value
-        data.Measure_Cine.hAxis.DA(2).YDir = 'normal';
+    if src.Value
     else
         data.Measure_Cine.hAxis.DA(2).YDir = 'reverse';
     end

@@ -195,31 +195,26 @@ data.Measure_Cine.hPanel.DACheckBox = uipanel('parent', data.Measure_Cine.hFig,.
  w_Gap = 0.05;
  w(1) = 0.5;
  x(1) = w_Gap;
- y(1) = 1-h_Gap-h_Button;
- 
- w(2) = w(1);
- x(2) = x(1);
- y(2) = y(1)-h_Gap-h_Button;
- 
- w(3) = 1-w(1)-w_Gap*3;
- x(3) = w(1)+w_Gap*2;
-y(3) = y(2);
- 
+ h(1
+ w(2) = 1-w(1)-w_Gap*3;
+ x(2) = w(1)+w_Gap*2;
+
 FS = 11;
 
 str{1} = 'Diaphragm';
 str{2} = 'Abdomen';
-str{3} = 'Inv';
+str{3} = '';
 
 FC2{1} = 'g';
 FC2{2} = 'c';
-FC2{3} = 'c';
-for n = 1:3%nButton
+y = 1;
+for n = 1:2%nButton
+    y = y - h_Gap-h_Button;
     data.Measure_Cine.DACheckBox(n) = uicontrol('parent',  data.Measure_Cine.hPanel.DACheckBox, ...
                                 'Style', 'radiobutton',...
                                 'String', str{n},...
                                 'Unit', 'Normalized',...
-                                'Position', [x(n) y(n) w(n) h_Button], ...
+                                'Position', [x(1) y w(1) h_Button], ...
                                 'FontSize', FS, ...
                                 'FontWeight', 'bold', ...
                                 'BackgroundColor', [1 1 1]*0.25,...
@@ -230,7 +225,5 @@ for n = 1:3%nButton
                                 'Tag', str{n}, ...
                                 'Callback', @Callback_Radiobutton_DACheckBox_Cine_);
 end
-
-data.Measure_Cine.DACheckBox(3).Value = 0;
 
 guidata(hFig, data);
