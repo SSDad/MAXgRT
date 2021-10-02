@@ -11,8 +11,9 @@ if strcmp(src.Checked, 'off')
     hMenuItem.ViewRay.Checked = 'off';
     hMenuItem.Table.Checked = 'off';
     
-    data.Panel.Table.PtInfo.hPanel.Visible = 'off';
-    data.Panel.Table.Table.hPanel.Visible = 'off';
+    data.Panel.TableMode.PtInfo.hPanel.Visible = 'off';
+    data.Panel.TableMode.Data.hPanel.Visible = 'off';
+    data.Panel.TableMode.Table.hPanel.Visible = 'off';
 
     data.Panel.LoadImage.hPanel.Visible = 'off';
     

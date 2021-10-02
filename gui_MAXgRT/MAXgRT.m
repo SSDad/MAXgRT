@@ -39,7 +39,9 @@ data.Panel.ContrastBar.Comp = addComponents2Panel_ContrastBar(data.Panel.Contras
 data.Panel.SliceSlider.Comp = addComponents2Panel_SliceSlider(data.Panel.SliceSlider.hPanel);
 
 % Table mode
-data.Panel.Table.Table.Comp = addComponents2Panel_Table_Table(data.Panel.Table.Table.hPanel);
+data.Panel.TableMode.PtInfo.Comp = addComponents2Panel_Table_PtInfo(data.Panel.TableMode.PtInfo.hPanel);
+data.Panel.TableMode.Data.Comp = addComponents2Panel_Table_Data(data.Panel.TableMode.Data.hPanel);
+data.Panel.TableMode.Table.Comp = addComponents2Panel_Table_Table(data.Panel.TableMode.Table.hPanel);
 
 
 data.Panel.Point.Comp = addComponents2Panel_Point(data.Panel.Point.hPanel);

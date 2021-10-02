@@ -26,8 +26,9 @@ if strcmp(src.Checked, 'off')
     data.Panel.View_Cine.hPanel.Visible = 'off';
 
     % on
-    data.Panel.Table.PtInfo.hPanel.Visible = 'on';
-    data.Panel.Table.Table.hPanel.Visible = 'on';
+    data.Panel.TableMode.PtInfo.hPanel.Visible = 'on';
+    data.Panel.TableMode.Data.hPanel.Visible = 'on';
+    data.Panel.TableMode.Table.hPanel.Visible = 'on';
 
     data.bMode = 'T';
     
