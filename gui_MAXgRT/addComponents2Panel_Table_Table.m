@@ -193,11 +193,11 @@ iCT = 1;
     end
     RowRatio = 2*ones(1, nR);
     ColRatio = ones(1, nC);
-    [Comp.CBCTIDTable(iCT).hEdit] = fun_myTable(Comp.hPanel.CBCTID(iCT), RowRatio, ColRatio, txt, 12);
+    [Comp.CBCTIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTID(iCT), RowRatio, ColRatio, txt, 12);
     for iR = 1:nR
         for iC = 2:nC
-            Comp.CBCTIDTable(iCT).hEdit(iR, iC).ForegroundColor = 'y';
-            Comp.CBCTIDTable(iCT).hEdit(iR, iC).Enable = 'inactive';
+            Comp.CBCTIDTable.hEdit(iR, iC).ForegroundColor = 'y';
+            Comp.CBCTIDTable.hEdit(iR, iC).Enable = 'inactive';
         end
     end
 
