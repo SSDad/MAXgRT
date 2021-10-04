@@ -22,13 +22,16 @@ if strcmp(src.Checked, 'off')
     data.Panel.Selection.hPanel.Visible = 'off';
     data.Panel.Snake.hPanel.Visible = 'off';
     data.Panel.Point.hPanel.Visible = 'off';
+    data.Panel.Body.hPanel.Visible = 'off';
 
+    data.Panel.OLView_Cine.hPanel.Visible = 'off';
+    data.Panel.Measure_Cine.hPanel.Visible = 'off';
     data.Panel.View_Cine.hPanel.Visible = 'off';
 
     % on
-    data.Panel.TableMode.PtInfo.hPanel.Visible = 'on';
-    data.Panel.TableMode.Data.hPanel.Visible = 'on';
-    data.Panel.TableMode.Table.hPanel.Visible = 'on';
+    data.Ethos.Panel.PtInfo.hPanel.Visible = 'on';
+    data.Ethos.Panel.Data.hPanel.Visible = 'on';
+    data.Ethos.Panel.Table.hPanel.Visible = 'on';
 
     data.bMode = 'T';
     

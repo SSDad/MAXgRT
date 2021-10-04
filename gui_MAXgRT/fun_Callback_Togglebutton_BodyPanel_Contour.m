@@ -115,12 +115,24 @@ for iSlice = 1:nSlices
     data.Panel.View.Comp.hPlotObj.TumorCent.XData = data.Tumor.cent.x(iSlice);
     data.Panel.View.Comp.hPlotObj.TumorCent.YData = data.Tumor.cent.y(iSlice);
 
+    % show tumor
     Tumor = data.Tumor;
     CLR = 'rgb';
     set(data.Panel.View.Comp.hPlotObj.RGBContour, 'XData', Tumor.eContXY{iSlice}(:, 1),...
         'YData', Tumor.eContXY{iSlice}(:, 2), 'Color', CLR(Tumor.indC(iSlice)));
     set(data.Panel.View.Comp.hPlotObj.RGBContourCenter, 'XData', mean(Tumor.eContXY{iSlice}(:, 1)),...
         'YData', mean(Tumor.eContXY{iSlice}(:, 2)), 'Color', CLR(Tumor.indC(iSlice)));
+
+    if Tumor.indC(iSlice) == 1
+        set(data.Panel.View.Comp.hPlotObj.SnakeContour, 'XData', [], 'YData', []);
+        set(data.Panel.View.Comp.hPlotObj.SnakeContourCenter, 'XData', [], 'YData', []);
+    else
+        set(data.Panel.View.Comp.hPlotObj.SnakeContour, 'XData', Tumor.snakeContXY{iSlice}(:, 1),...
+            'YData', Tumor.snakeContXY{iSlice}(:, 2));
+        set(data.Panel.View.Comp.hPlotObj.SnakeContourCenter, 'XData', mean(Tumor.snakeContXY{iSlice}(:, 1)),...
+            'YData', mean(Tumor.snakeContXY{iSlice}(:, 2)));
+    end
+
     
     if data.Point.InitDone
         % points on contour

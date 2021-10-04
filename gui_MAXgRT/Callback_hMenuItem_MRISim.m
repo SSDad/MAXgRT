@@ -11,9 +11,9 @@ if strcmp(src.Checked, 'off')
     hMenuItem.ViewRay.Checked = 'off';
     hMenuItem.Ethos.Checked = 'off';
     
-    data.Panel.TableMode.PtInfo.hPanel.Visible = 'off';
-    data.Panel.TableMode.Data.hPanel.Visible = 'off';
-    data.Panel.TableMode.Table.hPanel.Visible = 'off';
+    data.Ethos.Panel.PtInfo.hPanel.Visible = 'off';
+    data.Ethos.Panel.Data.hPanel.Visible = 'off';
+    data.Ethos.Panel.Table.hPanel.Visible = 'off';
 
     data.Panel.LoadImage.hPanel.Visible = 'off';
     
@@ -24,6 +24,7 @@ if strcmp(src.Checked, 'off')
     data.Panel.Selection.hPanel.Visible = 'off';
     data.Panel.Snake.hPanel.Visible = 'off';
     data.Panel.Point.hPanel.Visible = 'off';
+    data.Panel.Body.hPanel.Visible = 'off';
 
     data.Panel.LoadImage_Cine.hPanel.Visible = 'on';
     data.Panel.View_Cine.hPanel.Visible = 'on';
