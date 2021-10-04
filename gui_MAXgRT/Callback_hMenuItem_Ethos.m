@@ -1,15 +1,15 @@
-function Callback_hMenuItem_Table(src, evnt)
+function Callback_hMenuItem_Ethos(src, evnt)
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 hMenuItem = data.hMenuItem;
 
 if strcmp(src.Checked, 'off')
-    hFig.Name = 'MAXgRT - Table';
+    hFig.Name = 'MAXgRT - Ethos';
     
     src.Checked = 'on';
     hMenuItem.ViewRay.Checked = 'off';
-    hMenuItem.Cine.Checked = 'off';
+    hMenuItem.MRISim.Checked = 'off';
     
     % off
     data.Panel.LoadImage.hPanel.Visible = 'off';

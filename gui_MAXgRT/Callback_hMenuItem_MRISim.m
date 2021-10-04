@@ -1,15 +1,15 @@
-function Callback_hMenuItem_Cine(src, evnt)
+function Callback_hMenuItem_MRISim(src, evnt)
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 hMenuItem = data.hMenuItem;
 
 if strcmp(src.Checked, 'off')
-    hFig.Name = 'MAXgRT - Cine';
+    hFig.Name = 'MAXgRT - MRI_Sim';
     
     src.Checked = 'on';
     hMenuItem.ViewRay.Checked = 'off';
-    hMenuItem.Table.Checked = 'off';
+    hMenuItem.Ethos.Checked = 'off';
     
     data.Panel.TableMode.PtInfo.hPanel.Visible = 'off';
     data.Panel.TableMode.Data.hPanel.Visible = 'off';

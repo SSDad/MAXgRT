@@ -83,11 +83,10 @@ for iSlice = 1:nSlices
     data.Panel.SliceSlider.Comp.hSlider.Slice.Value = iSlice;
     data.Panel.SliceSlider.Comp.hText.nImages.String = [num2str(iSlice), ' / ', num2str(nSlices)];
     
-    %tumor center
+    %tumor
     data.Panel.View.Comp.hPlotObj.TumorCent.XData = data.Tumor.cent.x(iSlice);
     data.Panel.View.Comp.hPlotObj.TumorCent.YData = data.Tumor.cent.y(iSlice);
 
-    
     if data.Point.InitDone
         % points on contour
         xi = data.Point.Data.xi;

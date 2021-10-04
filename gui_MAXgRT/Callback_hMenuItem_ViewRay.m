@@ -8,8 +8,8 @@ if strcmp(src.Checked, 'off')
     hFig.Name = 'MAXgRT - ViewRay';
     
     src.Checked = 'on';
-    hMenuItem.Cine.Checked = 'off';
-    hMenuItem.Table.Checked = 'off';
+    hMenuItem.MRISim.Checked = 'off';
+    hMenuItem.Ethos.Checked = 'off';
 
     % off
     data.Panel.LoadImage_Cine.hPanel.Visible = 'off';
@@ -29,6 +29,8 @@ if strcmp(src.Checked, 'off')
     data.Panel.Selection.hPanel.Visible = 'on';
     data.Panel.Snake.hPanel.Visible = 'on';
     data.Panel.Point.hPanel.Visible = 'on';
-
+    
+    data.bMode = 'V';
+    guidata(hFig, data);
     
 end
