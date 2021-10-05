@@ -73,11 +73,8 @@ txt.FirstColumn = {'Target '
 nR = length(txt.FirstColumn);
 nC = length(txt.FirstRow);
 for iR = 1:nR
-    for iC = 1:3
-        txt.DataStr{iR, iC} = '';
-    end
-    for iC = 4:nC
-        txt.DataStr{iR, iC} = '-';
+    for iC = 1:nC
+        txt.DataStr{iR, iC} = 'xy';
     end
 end
 RowRatio = ones(1, nR);
@@ -89,11 +86,11 @@ clear txt;
 for iR = 1:nR
     for iC = 1:3
         Comp.SimTable(iS).hEdit(iR, iC).Tag = ['sim_', num2str(iS), '_', num2str(iR), num2str(iC)];
-        Comp.SimTable(iS).hEdit(iR, iC).Callback = @Callback_Ethos_SimTable_;
+        Comp.SimTable(iS).hEdit(iR, iC).Callback = @Callback_Table_Table_MRITable;
     end
     for iC = 4:nC
-        Comp.SimTable(iS).hEdit(iR, iC).ForegroundColor = 'y';
-        Comp.SimTable(iS).hEdit(iR, iC).Enable = 'inactive';
+        Comp.MRITable.hEdit(iR, iC).ForegroundColor = 'y';
+        Comp.MRITable.hEdit(iR, iC).Enable = 'inactive';
     end
 end
 
@@ -119,8 +116,9 @@ txt.FirstColumn = {'IDENTIFY1'
 nR = length(txt.FirstColumn);
 nC = length(txt.FirstRow);
 for iR = 1:nR
-    txt.DataStr{iR, 1} = '';
-    txt.DataStr{iR, 2} = '-';
+    for iC = 1:nC
+        txt.DataStr{iR, iC} = 'id';
+    end
 end
 RowRatio = 2*ones(1, nR);
 ColRatio = ones(1, nC);

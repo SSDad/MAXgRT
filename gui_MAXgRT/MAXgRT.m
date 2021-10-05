@@ -54,6 +54,19 @@ data.bMode = 'M';
 bZoomSelect = 'D';
 bLR = 'N';
 
+hd = '\\bjcfs02.carenet.org\rocdata\ROCData';
+if exist(hd, 'dir')
+    fd_Ethos = fullfile(hd, 'MAXgRT', 'Ethos');
+else
+    fd_Ethos = 'C:\MAXgRT\Ethos';
+end
+% fd_VG = 'C:\VIZ';
+if ~exist(fd_Ethos, 'dir')
+    mkdir(fd_Ethos);
+end
+data.Ethos.fd_Ethos = fd_Ethos;
+data.Ethos.MRN = [];
+
 guidata(hFig, data);
 
 %% point fig
