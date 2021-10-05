@@ -31,6 +31,7 @@ if strcmp(src.Checked, 'off')
     % on
     data.Ethos.Panel.PtInfo.hPanel.Visible = 'on';
     data.Ethos.Panel.Data.hPanel.Visible = 'on';
+    data.Ethos.Panel.Tx.hPanel.Visible = 'on';
     data.Ethos.Panel.Table.hPanel.Visible = 'on';
 
     data.bMode = 'T';

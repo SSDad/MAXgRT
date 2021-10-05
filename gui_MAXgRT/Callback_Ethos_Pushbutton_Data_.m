@@ -15,13 +15,12 @@ if strcmp(src.Tag, 'Save Data')
                 end
             end
         end
-        
         if ~all(isnan(SimuData{iS}(:)))
             bSimData = 1;
         end
-        
     end
     
+    % save sim data
     if bSimData
         MRN = data.Ethos.Panel.PtInfo.Comp.Edit.MRN.String;
         Fx = data.Ethos.Panel.PtInfo.Comp.Edit.Fraction.String;
@@ -36,4 +35,7 @@ if strcmp(src.Tag, 'Save Data')
         fun_messageBox(msg);
 
     end
+elseif strcmp(src.Tag, 'New CBCT_Tx')
+    createFig_Ethos_Tx;
+    
 end

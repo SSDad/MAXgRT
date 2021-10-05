@@ -18,6 +18,7 @@ if strcmp(src.Checked, 'off')
     data.Ethos.Panel.PtInfo.hPanel.Visible = 'off';
     data.Ethos.Panel.Data.hPanel.Visible = 'off';
     data.Ethos.Panel.Table.hPanel.Visible = 'off';
+    data.Ethos.Panel.Tx.hPanel.Visible = 'off';
 
     % on
     data.Panel.LoadImage.hPanel.Visible = 'on';

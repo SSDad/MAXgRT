@@ -3,6 +3,7 @@ function MAXgRT
 %% global 
 global hFig hFig2
 global bZoomSelect bLR
+global nEthosTxTable
 
 % global stopSlither
 % global reContL
@@ -45,6 +46,7 @@ data.Panel.About.Comp = addComponents2Panel_About(data.Panel.About.hPanel);
 data.Ethos.Panel = addPanel_Ethos(hFig);
 data.Ethos.Panel.PtInfo.Comp = addComponents2Panel_Ethos_PtInfo(data.Ethos.Panel.PtInfo.hPanel);
 data.Ethos.Panel.Data.Comp = addComponents2Panel_Ethos_Data(data.Ethos.Panel.Data.hPanel);
+data.Ethos.Panel.Tx.Comp = addComponents2Panel_Ethos_Tx(data.Ethos.Panel.Tx.hPanel);
 data.Ethos.Panel.Table.Comp = addComponents2Panel_Ethos_Table(data.Ethos.Panel.Table.hPanel);
 
 data.FC = [255 255 102]/255;
@@ -66,6 +68,7 @@ if ~exist(fd_Ethos, 'dir')
 end
 data.Ethos.fd_Ethos = fd_Ethos;
 data.Ethos.MRN = [];
+nEthosTxTable = 0;
 
 guidata(hFig, data);
 
