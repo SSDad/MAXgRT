@@ -3,7 +3,7 @@ function MAXgRT
 %% global 
 global hFig hFig2
 global bZoomSelect bLR
-global nEthosTxTable
+global EthosTxTableNo EthosTxTableName
 
 % global stopSlither
 % global reContL
@@ -68,7 +68,8 @@ if ~exist(fd_Ethos, 'dir')
 end
 data.Ethos.fd_Ethos = fd_Ethos;
 data.Ethos.MRN = [];
-nEthosTxTable = 0;
+EthosTxTableNo = 0;
+EthosTxTableName = [];
 
 guidata(hFig, data);
 

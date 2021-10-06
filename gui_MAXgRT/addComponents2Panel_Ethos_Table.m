@@ -15,6 +15,7 @@ TT{3} = 'CBCT_Sim';
 
 FirstColumn = {'CT ', 'MRI', 'CBCT'};
 
+bgc = [0 0 0];
 %% Sim Panels
 for iS = 1:3
 
@@ -48,7 +49,7 @@ for m = 1:3
 end
 nR = length(txt.FirstColumn);
 RowRatio = 2*ones(1, nR);
-fun_myTable_1Col(hC1, RowRatio, txt, 12);
+fun_myTable_1Col(hC1, RowRatio, txt, 12, bgc);
         
 %Data Table                
 Comp.hPanel.SimTable(iS) = uipanel('parent',Comp.hPanel.Sim(iS),...
@@ -82,7 +83,7 @@ for iR = 1:nR
 end
 RowRatio = ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.SimTable(iS).hEdit] = fun_myTable(Comp.hPanel.SimTable(iS), RowRatio, ColRatio, txt, 12);
+[Comp.SimTable(iS).hEdit] = fun_myTable(Comp.hPanel.SimTable(iS), RowRatio, ColRatio, txt, 12, bgc);
 
 clear txt;
 
@@ -112,7 +113,7 @@ Comp.hPanel.CBCTSimID = uipanel('parent', Comp.hPanel.Sim(3),...
             'ShadowColor',            'k', ...
             'Tag', 'MRITablePanel');
 
-txt.FirstRow = {'Vertical', 'dVer'};                            
+txt.FirstRow = {'Vertical', 'dVert'};                            
 txt.FirstColumn = {'IDENTIFY1'
                               'IDENTIFY2'
                               'IDENTIFY3'};
@@ -124,7 +125,7 @@ for iR = 1:nR
 end
 RowRatio = 2*ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.CBCTSimIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTSimID, RowRatio, ColRatio, txt, 12);
+[Comp.CBCTSimIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTSimID, RowRatio, ColRatio, txt, 12, bgc);
 for iR = 1:nR
     for iC = 2:nC
         Comp.CBCTSimIDTable.hEdit(iR, iC).ForegroundColor = 'y';

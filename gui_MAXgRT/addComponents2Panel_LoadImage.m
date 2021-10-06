@@ -30,7 +30,7 @@ rowRatio = [1 1 1]; % width ratio to first column
 txt.DataStr = {'350'; ''; ''};
 FS = 10;
 
-[Comp.hEdit.ImageInfo] = fun_myTable(Comp.hPanel.ImageInfo, rowRatio, columnRatio, txt, FS);
+[Comp.hEdit.ImageInfo] = fun_myTable(Comp.hPanel.ImageInfo, rowRatio, columnRatio, txt, FS, [0 0 0]);
 
 % load image
 h = h-h_Gap-h_Button;

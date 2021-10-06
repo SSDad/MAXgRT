@@ -1,4 +1,4 @@
-function Comp = addTxTable2Fig(hPanel)
+function Comp = addTxTable2Fig(hPanel, bgc)
 
 w_1 = 1/10;
 w_2 = 6/10;
@@ -29,13 +29,13 @@ hC1 = uipanel('parent', Comp.hPanel.CBCT,...
             'HighlightColor',          'k',...
             'ShadowColor',            'k');
 
-nT = 10;
+nT = 5;
 for m = 1:nT
     txt.FirstColumn{m} = ['CBCT', num2str(m)];
 end
 nR = length(txt.FirstColumn);
 RowRatio = 2*ones(1, nR);
-fun_myTable_1Col(hC1, RowRatio, txt, 12);
+fun_myTable_1Col(hC1, RowRatio, txt, 12, bgc);
         
 %Data Table                
 Comp.hPanel.CBCTTable = uipanel('parent',Comp.hPanel.CBCT,...
@@ -67,7 +67,7 @@ for iR = 1:nR
 end
 RowRatio = ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.CBCTTable.hEdit] = fun_myTable(Comp.hPanel.CBCTTable, RowRatio, ColRatio, txt, 12);
+[Comp.CBCTTable.hEdit] = fun_myTable(Comp.hPanel.CBCTTable, RowRatio, ColRatio, txt, 12, bgc);
 
 for iR = 1:nR
     for iC = 1:3
@@ -94,7 +94,7 @@ Comp.hPanel.CBCTID = uipanel('parent', Comp.hPanel.CBCT,...
             'ShadowColor',            'k', ...
             'Tag', 'MRITablePanel');
 
-txt.FirstRow = {'Vertical', 'dVer'};
+txt.FirstRow = {'Vertical', 'dVert'};
 for m = 1:nT
     txt.FirstColumn{m} = ['IDENTIFY', num2str(m)];
 end
@@ -106,7 +106,7 @@ for iR = 1:nR
 end
 RowRatio = 2*ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.CBCTIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTID, RowRatio, ColRatio, txt, 12);
+[Comp.CBCTIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTID, RowRatio, ColRatio, txt, 12, bgc);
 for iR = 1:nR
     for iC = 2:nC
         Comp.CBCTIDTable.hEdit(iR, iC).ForegroundColor = 'y';
