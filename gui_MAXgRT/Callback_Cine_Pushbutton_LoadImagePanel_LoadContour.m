@@ -7,13 +7,12 @@ fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect
 % idx = find(contains(fileList,'sag.txt', 'IgnoreCase', true));
 
 %% single sag txt
-
 TagNo = 1;
 ffn = fullfile(data.FileInfo.CineDataPath, fileList);
-
 [contData, NameColor] = fun_readContourTxt_withName(ffn);
 nSliceC = length(contData.data);
 
+% contour NameColor
 [CLR, ia, ~] = unique(NameColor(:,1)); 
 Name = NameColor(ia, 2);
 for n = 1:length(Name)
@@ -25,14 +24,6 @@ for n = 1:length(Name)
         hexCLR.Snake =  CLR{n};
     end
 end
-% hexCLR.Ab =  '#FFA52A2A';
-% hexCLR.Snake =   '#FF00FFFF';
-        
-
-        % hexCLR.Tumor =  '#FFFF0000';
-% hexCLR.Ab =  '#FFA52A2A';
-% hexCLR.Snake =   '#FF00FFFF';
-
 
 % % test_1
 % hexCLR.Tumor =  '#FFFF0000';

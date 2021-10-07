@@ -1,4 +1,4 @@
-function Callback_Radiobutton_OLView_Cine_(src, evnt)
+function Callback_Cine_Radiobutton_OLView_(src, evnt)
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);

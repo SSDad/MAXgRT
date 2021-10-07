@@ -9,7 +9,7 @@ recPos = src.Position;
 TagNo = str2num(src.Tag);
 % iSlice = data.cine(TagNo).iSlice;
 
-I = data.cine(TagNo).v(:, :, data.cine(TagNo).iSlice);
+I = data.cine.data(TagNo).v(:, :, data.cine.data(TagNo).iSlice);
 
 % % I = hPlotObj.snakeImage.CData;
 % Images = data.Image.Images;
@@ -31,4 +31,4 @@ I(I<cL1) = cL1;
 I(I>cL2) = cL2;
 % data.Panel.View.Comp.hPlotObj.Image.CData = I;
 
-data.Panel.View_Cine.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;
+data.Cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.Image.CData = I;

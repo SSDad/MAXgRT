@@ -1,4 +1,4 @@
-function subPanel = addComponents2Panel_View_Cine(hPanel, fileList)
+function subPanel = addComponents2Panel_Cine_View(hPanel, fileList)
 
 FC = [255 255 102]/255;
 
@@ -46,11 +46,11 @@ FC = [255 255 102]/255;
                                 'ShadowColor',            'k');
         end
         subPanel(n).ssPanel(4).Comp =...
-                 addComponents2Panel_SliceSlider_Cine(subPanel(n).ssPanel(4).hPanel, n);
+                 addComponents2Panel_Cine_SliceSlider(subPanel(n).ssPanel(4).hPanel, n);
         subPanel(n).ssPanel(2).Comp =...
-                 addComponents2Panel_ContrastBar_Cine(subPanel(n).ssPanel(2).hPanel, n);
+                 addComponents2Panel_Cine_ContrastBar(subPanel(n).ssPanel(2).hPanel, n);
         subPanel(n).ssPanel(1).Comp =...
-                 addComponents2Panel_ZoomButton(subPanel(n).ssPanel(1).hPanel, n);
+                 addComponents2Panel_Cine_ZoomButton(subPanel(n).ssPanel(1).hPanel, n);
              
         subPanel(n).ssPanel(3).Comp =...
                  addComponents2Panel_View(subPanel(n).ssPanel(3).hPanel);
