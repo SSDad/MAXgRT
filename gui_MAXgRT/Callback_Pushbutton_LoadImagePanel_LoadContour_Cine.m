@@ -11,7 +11,7 @@ fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect
 TagNo = 1;
 ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 
-contData = fun_readContourTxt(ffn);
+contData = fun_readContourTxt_withName(ffn);
 
 nSliceC = length(contData.data);
 
