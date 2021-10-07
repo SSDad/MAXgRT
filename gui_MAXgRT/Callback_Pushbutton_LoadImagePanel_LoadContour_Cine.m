@@ -11,24 +11,35 @@ fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect
 TagNo = 1;
 ffn = fullfile(data.FileInfo.CineDataPath, fileList);
 
-contData = fun_readContourTxt_withName(ffn);
-
+[contData, NameColor] = fun_readContourTxt_withName(ffn);
 nSliceC = length(contData.data);
 
-% test_1
-hexCLR.Tumor =  '#FFFF0000';
-hexCLR.Ab =  '#FFA52A2A';
-hexCLR.Snake =   '#FF00FFFF';
+[CLR, ia, ~] = unique(NameColor(:,1)); 
+Name = NameColor(ia, 2);
 
-% contours_TK
-hexCLR.Tumor =  '#FF8A2BE2';
-hexCLR.Ab =  '#FF00008B';
-hexCLR.Snake =   '#FFE9967A';
+% for n = 1:length(Name)
+%     if 
 
-%  test_2
-hexCLR.Tumor =  '#FFFF0000';
-hexCLR.Snake =  '#FF7FFF00';
-hexCLR.Ab =   '#FF00FFFF';
+        % hexCLR.Tumor =  '#FFFF0000';
+% hexCLR.Ab =  '#FFA52A2A';
+% hexCLR.Snake =   '#FF00FFFF';
+
+
+% % test_1
+% hexCLR.Tumor =  '#FFFF0000';
+% hexCLR.Ab =  '#FFA52A2A';
+% hexCLR.Snake =   '#FF00FFFF';
+% 
+% % contours_TK
+% hexCLR.Tumor =  '#FF8A2BE2';
+% hexCLR.Ab =  '#FF00008B';
+% hexCLR.Snake =   '#FFE9967A';
+% 
+% %  test_2
+% hexCLR.Tumor =  '#FFFF0000';
+% hexCLR.Snake =  '#FF7FFF00';
+% hexCLR.Ab =   '#FF00FFFF';
+% 
 
 x0 = data.cine(TagNo).x0;
 y0 = data.cine(TagNo).y0;
