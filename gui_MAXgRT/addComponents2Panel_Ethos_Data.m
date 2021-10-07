@@ -12,7 +12,7 @@ w_Gap = (1-w_Button(end))/2;
 FS = 11;
 
 str{1} = 'Save Data';
-str{2} = 'New CBCT_Tx';
+str{2} = '';
 str{3} = 'Threshold';
 str{4} = '';
 str{5} = '';
