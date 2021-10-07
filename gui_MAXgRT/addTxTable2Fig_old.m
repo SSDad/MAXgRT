@@ -1,22 +1,13 @@
-function Comp = addTxTable2Fig(hPanel)
-
-nT = 10;
-h(1:nT) = 1/3;
-for n = 1:nT
-    y(n) = 1-sum(h(1:n));
-    TT{n} = ['CBCT_', num2str(n)];
-end
+function Comp = addTxTable2Fig(hPanel, bgc)
 
 w_1 = 1/10;
 w_2 = 6/10;
 w_3 = 1-w_1-w_2;
 
-for iT = 1:nT
-
-Comp.hPanel.CBCT(iT) = uipanel('parent', hPanel,...
+Comp.hPanel.CBCT = uipanel('parent', hPanel,...
             'Unit', 'Normalized',...
-            'Position', [0 y(iT) 1 h(iT)], ...
-            'Title', TT{iT}, ...
+            'Position', [0 0 1 1], ...
+            'Title', '', ...
             'FontSize',                 12,...
             'Units',                     'normalized', ...
             'visible',                      'on', ...
@@ -24,10 +15,10 @@ Comp.hPanel.CBCT(iT) = uipanel('parent', hPanel,...
             'BackgroundColor',       'k', ...
             'HighlightColor',          'b',...
             'ShadowColor',            'k', ...
-            'Tag', [TT{iT}, '_Panel']);
+            'Tag', ['CBCT_Panel']);
 
 % first column                
-hC1 = uipanel('parent', Comp.hPanel.CBCT(iT),...
+hC1 = uipanel('parent', Comp.hPanel.CBCT,...
             'Unit', 'Normalized',...
             'Position', [0 0 w_1 1], ...
             'FontSize',                 12,...
@@ -36,17 +27,19 @@ hC1 = uipanel('parent', Comp.hPanel.CBCT(iT),...
             'ForegroundColor',       'c',...
             'BackgroundColor',       'k', ...
             'HighlightColor',          'k',...
-            'ShadowColor',            'k');
+            'ShadowColor',            'k',...
+            'Tag', ['FirstColumn_Panel']);
 
-for m = 1:3
+nT = 5;
+for m = 1:nT
     txt.FirstColumn{m} = ['CBCT', num2str(m)];
 end
 nR = length(txt.FirstColumn);
 RowRatio = 2*ones(1, nR);
-fun_myTable_1Col(hC1, RowRatio, txt, 12);
+fun_myTable_1Col(hC1, RowRatio, txt, 12, bgc);
         
 %Data Table                
-Comp.hPanel.CBCTTable(iT) = uipanel('parent',Comp.hPanel.CBCT(iT),...
+Comp.hPanel.CBCTTable = uipanel('parent',Comp.hPanel.CBCT,...
             'Unit', 'Normalized',...
             'Position', [w_1 0 w_2 1], ...
             'FontSize',                 12,...
@@ -56,15 +49,13 @@ Comp.hPanel.CBCTTable(iT) = uipanel('parent',Comp.hPanel.CBCT(iT),...
             'BackgroundColor',       'k', ...
             'HighlightColor',          'k',...
             'ShadowColor',            'k', ...
-            'Tag', 'MRITablePanel');
+            'Tag', 'TxTablePanel');
         
 txt.FirstRow = {'X', 'Y', 'Z', 'dX', 'dY', 'dZ'};                            
-txt.FirstColumn = {'Target '
-                              'Abdomen'
-                              'Target'
-                              'Abdomen'
-                              'Target'
-                              'Abdomen'};
+for m = 1:nT
+    txt.FirstColumn{m*2-1} = 'Target ';
+    txt.FirstColumn{m*2} = 'Abdomen ';
+end
 nR = length(txt.FirstColumn);
 nC = length(txt.FirstRow);
 for iR = 1:nR
@@ -77,24 +68,22 @@ for iR = 1:nR
 end
 RowRatio = ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.CBCTTable(iT).hEdit] = fun_myTable(Comp.hPanel.CBCTTable(iT), RowRatio, ColRatio, txt, 12);
-
-clear txt;
+[Comp.CBCTTable.hEdit] = fun_myTable(Comp.hPanel.CBCTTable, RowRatio, ColRatio, txt, 12, bgc);
 
 for iR = 1:nR
     for iC = 1:3
-        Comp.CBCTTable(iT).hEdit(iR, iC).Tag = ['sim_', num2str(iT), '_', num2str(iR), num2str(iC)];
-        Comp.CBCTTable(iT).hEdit(iR, iC).Callback = @Callback_Ethos_SimTable_;
+        Comp.CBCTTable.hEdit(iR, iC).Tag = ['cbct_', num2str(iR), num2str(iC)];
+        Comp.CBCTTable.hEdit(iR, iC).Callback = @Callback_Ethos_CBCTTable_;
     end
     for iC = 4:nC
-        Comp.CBCTTable(iT).hEdit(iR, iC).ForegroundColor = 'y';
-        Comp.CBCTTable(iT).hEdit(iR, iC).Enable = 'inactive';
+        Comp.CBCTTable.hEdit(iR, iC).ForegroundColor = 'y';
+        Comp.CBCTTable.hEdit(iR, iC).Enable = 'inactive';
     end
 end
-
+clear txt;
 
 % I ID Table
-Comp.hPanel.CBCTID(iT) = uipanel('parent', Comp.hPanel.CBCT(iT),...
+Comp.hPanel.CBCTID = uipanel('parent', Comp.hPanel.CBCT,...
             'Unit', 'Normalized',...
             'Position', [w_1+w_2 0 w_3 1], ...
             'FontSize',                 12,...
@@ -104,12 +93,12 @@ Comp.hPanel.CBCTID(iT) = uipanel('parent', Comp.hPanel.CBCT(iT),...
             'BackgroundColor',       'k', ...
             'HighlightColor',          'k',...
             'ShadowColor',            'k', ...
-            'Tag', 'MRITablePanel');
+            'Tag', 'IDTablePanel');
 
-txt.FirstRow = {'Vertical', 'dVer'};                            
-txt.FirstColumn = {'IDENTIFY1'
-                              'IDENTIFY2'
-                              'IDENTIFY3'};
+txt.FirstRow = {'Vertical', 'dVert'};
+for m = 1:nT
+    txt.FirstColumn{m} = ['IDENTIFY', num2str(m)];
+end
 nR = length(txt.FirstColumn);
 nC = length(txt.FirstRow);
 for iR = 1:nR
@@ -118,13 +107,10 @@ for iR = 1:nR
 end
 RowRatio = 2*ones(1, nR);
 ColRatio = ones(1, nC);
-[Comp.CBCTIDTable(iT).hEdit] = fun_myTable(Comp.hPanel.CBCTID(iT), RowRatio, ColRatio, txt, 12);
+[Comp.CBCTIDTable.hEdit] = fun_myTable(Comp.hPanel.CBCTID, RowRatio, ColRatio, txt, 12, bgc);
 for iR = 1:nR
     for iC = 2:nC
-        Comp.CBCTIDTable(iT).hEdit(iR, iC).ForegroundColor = 'y';
-        Comp.CBCTIDTable(iT).hEdit(iR, iC).Enable = 'inactive';
+        Comp.CBCTIDTable.hEdit(iR, iC).ForegroundColor = 'y';
+        Comp.CBCTIDTable.hEdit(iR, iC).Enable = 'inactive';
     end
-end
-clear txt;
-
 end
