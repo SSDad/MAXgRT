@@ -1,4 +1,4 @@
- function Comp = addComponents2Panel_Measure_Cine(hPanel)
+ function Comp = addComponents2Panel_Cine_Measure(hPanel)
 
  nButton = 3;
  h_Gap = 0.025;
@@ -15,7 +15,7 @@ str{3} = '';
 y = 1;
 for n = 1:2%nButton
     y = y - h_Gap-h_Button;
-    Comp.Radiobutton.Measure_Cine(n) = uicontrol('parent', hPanel, ...
+    Comp.Radiobutton.Measure(n) = uicontrol('parent', hPanel, ...
                                 'Style', 'radiobutton',...
                                 'String', str{n},...
                                 'Unit', 'Normalized',...
@@ -27,11 +27,11 @@ for n = 1:2%nButton
                                 'Value', 0, ...
                                 'Visible', 'on', ...
                                 'Tag', str{n}, ...
-                                'Callback', @Callback_Radiobutton_Measure_Cine_);
+                                'Callback', @Callback_Cine_Radiobutton_Measure_);
     y_Button(n) = y;
 end
 
-Comp.Radiobutton.Measure_Cine(2).Enable = 'off';
+Comp.Radiobutton.Measure(2).Enable = 'off';
 
 w_Text = 0.3;
  x_Text = w_Button + h_Gap*5;

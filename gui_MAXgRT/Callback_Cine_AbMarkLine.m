@@ -15,10 +15,10 @@ src.Position(1:2, 1) = xp;
 
 % updateAbMarkPatch
 data = guidata(hFig);
-TagNo = data.CineActiveTagNo;
+TagNo = data.cine.ActiveTagNo;
 
-nA = str2double(data.Panel.Measure_Cine.Comp.Edit.NoP.String);
-hP = data.Panel.View_Cine.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch;
-yL = data.cine(TagNo).dy*nA;
+nA = str2double(data.cine.Panel.Measure.Comp.Edit.NoP.String);
+hP = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch;
+yL = data.cine.data(TagNo).dy*nA;
 y4 = [yp-yL yp-yL yp+yL yp+yL];
 hP.YData = y4;

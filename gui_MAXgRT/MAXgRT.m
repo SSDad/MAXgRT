@@ -39,11 +39,11 @@ data.Panel.Point.Comp = addComponents2Panel_Point(data.Panel.Point.hPanel);
 data.Panel.About.Comp = addComponents2Panel_About(data.Panel.About.hPanel);
 
 % MRI_Sim mode (_Cine)
-data.Cine.Panel = addPanel_Cine(hFig);
-data.Cine.Panel.LoadImage.Comp = addComponents2Panel_Cine_LoadImage(data.Cine.Panel.LoadImage.hPanel);
-data.Cine.Panel.OLView.Comp = addComponents2Panel_Cine_OLView(data.Cine.Panel.OLView.hPanel);
-data.Cine.Panel.Measure.Comp = addComponents2Panel_Cine_Measure(data.Cine.Panel.Measure.hPanel);
-data.Cine.Panel.MCI.Comp = addComponents2Panel_Cine_MCI(data.Cine.Panel.MCI.hPanel);
+data.cine.Panel = addPanel_Cine(hFig);
+data.cine.Panel.LoadImage.Comp = addComponents2Panel_Cine_LoadImage(data.cine.Panel.LoadImage.hPanel);
+data.cine.Panel.OLView.Comp = addComponents2Panel_Cine_OLView(data.cine.Panel.OLView.hPanel);
+data.cine.Panel.Measure.Comp = addComponents2Panel_Cine_Measure(data.cine.Panel.Measure.hPanel);
+data.cine.Panel.MCI.Comp = addComponents2Panel_Cine_MCI(data.cine.Panel.MCI.hPanel);
 
 % Ethos mode
 data.Ethos.Panel = addPanel_Ethos(hFig);

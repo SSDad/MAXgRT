@@ -1,4 +1,5 @@
 function updateAbMarkWave_Cine(yp, S)
+data.
 global hFig
 data = guidata(hFig);
 

@@ -6,10 +6,10 @@ hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 
 TagNo = str2num(src.Tag);
-hPanel = data.Cine.Panel.View.subPanel(TagNo).hPanel;
+hPanel = data.cine.Panel.View.subPanel(TagNo).hPanel;
 if hPanel.Position(4) < 1
     for n = 1:3
-        data.Cine.Panel.View.subPanel(n).hPanel.Visible = 'off';
+        data.cine.Panel.View.subPanel(n).hPanel.Visible = 'off';
     end
     hPanel.Position = [0 0 1 1];
     hPanel.Visible = 'on';
@@ -30,7 +30,7 @@ if hPanel.Position(4) < 1
         data.Panel.Snake.hPanel.Visible = 'on';
     end
     
-    data.CineActiveTagNo = TagNo;
+    data.cine.ActiveTagNo = TagNo;
 
     data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
     data.Panel.Snake.Comp.Edit.EndSlice.String = num2str(data.cine.data(TagNo).nSlice);
@@ -41,8 +41,8 @@ else
     w = [.5 .5 1];
     h = .5;
     for n = 1:3
-        data.Cine.Panel.View.subPanel(n).hPanel.Position = [x(n) y(n) w(n) h];
-        data.Cine.Panel.View.subPanel(n).hPanel.Visible = 'on';
+        data.cine.Panel.View.subPanel(n).hPanel.Position = [x(n) y(n) w(n) h];
+        data.cine.Panel.View.subPanel(n).hPanel.Visible = 'on';
     end
     
     % panel off
@@ -54,7 +54,7 @@ else
 %     data.Panel.OLView_Cine.hPanel.Visible = 'off';
 
     
-    data.Cine.ActiveTagNo = TagNo;
+    data.Cine.ActiveTagNo = [];
 
 end
 

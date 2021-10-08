@@ -49,7 +49,7 @@ if ~isempty(idx)
     fileList{3} = 'sc.mat';
 end
 
-data.Cine.Panel.View.subPanel = addComponents2Panel_Cine_View(data.Cine.Panel.View.hPanel, fileList);
+data.cine.Panel.View.subPanel = addComponents2Panel_Cine_View(data.cine.Panel.View.hPanel, fileList);
 % data.cine = [];
 %% load data
 bSC = false(3,1);
@@ -104,7 +104,7 @@ end
 %     data.cine(n).dy = 1;
 % end
 
-data.Cine.bSC = bSC;
+data.cine.bSC = bSC;
 guidata(hFig, data);
 
 %% view
@@ -112,7 +112,7 @@ guidata(hFig, data);
 % data.cine(2).iSlice = 1;
 % data.cine(3).iSlice = 1;
 
-data.Cine.ActiveTagNo = [];
+data.cine.ActiveTagNo = [];
 
 % cineImg{1} = data.cine.sag(:, :, data.cine.iSlice(1));
 % [~, ~, data.cine.nSlice(1)] = size(data.cine.sag);
@@ -139,19 +139,19 @@ data.Cine.ActiveTagNo = [];
     data.cine.data(n).RA = RA;
     
     % axis and image
-    hA = data.Cine.Panel.View.subPanel(n).ssPanel(3).Comp.hAxis.Image;
+    hA = data.cine.Panel.View.subPanel(n).ssPanel(3).Comp.hAxis.Image;
     I = data.cine.data(n).v(:, :, data.cine.data(n).iSlice);
-    data.Cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...
+    data.cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj.Image =...
         imshow(I, RA, [], 'parent', hA);
     
     % slider
-    hSS =  data.Cine.Panel.View.subPanel(n).ssPanel(4).Comp.hSlider.Slice;
+    hSS =  data.cine.Panel.View.subPanel(n).ssPanel(4).Comp.hSlider.Slice;
     hSS.Min = 1;
     hSS.Max = data.cine.data(n).nSlice;
     hSS.Value = data.cine.data(n).iSlice;
     hSS.SliderStep = [1 10]/(data.cine.data(n).nSlice-1);
 
-    data.Cine.Panel.View.subPanel(n).ssPanel(4).Comp.hText.nImages.String...
+    data.cine.Panel.View.subPanel(n).ssPanel(4).Comp.hText.nImages.String...
         = [num2str(data.cine.data(n).iSlice), ' / ', num2str(data.cine.data(n).nSlice)];
 
 %     waitbar(1, hWB, 'All slices are loaded!');
@@ -165,11 +165,11 @@ data.Cine.ActiveTagNo = [];
     xc = 1:length(yc);
     xc = xc/max(xc);
 
-     data.Cine.Panel.View.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.XData = xc;
-     data.Cine.Panel.View.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.YData = yc;
+     data.cine.Panel.View.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.XData = xc;
+     data.cine.Panel.View.subPanel(n).ssPanel(2).Comp.hPlotObj.Hist.YData = yc;
      
     % snake
-    hPlotObj = data.Cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj;
+    hPlotObj = data.cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj;
     hPlotObj.Snake = line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineStyle', '-', 'LineWidth', 3);
     hPlotObj.Snake2 = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
     axis(hA, 'tight', 'equal', 'on');
@@ -212,7 +212,7 @@ data.Cine.ActiveTagNo = [];
     hPlotObj.Tumor = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
 
 
-    data.Cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
+    data.cine.Panel.View.subPanel(n).ssPanel(3).Comp.hPlotObj = hPlotObj;
 
      % save file names
      if n ~=3
@@ -222,7 +222,7 @@ data.Cine.ActiveTagNo = [];
          data.cine.data(n).Snake.SlitherDone = 0;
          
          data.cine.data(n).ffn_Tumor_mat = fullfile(data.FileInfo.CineMatPath, ['Tumor_', num2str(n), '.mat']);
-         data.cine.data(n).data.ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2_', num2str(n), '.csv']);
+         data.cine.data(n).ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2_', num2str(n), '.csv']);
      else
          data.cine.data(n).ffn_SnakeL_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeL_', num2str(n), '.mat']);
          data.cine.data(n).ffn_SnakeR_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeR_', num2str(n), '.mat']);
@@ -242,7 +242,7 @@ data.Cine.ActiveTagNo = [];
      data.cine.data(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', num2str(n), '.csv']);
 
      % enable zoom button
-    data.Cine.Panel.View.subPanel(n).ssPanel(1).Comp.Pushbutton.Zoom.Enable = 'on';
+    data.cine.Panel.View.subPanel(n).ssPanel(1).Comp.Pushbutton.Zoom.Enable = 'on';
 end
 
 %buttons on Snake
@@ -257,7 +257,7 @@ data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
 data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
 
 % LoadContour button
-data.Cine.Panel.LoadImage.Comp.Pushbutton.LoadContour.Enable = 'on';
-data.Cine.bContourLoaded = 0;
+data.cine.Panel.LoadImage.Comp.Pushbutton.LoadContour.Enable = 'on';
+data.cine.bContourLoaded = 0;
 
 guidata(hFig, data);
