@@ -1,12 +1,13 @@
  function Comp = addComponents2Panel_Cine_Measure(hPanel)
 
- nButton = 3;
+ nButton = 4;
  h_Gap = 0.025;
  h_Button = (1-h_Gap*(nButton+1))/nButton;
  w_Button = 0.35;
  x_Button = h_Gap;
  
 FS = 11;
+BC_PB = [1 1 1]*0.25;
 
 str{1} = 'Wave';
 str{2} = 'Distance';
@@ -32,6 +33,20 @@ for n = 1:2%nButton
 end
 
 Comp.Radiobutton.Measure(2).Enable = 'off';
+
+y = y - h_Gap-h_Button*2;
+Comp.Pushbutton.SavePDF = uicontrol('parent', hPanel, ...
+                                'Style', 'pushbutton',...
+                                'String', 'Save PDF',...
+                                'Unit', 'Normalized',...
+                                'Position', [0.3 y 0.4 h_Button], ...
+                                'FontSize', 11, ...
+                                'FontWeight', 'bold', ...
+                                'BackgroundColor', BC_PB,...
+                                'ForegroundColor', 'c',...
+                                'Enable', 'off', ...
+                                'Callback', @Callback_Cine_Pushbutton_Measure_SavePDF);
+
 
 w_Text = 0.3;
  x_Text = w_Button + h_Gap*5;

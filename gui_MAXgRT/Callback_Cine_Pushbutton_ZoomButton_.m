@@ -31,9 +31,13 @@ if hPanel.Position(4) < 1
     end
     
     data.cine.ActiveTagNo = TagNo;
-
-    data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
-    data.Panel.Snake.Comp.Edit.EndSlice.String = num2str(data.cine.data(TagNo).nSlice);
+    
+    if data.cine.bContourLoaded
+        data.cine.Panel.OLView.hPanel.Visible = 'on';
+        data.cine.Panel.Measure.hPanel.Visible = 'on';
+    end
+%     data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
+%     data.Panel.Snake.Comp.Edit.EndSlice.String = num2str(data.cine.data(TagNo).nSlice);
    
 else
     x = [0 0.5 0];
@@ -54,7 +58,10 @@ else
 %     data.Panel.OLView_Cine.hPanel.Visible = 'off';
 
     
-    data.Cine.ActiveTagNo = [];
+    data.Cine.ActiveTagNo = 0;
+
+    data.cine.Panel.OLView.hPanel.Visible = 'off';
+    data.cine.Panel.Measure.hPanel.Visible = 'off';
 
 end
 

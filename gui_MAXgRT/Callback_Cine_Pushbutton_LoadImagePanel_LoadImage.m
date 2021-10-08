@@ -54,7 +54,6 @@ data.cine.Panel.View.subPanel = addComponents2Panel_Cine_View(data.cine.Panel.Vi
 %% load data
 bSC = false(3,1);
 ffn = fullfile(matPath, 'sag.mat');
-% data.cine(1) = [];
 if exist(ffn, 'file')
     bSC(1) = 1;
     load(ffn)
@@ -64,6 +63,10 @@ if exist(ffn, 'file')
     data.cine.data(1).y0 = cineData.IMP(2);
     data.cine.data(1).dx = cineData.PS(1);
     data.cine.data(1).dy = cineData.PS(2);
+    
+    data.cine.data(1).dcmInfo = cineData.dcmInfo;
+    data.cine.Panel.PtInfo.Comp.Text.PtInfo.String = ['MRN - ', cineData.dcmInfo.PatientID];
+    
     clearvars cineData;
 end
 
@@ -245,19 +248,21 @@ data.cine.ActiveTagNo = [];
     data.cine.Panel.View.subPanel(n).ssPanel(1).Comp.Pushbutton.Zoom.Enable = 'on';
 end
 
-%buttons on Snake
-data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
-data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
-data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
-data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
-data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
-
-%buttons on Body
-data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
-data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
+% %buttons on Snake
+% data.Panel.Snake.Comp.Pushbutton.FreeHand.Enable = 'on';
+% data.Panel.Snake.Comp.Pushbutton.StartSlice.Enable = 'on';
+% data.Panel.Snake.Comp.Pushbutton.EndSlice.Enable = 'on';
+% data.Panel.Snake.Comp.Edit.StartSlice.ForegroundColor = 'r';
+% data.Panel.Snake.Comp.Edit.EndSlice.ForegroundColor = 'r';
+% 
+% %buttons on Body
+% data.Panel.Body.Comp.Pushbutton.Contour.Enable = 'on';
+% data.Panel.Body.Comp.Togglebutton.Boundary.Enable = 'on';
 
 % LoadContour button
 data.cine.Panel.LoadImage.Comp.Pushbutton.LoadContour.Enable = 'on';
+data.cine.Panel.LoadImage.Comp.Pushbutton.SavePDF.Enable = 'on';
 data.cine.bContourLoaded = 0;
+
 
 guidata(hFig, data);

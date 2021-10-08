@@ -24,7 +24,8 @@ if bSag && bCor % Sag+Cor
         waitbar(n/nFile, hWB, ['Processing ', num2str(n), '/', num2str(nFile)])
     end
     close(hWB);
-    
+    data.dcmInfo = di;
+
     [~, ind] = sort(acqt_sag);
     data.sag = sag(:,:,ind);
 
@@ -47,7 +48,8 @@ elseif (bSag && ~bCor) |  (~bSag && bCor) % Sag or cor
         waitbar(n/nFile, hWB, ['Processing ', num2str(n), '/', num2str(nFile)])
     end
     close(hWB);
-    
+    data.dcmInfo = di;
+
     [~, ind] = sort(acqt);
     data.v = v(:,:,ind);
     

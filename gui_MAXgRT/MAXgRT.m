@@ -40,10 +40,14 @@ data.Panel.About.Comp = addComponents2Panel_About(data.Panel.About.hPanel);
 
 % MRI_Sim mode (_Cine)
 data.cine.Panel = addPanel_Cine(hFig);
+data.cine.Panel.PtInfo.Comp = addComponents2Panel_Cine_PtInfo(data.cine.Panel.PtInfo.hPanel);
 data.cine.Panel.LoadImage.Comp = addComponents2Panel_Cine_LoadImage(data.cine.Panel.LoadImage.hPanel);
 data.cine.Panel.OLView.Comp = addComponents2Panel_Cine_OLView(data.cine.Panel.OLView.hPanel);
 data.cine.Panel.Measure.Comp = addComponents2Panel_Cine_Measure(data.cine.Panel.Measure.hPanel);
-data.cine.Panel.MCI.Comp = addComponents2Panel_Cine_MCI(data.cine.Panel.MCI.hPanel);
+% data.cine.Panel.MCI.Comp = addComponents2Panel_Cine_MCI(data.cine.Panel.MCI.hPanel);
+
+data.cine.AcitveTagNo = 0;
+data.cine.bContourLoaded = 0;
 
 % Ethos mode
 data.Ethos.Panel = addPanel_Ethos(hFig);
@@ -60,6 +64,16 @@ bZoomSelect = 'D';
 bLR = 'N';
 
 hd = '\\bjcfs02.carenet.org\rocdata\ROCData';
+if exist(hd, 'dir')
+    fd_Cine = fullfile(hd, 'MAXgRT', 'MRISim');
+else
+    fd_Cine = 'C:\MAXgRT\MRISim';
+end
+if ~exist(fd_Cine, 'dir')
+    mkdir(fd_Cine);
+end
+data.cine.fd_Cine = fd_Cine;
+
 if exist(hd, 'dir')
     fd_Ethos = fullfile(hd, 'MAXgRT', 'Ethos');
 else

@@ -25,6 +25,7 @@ if strcmp(src.Tag, 'Wave')
 
             data.cine.Panel.Measure.Comp.Edit.NoP.Enable = 'on';
 %             data.Panel.Measure.Comp.Text.NoP.Visible = 'on';
+            data.cine.Panel.Measure.Comp.Pushbutton.SavePDF.Enable = 'on';
         else
             data.cine.Measure.hFig.Visible = 'off';
             data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'off';
@@ -36,6 +37,8 @@ if strcmp(src.Tag, 'Wave')
             data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText.Visible = 'off';
             data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Value = 0;
             data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Enable = 'off';
+
+            data.cine.Panel.Measure.Comp.Pushbutton.SavePDF.Enable = 'off';
 
             data.cine.Panel.Measure.Comp.Edit.NoP.Enable = 'off';
 %             data.Panel.Measure.Comp.Text.NoP.Visible = 'off';
