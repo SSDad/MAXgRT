@@ -4,7 +4,7 @@ global hFig
 data = guidata(hFig);
 
 %% update Patch
-TagNo = data.CineActiveTagNo;
+TagNo = data.cine.ActiveTagNo;
 nA = str2double(src.String);
 
 % Ab

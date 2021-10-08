@@ -13,7 +13,7 @@ if strcmp(src.Checked, 'off')
     
     % off
     data.Panel.LoadImage.hPanel.Visible = 'off';
-    data.Panel.LoadImage_Cine.hPanel.Visible = 'off';
+    data.cine.Panel.LoadImage.hPanel.Visible = 'off';
     
     data.Panel.ContrastBar.hPanel.Visible = 'off';
     data.Panel.SliceSlider.hPanel.Visible = 'off';
@@ -24,9 +24,9 @@ if strcmp(src.Checked, 'off')
     data.Panel.Point.hPanel.Visible = 'off';
     data.Panel.Body.hPanel.Visible = 'off';
 
-    data.Panel.OLView_Cine.hPanel.Visible = 'off';
-    data.Panel.Measure_Cine.hPanel.Visible = 'off';
-    data.Panel.View_Cine.hPanel.Visible = 'off';
+    data.cine.Panel.OLView.hPanel.Visible = 'off';
+    data.cine.Panel.Measure.hPanel.Visible = 'off';
+    data.cine.Panel.View.hPanel.Visible = 'off';
 
     % on
     data.Ethos.Panel.PtInfo.hPanel.Visible = 'on';
