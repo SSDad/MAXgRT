@@ -59,10 +59,25 @@ else
 %     data.Panel.Snake.hPanel.Visible = 'off';
 %     data.Panel.Body.hPanel.Visible = 'off';
     
-    data.cine.ActiveTagNo = 0;
+    % OL off
+    for m = 1:3
+        data.cine.Panel.OLView.Comp.Radiobutton.OLView(m).Value = 0;
+    end
+    data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView.Visible = 'off';
+    data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
+    if TagNo == 1
+        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
+    end
+    
+    %  Measure off
+    data.cine.Panel.Measure.Comp.Radiobutton.Measure(1).Value = 0;
+    CineMeasureWaveOff(data, TagNo)
+
+
     data.cine.Panel.OLView.hPanel.Visible = 'off';
     data.cine.Panel.Measure.hPanel.Visible = 'off';
 
+    data.cine.ActiveTagNo = 0;
 end
 
 %% all off

@@ -1,8 +1,7 @@
-function updateAbMarkWave_Cine(yp, S)
+function updateAbMarkWave_Cine(TagNo, yp, S)
 global hFig
 data = guidata(hFig);
 
-TagNo = 1;
 nA = 10; % number of points average on each side
 nA = str2double(data.cine.Panel.Measure.Comp.Edit.NoP.String);
 
@@ -33,7 +32,7 @@ end
 
 t = 1:nS;
 
-set(data.cine.Measure.hPlotObj.DA(2), 'XData', t, 'YData', xp);
+set(data.cine.Measure(TagNo).hPlotObj.DA(2), 'XData', t, 'YData', xp);
 
 % AbTumorLine
 iSlice = round(data.cine.Panel.View.subPanel(1).ssPanel(4).Comp.hSlider.Slice.Value);

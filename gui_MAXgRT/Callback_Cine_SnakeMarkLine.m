@@ -1,21 +1,21 @@
 function Callback_Cine_SnakeMarkLine(src, evnt)
 
 global hFig
+data = guidata(hFig);
+TagNo = data.cine.ActiveTagNo;
+
 global SnakeMarkLinePos
-yp = SnakeMarkLinePos(1:2, 2);
+yp = SnakeMarkLinePos(1:2, 2, TagNo);
 
 pos = src.Position;
 xp = pos(1);
 S = src.UserData;
 
-updateSnakeMarkWave_Cine(xp, S);
+updateSnakeMarkWave_Cine(TagNo, xp, S);
 
 src.Position(1:2, 2) = yp;
 
 % updateAbMarkPatch
-data = guidata(hFig);
-TagNo = data.cine.ActiveTagNo;
-
 nA = str2double(data.cine.Panel.Measure.Comp.Edit.NoP.String);
 hP = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkPatch;
 xL = data.cine.data(TagNo).dx*nA;

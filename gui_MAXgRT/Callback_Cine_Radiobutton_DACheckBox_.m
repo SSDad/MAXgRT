@@ -2,6 +2,7 @@ function Callback_Cine_Radiobutton_DACheckBox_(src, evnt)
 
 global hFig
 data = guidata(hFig);
+TagNo = data.cine.ActiveTagNo;
 
 if strcmp(src.Tag, 'Diaphragm')
     n = 1;
@@ -19,8 +20,8 @@ if n~=3
     end
 else
     if ~src.Value
-        data.cine.Measure.hAxis.DA(2).YDir = 'normal';
+        data.cine.Measure(TagNo).hAxis.DA(2).YDir = 'normal';
     else
-        data.cine.Measure.hAxis.DA(2).YDir = 'reverse';
+        data.cine.Measure(TagNo).hAxis.DA(2).YDir = 'reverse';
     end
 end

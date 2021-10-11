@@ -10,7 +10,7 @@ ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
 %% single sag txt
-for TagNo = 1:2
+for TagNo = 1:1
     if ~isempty(ind{TagNo}) % contour file exists
         if iscell(fileList)
             ffn = fullfile(data.FileInfo.CineDataPath, fileList{ind{TagNo}});
@@ -166,6 +166,12 @@ for TagNo = 1:2
                         line(hA, 'XData', [], 'YData', [], 'Color', 'g', 'LineWidth', 2,...
                         'Marker', '+', 'MarkerSize', 25, 'Tag', ['mr', num2str(iM)], 'Visible', 'on');
         end
+        
+        % initialize measure fig
+        guidata(hFig, data);
+        createFig_Cine_Measure(TagNo);
+        data = guidata(hFig);
+        
     end % empty ind{TagNo}
 end % TagNo
 
@@ -175,6 +181,12 @@ if data.cine.ActiveTagNo > 0
 end
 
 guidata(hFig, data);
+
+% % initialize measure fig
+% for TagNo = 1:2
+%     createFig_Cine_Measure(TagNo);
+% %     guidata(hFig, data);
+% end
 
 end
 

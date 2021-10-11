@@ -1,9 +1,8 @@
-function updateSnakeMarkWave_Cine(xp, S)
+function updateSnakeMarkWave_Cine(TagNo, xp, S)
 
 global hFig
 data = guidata(hFig);
 
-TagNo = 1;
 nA = 10; % number of points average on each side
 nA = str2double(data.cine.Panel.Measure.Comp.Edit.NoP.String);
 
@@ -33,12 +32,12 @@ for n = 1:nS
 end
 
 t = 1:nS;
-set(data.cine.Measure.hPlotObj.DA(1), 'XData', t, 'YData', yp);
+set(data.cine.Measure(TagNo).hPlotObj.DA(1), 'XData', t, 'YData', yp);
 
 % SnakeTumorLine
 iSlice = round(data.cine.Panel.View.subPanel(1).ssPanel(4).Comp.hSlider.Slice.Value);
-hL = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine;
-hT = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText;
+hL = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine;
+hT = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText;
 
 if isnan(yp(iSlice))
 %     hL.Visible = 'off';

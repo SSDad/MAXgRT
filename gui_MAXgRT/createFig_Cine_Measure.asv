@@ -3,19 +3,15 @@ function createFig_Cine_Measure(TagNo)
 global hFig
 data = guidata(hFig);
 
-FigName{1} = 'Wave - Sagittal';
-FigName{2} = 'Wave - Coronal';
-FigName{3} = 'Wave - Sag+Cor';
-
 data.cine.Measure(TagNo).hFig = figure('MenuBar',            'none', ...
                                                         'Toolbar',              'none', ...
-                                                        'Name',                FigName{TagNo}, ...
+                                                        'Name',                'Wave', ...
                                                         'NumberTitle',      'off', ...
                                                         'Units',                 'normalized',...
                                                         'Position',             [0.2 0.1 0.6 0.8],...
                                                         'Color',                 'black', ...
                                                         'CloseRequestFcn', @figCloseReq_Cine_Measure, ...
-                                                        'Visible',               'off');
+                                                        'Visible',               'on');
                                                     
 %% Tumor                   
 data.cine.Measure(TagNo).hPanel.Tumor = uipanel('parent', data.cine.Measure(TagNo).hFig,...
@@ -57,7 +53,7 @@ for n = 1:2
 
     data.cine.Measure(TagNo).hPlotObj.Tumor(n) = line(data.cine.Measure(TagNo).hAxis.Tumor(n),...
                     'XData', xx, 'YData', TC(:, n), ...
-                    'Color', tFC{n}, 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 24);
+                    'Color', tFC{n}, 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 32);
     data.cine.Measure(TagNo).hAxis.Tumor(n).XLim =  [xx(1) xx(end)];
 end
 data.cine.Measure(TagNo).hAxis.Tumor(n).XLabel.String = 'Slice';
@@ -149,7 +145,7 @@ for n = 1:2
     data.cine.Measure(TagNo).hAxis.DA(n).YLabel.String = yLB{n};
 
     data.cine.Measure(TagNo).hPlotObj.DA(n) = line(data.cine.Measure(TagNo).hAxis.DA(n),  'XData', [], 'YData', [], ...
-                    'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 24);
+                    'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 32);
 
 end
 data.cine.Measure(TagNo).hAxis.DA(n).XLabel.String = 'Slice';
@@ -159,7 +155,7 @@ data.cine.Measure(TagNo).hAxis.DA(1).YLim =  data.cine.data(TagNo).Snake.xyLim(:
 guidata(hFig, data);
 
 hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine;
-% hLine.Visible = 'on';
+hLine.Visible = 'on';
 xp = hLine.Position(1);
 S = hLine.UserData;
 updateSnakeMarkWave_Cine(TagNo, xp, S);
@@ -167,17 +163,17 @@ data.cine.Measure(TagNo).hAxis.DA(1).XLim =  [1 length(S)];
 
 %Ab wave
 if TagNo == 1
-    data.cine.Measure(TagNo).hAxis.DA(2).YLim =  data.cine.data(TagNo).Ab.xyLim(:, 1);
-    guidata(hFig, data);
+data.cine.Measure(TagNo).hAxis.DA(2).YLim =  data.cine.data(TagNo).Ab.xyLim(:, 1);
+guidata(hFig, data);
 
-    hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine;
-%     hLine.Visible = 'on';
-    yp = hLine.Position(1, 2);
-    S = hLine.UserData;
-    updateAbMarkWave_Cine(TagNo, yp, S);
-    data.cine.Measure(TagNo).hAxis.DA(2).XLim =  data.cine.Measure(TagNo).hAxis.DA(1).XLim;
+hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine;
+hLine.Visible = 'on';
+yp = hLine.Position(1, 2);
+S = hLine.UserData;
+updateAbMarkWave_Cine(TagNo, yp, S);
+data.cine.Measure(TagNo).hAxis.DA(2).XLim =  data.cine.Measure(TagNo).hAxis.DA(1).XLim;
 
-    linkaxes([data.cine.Measure(TagNo).hAxis.DA], 'x')
+linkaxes([data.cine.Measure(TagNo).hAxis.DA], 'x')
 end
 
 % Check box                   

@@ -4,6 +4,10 @@ addpath(fullfile(pwd, 'inputdlg'));
 
 global hFig
 data = guidata(hFig);
+TagNo = data.cine.ActiveTagNo;
+
+FigName{1} = 'Sagittal';
+FigName{2} = 'Coronal';
 
 datafd = data.cine.fd_Cine;
 MRN = data.cine.data(1).dcmInfo.PatientID;
@@ -18,8 +22,8 @@ opts.Interpreter = 'tex';
 suffix = fun_inputdlg(prompt, dlgtitle, dims, definput, opts);
 
 if ~isempty(suffix)
-    ffn{1} = fullfile(datafd, [MRN, '_Image_', suffix{1}, '.pdf']);
-    ffn{2} = fullfile(datafd, [MRN, '_Wave_', suffix{1}, '.pdf']);
+    ffn{1} = fullfile(datafd, [MRN, '_Image_', FigName{TagNo}, '_', suffix{1}, '.pdf']);
+    ffn{2} = fullfile(datafd, [MRN, '_Wave_', FigName{TagNo}, '_', suffix{1}, '.pdf']);
 
     hF(1) = hFig;
     hF(2) = data.cine.Measure.hFig;
