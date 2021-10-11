@@ -14,9 +14,9 @@ end
 
 if n~=3
     if src.Value
-        data.cine.Measure.hPlotObj.DA(n).Visible = 'on';
+        data.cine.Measure(TagNo).hPlotObj.DA(n).Visible = 'on';
     else
-        data.cine.Measure.hPlotObj.DA(n).Visible = 'off';
+        data.cine.Measure(TagNo).hPlotObj.DA(n).Visible = 'off';
     end
 else
     if ~src.Value

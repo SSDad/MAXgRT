@@ -66,7 +66,7 @@ else
     data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView.Visible = 'off';
     data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
     if TagNo == 1
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
+        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'off';
     end
     
     %  Measure off

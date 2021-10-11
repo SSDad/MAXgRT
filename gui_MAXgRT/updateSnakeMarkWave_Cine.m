@@ -35,7 +35,7 @@ t = 1:nS;
 set(data.cine.Measure(TagNo).hPlotObj.DA(1), 'XData', t, 'YData', yp);
 
 % SnakeTumorLine
-iSlice = round(data.cine.Panel.View.subPanel(1).ssPanel(4).Comp.hSlider.Slice.Value);
+iSlice = round(data.cine.Panel.View.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value);
 hL = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine;
 hT = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText;
 

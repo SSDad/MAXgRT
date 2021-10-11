@@ -10,7 +10,7 @@ ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
 %% single sag txt
-for TagNo = 1:1
+for TagNo = 1:2
     if ~isempty(ind{TagNo}) % contour file exists
         if iscell(fileList)
             ffn = fullfile(data.FileInfo.CineDataPath, fileList{ind{TagNo}});

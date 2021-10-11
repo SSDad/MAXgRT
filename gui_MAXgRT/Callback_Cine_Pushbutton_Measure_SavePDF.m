@@ -26,7 +26,7 @@ if ~isempty(suffix)
     ffn{2} = fullfile(datafd, [MRN, '_Wave_', FigName{TagNo}, '_', suffix{1}, '.pdf']);
 
     hF(1) = hFig;
-    hF(2) = data.cine.Measure.hFig;
+    hF(2) = data.cine.Measure(TagNo).hFig;
     
     for m = 1:2
         set(hF(m), 'Units', 'Inches');

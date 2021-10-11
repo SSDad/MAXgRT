@@ -136,7 +136,9 @@ yLB{1} = 'Diaphram Vertical Coordiante (mm)';
 yLB{2} = 'Abdomen Horizontal Coordiante (mm)';
 TT{1} = 'DWave';
 TT{2} = 'AWave';
-for n = 1:2
+
+nA = [2 1]; 
+for n = 1:nA(TagNo)
     data.cine.Measure(TagNo).hAxis.DA(n) = axes('Parent',      data.cine.Measure(TagNo).hPanel.DA, ...
                                         'YAxisLocation',yLoc{n}, ...
                                         'color',        'none',...
@@ -220,7 +222,9 @@ str{3} = 'Inv';
 FC2{1} = 'g';
 FC2{2} = 'c';
 FC2{3} = 'c';
-for n = 1:3%nButton
+
+nA = [3 1];
+for n = 1:nA(TagNo)%nButton
     data.cine.Measure(TagNo).DACheckBox(n) = uicontrol('parent',  data.cine.Measure(TagNo).hPanel.DACheckBox, ...
                                 'Style', 'radiobutton',...
                                 'String', str{n},...
@@ -237,6 +241,8 @@ for n = 1:3%nButton
                                 'Callback', @Callback_Cine_Radiobutton_DACheckBox_);
 end
 
-data.cine.Measure(TagNo).DACheckBox(3).Value = 0;
+if TagNo == 1
+    data.cine.Measure(TagNo).DACheckBox(3).Value = 0;
+end
 
 guidata(hFig, data);
