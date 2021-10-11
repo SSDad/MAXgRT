@@ -14,26 +14,31 @@ if hPanel.Position(4) < 1
     hPanel.Position = [0 0 1 1];
     hPanel.Visible = 'on';
 
-    % Snake panel on
-    data.Panel.Selection.hPanel.Visible = 'on';
+%     % Snake panel on
+%     data.Panel.Selection.hPanel.Visible = 'on';
 
-    if strcmp(bZoomSelect, 'B')
-        data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 0;
-        data.Panel.Selection.Comp.Radiobutton.Body.Value = 1;
-
-        data.Panel.Body.hPanel.Visible = 'on';
-        data.Panel.Snake.hPanel.Visible = 'off';
-    else
-        data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 1;
-        data.Panel.Selection.Comp.Radiobutton.Body.Value = 0;
-        data.Panel.Body.hPanel.Visible = 'off';
-        data.Panel.Snake.hPanel.Visible = 'on';
-    end
+%     if strcmp(bZoomSelect, 'B')
+%         data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 0;
+%         data.Panel.Selection.Comp.Radiobutton.Body.Value = 1;
+% 
+%         data.Panel.Body.hPanel.Visible = 'on';
+%         data.Panel.Snake.hPanel.Visible = 'off';
+%     else
+%         data.Panel.Selection.Comp.Radiobutton.Diaphragm.Value = 1;
+%         data.Panel.Selection.Comp.Radiobutton.Body.Value = 0;
+%         data.Panel.Body.hPanel.Visible = 'off';
+%         data.Panel.Snake.hPanel.Visible = 'on';
+%     end
     
     data.cine.ActiveTagNo = TagNo;
     
-    if data.cine.bContourLoaded
+    if data.cine.data(TagNo).bContourLoaded
         data.cine.Panel.OLView.hPanel.Visible = 'on';
+        data.cine.Panel.OLView.Comp.Radiobutton.OLView(3).Visible = 'on';
+        if TagNo == 2
+            data.cine.Panel.OLView.Comp.Radiobutton.OLView(3).Visible = 'off';
+        end
+        
         data.cine.Panel.Measure.hPanel.Visible = 'on';
     end
 %     data.Panel.Snake.Comp.Edit.StartSlice.String = '1';
@@ -50,25 +55,19 @@ else
     end
     
     % panel off
-    data.Panel.Selection.hPanel.Visible = 'off';
-    data.Panel.Snake.hPanel.Visible = 'off';
-
-    data.Panel.Body.hPanel.Visible = 'off';
-
-%     data.Panel.OLView_Cine.hPanel.Visible = 'off';
-
+%     data.Panel.Selection.hPanel.Visible = 'off';
+%     data.Panel.Snake.hPanel.Visible = 'off';
+%     data.Panel.Body.hPanel.Visible = 'off';
     
-    data.Cine.ActiveTagNo = 0;
-
+    data.cine.ActiveTagNo = 0;
     data.cine.Panel.OLView.hPanel.Visible = 'off';
     data.cine.Panel.Measure.hPanel.Visible = 'off';
 
 end
 
 %% all off
-data.Panel.Selection.hPanel.Visible = 'off';
-data.Panel.Body.hPanel.Visible = 'off';
-data.Panel.Snake.hPanel.Visible = 'off';
-
+% data.Panel.Selection.hPanel.Visible = 'off';
+% data.Panel.Body.hPanel.Visible = 'off';
+% data.Panel.Snake.hPanel.Visible = 'off';
 
 guidata(hFig, data);

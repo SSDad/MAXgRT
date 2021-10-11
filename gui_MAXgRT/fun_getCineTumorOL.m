@@ -1,9 +1,8 @@
 function  [ovAll, tCent, tLim] = fun_getCineTumorOL(cineData)
 
-for n = 1:length(cineData)
-    M = cineData(n).mImg;
-    N = cineData(n).nImg;
-    s = cineData(n).Tumor.Snakes;
+    M = cineData.mImg;
+    N = cineData.nImg;
+    s = cineData.Tumor.Snakes;
     ov = zeros(M, N);
 
     nS = length(s);
@@ -24,9 +23,8 @@ for n = 1:length(cineData)
         end
     end
 
-    ovAll{n} = ov;
+    ovAll = ov;
     
-    tLim{n} = [xymin; xymax];
-    tCent{n} = cent;
+    tLim = [xymin; xymax];
+    tCent = cent;
     
-end

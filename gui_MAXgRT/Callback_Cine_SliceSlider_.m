@@ -45,16 +45,21 @@ dx = data.cine.data(TagNo).dx;
 dy = data.cine.data(TagNo).dy;
 
 %% contours
-if data.cine.bContourLoaded
+if data.cine.data(TagNo).bContourLoaded
     hPlotObj = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj; %data.Panel.View.Comp.hPlotObj;
 
     cineData = data.cine.data(TagNo);
     bShow = [1 1 1];
+    if TagNo == 2
+        bShow = [1 1 0];
+    end
     showAllContours(hPlotObj, cineData, iSlice, bShow)
     showTumorCenter(hPlotObj, cineData, iSlice)
     
     bDist = data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Value;
-    updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
+    if TagNo == 1
+        updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
+    end
     updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
 end
 
