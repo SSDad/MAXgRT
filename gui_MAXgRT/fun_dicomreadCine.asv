@@ -37,10 +37,8 @@ if bSag && bCor % Sag+Cor
     data.cor = cor(:,:,ind);
     
     data.sc = 'sc';
-    data.imp_sag = imp_sag;
-    data.imp_cor = imp_cor;
-    data.ps_sag = ps_sag;
-    data.ps_cor = ps_cor;
+    data.imp_ = di.ImagePositionPatient;
+    data.PS = di.PixelSpacing;
     
 elseif (bSag && ~bCor) |  (~bSag && bCor) % Sag or cor
     v = [];

@@ -6,22 +6,13 @@ TagNo = data.cine.ActiveTagNo;
 if strcmp(src.Tag, 'Wave')
         hRB = data.cine.Panel.Measure.Comp.Radiobutton.Measure(1);
         if hRB.Value
-%             if isfield(data.cine, 'Measure')
-%                 if ishandle(data.cine.Measure(TagNo).hFig)
-                    data.cine.Measure(TagNo).hFig.Visible = 'on';
-                    data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'on';
-                    data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'on';
+            data.cine.Measure(TagNo).hFig.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeMarkLine.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.AbMarkLine.Visible = 'on';
 
-                    data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Enable = 'on';
-%                 else
-%                     data.cine.Measure.hFig.Visible = 'off';
-%                 end
-%             else
-%                 createFig_Cine_Measure(TagNo);
-%                 data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Enable = 'on';
-%             end
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkPatch.Visible = 'on';
+            data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Enable = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.AbMarkPatch.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeMarkPatch.Visible = 'on';
 
             data.cine.Panel.Measure.Comp.Edit.NoP.Enable = 'on';
 %             data.Panel.Measure.Comp.Text.NoP.Visible = 'on';
@@ -34,16 +25,16 @@ end
 if strcmp(src.Tag, 'Distance')
         hRB = data.cine.Panel.Measure.Comp.Radiobutton.Measure(2);
         if hRB.Value
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorLine.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorText.Visible = 'on';
             
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorLine.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorText.Visible = 'on';
         else
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine.Visible = 'off';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorLine.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorText.Visible = 'off';
 
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine.Visible = 'off';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorLine.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorText.Visible = 'off';
         end
 end

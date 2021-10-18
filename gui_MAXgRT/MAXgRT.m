@@ -47,7 +47,6 @@ data.cine.Panel.Measure.Comp = addComponents2Panel_Cine_Measure(data.cine.Panel.
 % data.cine.Panel.MCI.Comp = addComponents2Panel_Cine_MCI(data.cine.Panel.MCI.hPanel);
 
 data.cine.AcitveTagNo = 0;
-data.cine.bContourLoaded = 0;
 
 % Ethos mode
 data.Ethos.Panel = addPanel_Ethos(hFig);

@@ -17,7 +17,8 @@ if strcmp(src.Tag, 'Tumor')
 %             guidata(hFig, data);
 %         end
         % TumorOL on
-        h = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView;
+%         h = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView;
+        h = data.cine.hPlotObj(TagNo).TumorOLView;
         if isfield(data.cine.data(TagNo).Tumor, 'OL')
             h.CData(:, :, 1) = data.cine.data(TagNo).Tumor.OL;
             h.AlphaData = rescale(data.cine.data(TagNo).Tumor.OL);
@@ -25,22 +26,26 @@ if strcmp(src.Tag, 'Tumor')
         end
     else
         % TumorOL off
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView.Visible = 'off';
+%         data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.TumorOLView.Visible = 'off';
+        data.cine.hPlotObj(TagNo).TumorOLView.Visible = 'off';
     end
 elseif strcmp(src.Tag, 'Diaphragm')
     hRB = data.cine.Panel.OLView.Comp.Radiobutton.OLView(2);
     if hRB.Value
-%         data.Panel.View_Cine.subPanel(n).ssPanel(3).Comp.hPlotObj.hgSnake.Visible = 'on';
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'on';
+%         data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'on';
+        data.cine.hPlotObj(TagNo).DiaphragmOLView.Visible = 'on';
     else
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
+%         data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.DiaphragmOLView.Visible = 'off';
+        data.cine.hPlotObj(TagNo).DiaphragmOLView.Visible = 'off';
     end
 elseif strcmp(src.Tag, 'Ab')
     hRB = data.cine.Panel.OLView.Comp.Radiobutton.OLView(3);
     if hRB.Value
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'on';
+%         data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'on';
+        data.cine.hPlotObj(TagNo).AbOLView.Visible = 'on';
     else
-        data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'off';
+%         data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.AbOLView.Visible = 'off';
+        data.cine.hPlotObj(TagNo).AbOLView.Visible = 'off';
     end
 end
 

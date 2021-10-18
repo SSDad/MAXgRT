@@ -36,8 +36,10 @@ set(data.cine.Measure(TagNo).hPlotObj.DA(2), 'XData', t, 'YData', xp);
 
 % AbTumorLine
 iSlice = round(data.cine.Panel.View.subPanel(1).ssPanel(4).Comp.hSlider.Slice.Value);
-hL = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine;
-hT = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText;
+% hL = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine;
+% hT = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText;
+hL = data.cine.hPlotObj(TagNo).MarkLines.AbTumorLine;
+hT = data.cine.hPlotObj(TagNo).MarkLines.AbTumorText;
 
 if isnan(xp(iSlice))
 %     hL.Visible = 'off';

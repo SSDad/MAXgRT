@@ -1,4 +1,4 @@
-function Comp = addComponents2Panel_ContrastBar_Cine(hPanel, TagNo)
+function Comp = addComponents2Panel_Cine_ContrastBar(hPanel, TagNo)
 
 global contrastRectLim_Cine
 

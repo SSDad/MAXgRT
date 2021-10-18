@@ -160,7 +160,8 @@ data.cine.Measure(TagNo).hAxis.DA(n).XLabel.String = 'Slice';
 data.cine.Measure(TagNo).hAxis.DA(1).YLim =  data.cine.data(TagNo).Snake.xyLim(:, 2);
 guidata(hFig, data);
 
-hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine;
+% hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine;
+hLine = data.cine.hPlotObj(TagNo).MarkLines.SnakeMarkLine;
 % hLine.Visible = 'on';
 xp = hLine.Position(1);
 S = hLine.UserData;
@@ -172,7 +173,8 @@ if TagNo == 1
     data.cine.Measure(TagNo).hAxis.DA(2).YLim =  data.cine.data(TagNo).Ab.xyLim(:, 1);
     guidata(hFig, data);
 
-    hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine;
+%     hLine = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine;
+    hLine = data.cine.hPlotObj(TagNo).MarkLines.AbMarkLine;
 %     hLine.Visible = 'on';
     yp = hLine.Position(1, 2);
     S = hLine.UserData;

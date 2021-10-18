@@ -18,7 +18,7 @@ src.Position(1:2, 2) = yp;
 
 % updateMarkPatch
 nA = str2double(data.cine.Panel.Measure.Comp.Edit.NoP.String);
-hP = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkPatch;
+hP = data.cine.hPlotObj(TagNo).MarkLines.SnakeMarkPatch;
 xL = data.cine.data(TagNo).dx*nA;
 x4 = [xp-xL xp-xL xp+xL xp+xL];
 hP.XData = x4;
