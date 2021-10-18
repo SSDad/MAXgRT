@@ -19,6 +19,7 @@ tt = tt(1:end-1);
 ind_img = find(contains(tt, 'Image Id', 'IgnoreCase', true));
 
 NameColor = [];
+contData.data(length(ind_img)) = struct();
 for n = 1:length(ind_img)-1
     m1 = ind_img(n)+1;
     m2 = ind_img(n+1)-1;

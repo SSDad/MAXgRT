@@ -4,47 +4,69 @@ hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 
 fileList = uigetfile(fullfile(data.FileInfo.CineDataPath, '*.txt'), 'MultiSelect', 'on');
-% idx = find(contains(fileList,'sag.txt', 'IgnoreCase', true));
 ind{1} = find(contains(fileList,'sag', 'IgnoreCase', true) & ~contains(fileList,'cor', 'IgnoreCase', true));
 ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,'sag', 'IgnoreCase', true));
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
-%% single sag txt
-for TagNo = 1:2
+for TagNo = 1:3
     if ~isempty(ind{TagNo}) % contour file exists
         if iscell(fileList)
             ffn = fullfile(data.FileInfo.CineDataPath, fileList{ind{TagNo}});
         else
             ffn = fullfile(data.FileInfo.CineDataPath, fileList);
-        end            
-        [contData, NameColor] = fun_readContourTxt_withName(ffn);
-        nSliceC = length(contData.data);
+        end           
+        [contData3{TagNo}, NameColor] = fun_readContourTxt_withName(ffn);
+
+        nSliceC = length(contData3{TagNo}.data);
 
         % contour NameColor
         [CLR, ia, ~] = unique(NameColor(:,1)); 
         Name = NameColor(ia, 2);
         for n = 1:length(Name)
             if strcmpi(Name{n}(1), 't')        
-                hexCLR.Tumor =  CLR{n};
+                contCLR(TagNo).Tumor =  CLR{n};
             elseif strcmpi(Name{n}(1), 'a')        
-                hexCLR.Ab =  CLR{n};
+                contCLR(TagNo).Ab =  CLR{n};
             elseif strcmpi(Name{n}(1), 'd')        
-                hexCLR.Snake =  CLR{n};
+                contCLR(TagNo).Snake =  CLR{n};
             end
         end
-
         % %  test_2
         % hexCLR.Tumor =  '#FFFF0000';
         % hexCLR.Snake =  '#FF7FFF00';
         % hexCLR.Ab =   '#FF00FFFF';
-        % 
+        
+        data.cine.data(TagNo).bContourLoaded = 1;
+    end
+end
 
+for TagNo = 1:4
+    contData = [];
+    if TagNo < 3
+        if data.cine.data(TagNo).bContourLoaded
+            contData = contData3{TagNo};
+            hexCLR = contCLR(TagNo);
+        end
+    else
+        if data.cine.data(TagNo).bContourLoaded
+            nData = length(contData3{TagNo}.data)/2;
+            contData.ratio = contData3{TagNo}.ratio;
+            hexCLR = contCLR(3);
+            if TagNo == 3
+                contData.data = contData3{3}.data(1:nData);
+            else
+                contData.data = contData3{3}.data(nData+1:end);
+            end
+        end
+    end
+    
+    if ~isempty(contData)
         x0 = data.cine.data(TagNo).x0;
         y0 = data.cine.data(TagNo).y0;
         dx = data.cine.data(TagNo).dx;
         dy = data.cine.data(TagNo).dy;
 
-        for n = 1:nSliceC
+        for n = 1: length(contData.data)
             if ~isempty(contData.data(n).cont)
                 for m = 1:length(contData.data(n).cont)
                     CLR = contData.data(n).cont(m).CLR;
@@ -72,57 +94,38 @@ for TagNo = 1:2
             end
         end
 
-        data.cine.data(TagNo).bContourLoaded = 1;
-
-        %% contours on slice 1
-        cineData = data.cine.data(TagNo);
-        bShow = [1 1 1];
-        if TagNo == 2
-            bShow = [1 1 0];
-        end
-        showAllContours(data.cine.hPlotObj(TagNo), cineData, 1, bShow)
-
-        %% save .mat .csv
-        Snakes =  data.cine.data(TagNo).Tumor.Snakes;
-        dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
-        dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
-        saveContourMatCsv(Snakes, dataFileName);
-
-        Snakes =  data.cine.data(TagNo).Snake.Snakes;
-        dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
-        dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
-        saveContourMatCsv(Snakes, dataFileName);
-
-        if TagNo == 1
-            Snakes =  data.cine.data(TagNo).Ab.Snakes;
-            dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
-            dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
-            saveContourMatCsv(Snakes, dataFileName);
-        end
-        
-        if TagNo == 1
-            msg = {'Sagittal contour data have been saved.'};
-        elseif TagNo == 2
-            msg = {'Coronal contour data have been saved.'};
-        end
-        fun_messageBox(msg);
+%         %% save .mat .csv
+%         Snakes =  data.cine.data(TagNo).Tumor.Snakes;
+%         dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
+%         dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
+%         saveContourMatCsv(Snakes, dataFileName);
+% 
+%         Snakes =  data.cine.data(TagNo).Snake.Snakes;
+%         dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
+%         dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
+%         saveContourMatCsv(Snakes, dataFileName);
+% 
+%         if TagNo == 1
+%             Snakes =  data.cine.data(TagNo).Ab.Snakes;
+%             dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
+%             dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
+%             saveContourMatCsv(Snakes, dataFileName);
+%         end
+%         
+%         if TagNo == 1
+%             msg = {'Sagittal contour data have been saved.'};
+%         elseif TagNo == 2
+%             msg = {'Coronal contour data have been saved.'};
+%         end
+%         fun_messageBox(msg);
         
         %% OLView
-        % tumor OL
-        [data.cine.data(TagNo).Tumor.OL, ...
-         data.cine.data(TagNo).Tumor.Cent,...
-         data.cine.data(TagNo).Tumor.Lim] = fun_getCineTumorOL(data.cine.data(TagNo));
-%         for nn = 1:length(CineTumorOL)
-%             data.cine.data(TagNo).Tumor.OL = CineTumorOL{nn};
-%             data.cine.data(TagNo).Tumor.Cent = CineTumorCent{nn};
-%             data.cine.data(TagNo).Tumor.Lim = CineTumorLim{nn};
-%         end
+        % tumor
+        [data.cine.data(TagNo).Tumor.OL,  data.cine.data(TagNo).Tumor.Cent, data.cine.data(TagNo).Tumor.Lim] = ...
+            fun_getCineTumorOL(data.cine.data(TagNo));
         data.cine.data(TagNo).bTumorOLDone = 1;
 
-        %% contour on view
         hA = data.cine.hAxis(TagNo);
-
-        % tumor
         I = zeros(data.cine.data(TagNo).mImg, data.cine.data(TagNo).mImg);
         red = cat(3, I, I, I);
         data.cine.hPlotObj(TagNo).TumorOLView =...
@@ -143,7 +146,7 @@ for TagNo = 1:2
         set(data.cine.hPlotObj(TagNo).DiaphragmOLView, 'AlphaData', rescale(I), 'Visible', 'off');
     
         % ab
-        if TagNo == 1
+        if TagNo == 1 | TagNo == 3
             cont = data.cine.data(TagNo).Ab.Snakes;
             [I, data.cine.data(TagNo).Ab.xyLim] = fun_getCineContourOL(cont, data.cine.data(TagNo).mImg, data.cine.data(TagNo).nImg, 'A', x0, y0, dx, dy);
             blue = cat(3, zeros(size(I)), I, I); 
@@ -152,7 +155,15 @@ for TagNo = 1:2
             set(data.cine.hPlotObj(TagNo).AbOLView,...
                 'AlphaData', rescale(I), 'Visible', 'off');
         end
-    
+        
+        %% contours on slice 1
+        cineData = data.cine.data(TagNo);
+        bShow = [1 1 1];
+        if TagNo == 2 | TagNo == 4
+            bShow = [1 1 0];
+        end
+        showAllContours(data.cine.hPlotObj(TagNo), cineData, 1, bShow)
+        
         %% Measure marks
         data.cine.hPlotObj(TagNo).MarkLines =...
             addMeasureMarks_Cine(hA, data.cine.data(TagNo), TagNo);
@@ -165,11 +176,10 @@ for TagNo = 1:2
         end
         
         % initialize measure fig
-        guidata(hFig, data);
-        createFig_Cine_Measure(TagNo);
-        data = guidata(hFig);
-        
-    end % empty ind{TagNo}
+%         guidata(hFig, data);
+%         createFig_Cine_Measure(TagNo);
+%         data = guidata(hFig);
+    end %isempty(cineData)
 end % TagNo
 
 if data.cine.ActiveTagNo > 0
@@ -178,12 +188,6 @@ if data.cine.ActiveTagNo > 0
 end
 
 guidata(hFig, data);
-
-% % initialize measure fig
-% for TagNo = 1:2
-%     createFig_Cine_Measure(TagNo);
-% %     guidata(hFig, data);
-% end
 
 end
 
