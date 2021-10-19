@@ -110,7 +110,8 @@ guidata(hFig, data);
 %% view
 SaveFileAppendix{1} = 'sag';
 SaveFileAppendix{2} = 'cor';
-SaveFileAppendix{3} = 'sc';
+SaveFileAppendix{3} = 'scSag';
+SaveFileAppendix{4} = 'scCor';
 
 data.cine.ActiveTagNo = [];
 for n = find(bSC)'
@@ -199,26 +200,27 @@ for n = find(bSC)'
     data.cine.hPlotObj(n).Tumor = line(hA, 'XData', [], 'YData', [], 'Color', 'c', 'LineStyle', '-', 'LineWidth', 3);
 
      % save file names
-     if n < 4
+%      if n < 4
          data.cine.data(n).ffn_Snake_mat = fullfile(data.FileInfo.CineMatPath, ['Snake_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_Snake_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2_', SaveFileAppendix{n}, '.csv']);
+         data.cine.data(n).ffn_Snake_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix_', SaveFileAppendix{n}, '.csv']);
          
          data.cine.data(n).ffn_Tumor_mat = fullfile(data.FileInfo.CineMatPath, ['Tumor_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2_', SaveFileAppendix{n}, '.csv']);
+         data.cine.data(n).ffn_Tumor_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix_', SaveFileAppendix{n}, '.csv']);
 
-         data.cine.data(n).ffn_SnakeL_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeL_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_SnakeR_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeR_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_SnakeL_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2L_', SaveFileAppendix{n}, '.csv']);
-         data.cine.data(n).ffn_SnakeR_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrix2R_', SaveFileAppendix{n}, '.csv']);
-
-         data.cine.data(n).ffn_TumorL_mat = fullfile(data.FileInfo.CineMatPath, ['TumorL_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_TumorR_mat = fullfile(data.FileInfo.CineMatPath, ['TumorR_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_TumorL_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2L_', SaveFileAppendix{n}, '.csv']);
-         data.cine.data(n).ffn_TumorR_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrix2R_', SaveFileAppendix{n}, '.csv']);
-     
-         data.cine.data(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['AbsContour_', SaveFileAppendix{n}, '.mat']);
-         data.cine.data(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbsContourMatrix2_', SaveFileAppendix{n}, '.csv']);
-     end
+          data.cine.data(n).ffn_Body_mat = fullfile(data.FileInfo.CineMatPath, ['Ab_', SaveFileAppendix{n}, '.mat']);
+         data.cine.data(n).ffn_Body_csv = fullfile(data.FileInfo.CineMatPath, ['AbPointsMatrix_', SaveFileAppendix{n}, '.csv']);
+%      else
+%          data.cine.data(n).ffn_SnakeL_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeL_', SaveFileAppendix{n}, '.mat']);
+%          data.cine.data(n).ffn_SnakeR_mat = fullfile(data.FileInfo.CineMatPath, ['SnakeR_', SaveFileAppendix{n}, '.mat']);
+%          data.cine.data(n).ffn_SnakeL_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrixL_', SaveFileAppendix{n}, '.csv']);
+%          data.cine.data(n).ffn_SnakeR_csv = fullfile(data.FileInfo.CineMatPath, ['SnakePointsMatrixR_', SaveFileAppendix{n}, '.csv']);
+% 
+%          data.cine.data(n).ffn_TumorL_mat = fullfile(data.FileInfo.CineMatPath, ['TumorL_', SaveFileAppendix{n}, '.mat']);
+%          data.cine.data(n).ffn_TumorR_mat = fullfile(data.FileInfo.CineMatPath, ['TumorR_', SaveFileAppendix{n}, '.mat']);
+%          data.cine.data(n).ffn_TumorL_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrixL_', SaveFileAppendix{n}, '.csv']);
+%          data.cine.data(n).ffn_TumorR_csv = fullfile(data.FileInfo.CineMatPath, ['TumorPointsMatrixR_', SaveFileAppendix{n}, '.csv']);
+%      
+%      end
 
      % enable zoom button
     data.cine.Panel.View.subPanel(n).ssPanel(1).Comp.Pushbutton.Zoom.Enable = 'on';

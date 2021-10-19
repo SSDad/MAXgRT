@@ -97,30 +97,34 @@ for TagNo = 1:4
             end
         end
 
-%         %% save .mat .csv
-%         Snakes =  data.cine.data(TagNo).Tumor.Snakes;
-%         dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
-%         dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
-%         saveContourMatCsv(Snakes, dataFileName);
-% 
-%         Snakes =  data.cine.data(TagNo).Snake.Snakes;
-%         dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
-%         dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
-%         saveContourMatCsv(Snakes, dataFileName);
-% 
-%         if TagNo == 1
-%             Snakes =  data.cine.data(TagNo).Ab.Snakes;
-%             dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
-%             dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
-%             saveContourMatCsv(Snakes, dataFileName);
-%         end
-%         
-%         if TagNo == 1
-%             msg = {'Sagittal contour data have been saved.'};
-%         elseif TagNo == 2
-%             msg = {'Coronal contour data have been saved.'};
-%         end
-%         fun_messageBox(msg);
+        %% save .mat .csv
+        Snakes =  data.cine.data(TagNo).Tumor.Snakes;
+        dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
+        dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
+        saveContourMatCsv(Snakes, dataFileName);
+
+        Snakes =  data.cine.data(TagNo).Snake.Snakes;
+        dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
+        dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
+        saveContourMatCsv(Snakes, dataFileName);
+
+        if TagNo == 1 | TagNo == 3
+            Snakes =  data.cine.data(TagNo).Ab.Snakes;
+            dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
+            dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
+            saveContourMatCsv(Snakes, dataFileName);
+        end
+        
+        if TagNo == 1 
+            msg = {'Sagittal contour data have been saved.'};
+        elseif TagNo == 2
+            msg = {'Coronal contour data have been saved.'};
+        elseif TagNo == 3
+            msg = {'Sagittal contour in Sag+Cor data have been saved.'};
+        elseif TagNo == 4
+            msg = {'Coronal contour in Sag+Cor data have been saved.'};
+        end
+        fun_messageBox(msg);
         
         %% OLView
         % tumor
