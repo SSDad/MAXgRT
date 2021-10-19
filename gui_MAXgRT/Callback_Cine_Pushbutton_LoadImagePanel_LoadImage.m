@@ -59,10 +59,12 @@ if exist(ffn, 'file')
     load(ffn)
     data.cine.data(1).v = cineData.v;
     [data.cine.data(1).mImg, data.cine.data(1).nImg, data.cine.data(1).nSlice] = size(cineData.v);
-    data.cine.data(1).x0 = cineData.IMP(1);
-    data.cine.data(1).y0 = cineData.IMP(2);
+    data.cine.data(1).IMP = cineData.IMP;
     data.cine.data(1).dx = cineData.PS(1);
     data.cine.data(1).dy = cineData.PS(2);
+
+    data.cine.data(1).x0 = cineData.IMP(2);
+    data.cine.data(1).y0 = cineData.IMP(3)- data.cine.data(1).dy*data.cine.data(1).mImg;
     
     data.cine.data(1).dcmInfo = cineData.dcmInfo;
     data.cine.Panel.PtInfo.Comp.Text.PtInfo.String = ['MRN - ', cineData.dcmInfo.PatientID];
@@ -77,10 +79,15 @@ if exist(ffn, 'file')
     load(ffn)
     data.cine.data(2).v = cineData.v;
     [data.cine.data(2).mImg, data.cine.data(2).nImg, data.cine.data(2).nSlice] = size(cineData.v);
-    data.cine.data(2).x0 = cineData.IMP(1);
-    data.cine.data(2).y0 = cineData.IMP(2);
+    data.cine.data(2).IMP = cineData.IMP;
     data.cine.data(2).dx = cineData.PS(1);
     data.cine.data(2).dy = cineData.PS(2);
+
+    data.cine.data(2).x0 = cineData.IMP(1);
+%     data.cine.data(2).y0 = cineData.IMP(3);
+    data.cine.data(2).y0 = cineData.IMP(3)- data.cine.data(2).dy*data.cine.data(2).mImg;
+    
+    data.cine.data(2).dcmInfo = cineData.dcmInfo;
     clearvars cineData;
 end
 
@@ -93,14 +100,18 @@ if exist(ffn, 'file')
     data.cine.data(4).v = cineData.cor;
     [data.cine.data(3).mImg, data.cine.data(3).nImg, data.cine.data(3).nSlice] = size(data.cine.data(3).v);
     [data.cine.data(4).mImg, data.cine.data(4).nImg, data.cine.data(4).nSlice] = size(data.cine.data(4).v);
-    data.cine.data(3).x0 = cineData.imp_sag(1);
-    data.cine.data(3).y0 = cineData.imp_sag(2);
+
+    data.cine.data(3).IMP = cineData.imp_sag;
     data.cine.data(3).dx = cineData.ps_sag(1);
     data.cine.data(3).dy = cineData.ps_sag(2);
-    data.cine.data(4).x0 = cineData.imp_cor(1);
-    data.cine.data(4).y0 = cineData.imp_cor(2);
+    data.cine.data(3).x0 = cineData.imp_sag(2);
+    data.cine.data(3).y0 = cineData.imp_sag(3)- data.cine.data(3).dy*data.cine.data(3).mImg;;
+
+    data.cine.data(4).IMP = cineData.imp_cor;
     data.cine.data(4).dx = cineData.ps_cor(1);
     data.cine.data(4).dy = cineData.ps_cor(2);
+    data.cine.data(4).x0 = cineData.imp_cor(1);
+    data.cine.data(4).y0 = cineData.imp_cor(3)- data.cine.data(4).dy*data.cine.data(4).mImg;
     clearvars cineData;
 end
 
@@ -132,7 +143,10 @@ for n = find(bSC)'
     % axis and image
     hA = data.cine.hAxis(n);
     I = data.cine.data(n).v(:, :, data.cine.data(n).iSlice);
+%     I = flipud(I);
     data.cine.hPlotObj(n).Image = imshow(I, RA, [], 'parent', hA);
+%     hA.YDir = 'Normal';
+    hA.YTickLabel = flipud(hA.YTickLabel);
     
     % slider
     if n < 4

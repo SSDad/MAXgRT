@@ -46,10 +46,12 @@ elseif (bSag && ~bCor) |  (~bSag && bCor) % Sag or cor
     v = [];
     acqt = [];
     hWB = waitbar(0);
+    ipp = [];
     for n = 1:nFile
         I = dicomread(dcmFileName(n));
         v = cat(3, v, I);
         di = dicominfo(dcmFileName(n));
+        ipp = [ipp di.ImagePositionPatient];
         acqt = [acqt; str2double(di.AcquisitionTime)];
         waitbar(n/nFile, hWB, ['Processing ', num2str(n), '/', num2str(nFile)])
     end

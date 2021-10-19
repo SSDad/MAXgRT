@@ -8,6 +8,10 @@ ind{1} = find(contains(fileList,'sag', 'IgnoreCase', true) & ~contains(fileList,
 ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,'sag', 'IgnoreCase', true));
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
+for  iV = 1:4
+    data.cine.data(iV).bContourLoaded = 0;
+end
+
 for TagNo = 1:3
     if ~isempty(ind{TagNo}) % contour file exists
         if iscell(fileList)

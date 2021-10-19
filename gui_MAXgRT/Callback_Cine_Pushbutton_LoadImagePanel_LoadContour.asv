@@ -8,6 +8,10 @@ ind{1} = find(contains(fileList,'sag', 'IgnoreCase', true) & ~contains(fileList,
 ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,'sag', 'IgnoreCase', true));
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
+for  m = 1:4
+    data.cine.data(Tag).bContourLoaded = 1;
+
+
 for TagNo = 1:3
     if ~isempty(ind{TagNo}) % contour file exists
         if iscell(fileList)
@@ -37,6 +41,9 @@ for TagNo = 1:3
         % hexCLR.Ab =   '#FF00FFFF';
         
         data.cine.data(TagNo).bContourLoaded = 1;
+        if TagNo == 3
+            data.cine.data(4).bContourLoaded = 1;
+        end
     end
 end
 
@@ -49,8 +56,8 @@ for TagNo = 1:4
         end
     else
         if data.cine.data(TagNo).bContourLoaded
-            nData = length(contData3{TagNo}.data)/2;
-            contData.ratio = contData3{TagNo}.ratio;
+            nData = length(contData3{3}.data)/2;
+            contData.ratio = contData3{3}.ratio;
             hexCLR = contCLR(3);
             if TagNo == 3
                 contData.data = contData3{3}.data(1:nData);
@@ -94,30 +101,34 @@ for TagNo = 1:4
             end
         end
 
-%         %% save .mat .csv
-%         Snakes =  data.cine.data(TagNo).Tumor.Snakes;
-%         dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
-%         dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
-%         saveContourMatCsv(Snakes, dataFileName);
-% 
-%         Snakes =  data.cine.data(TagNo).Snake.Snakes;
-%         dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
-%         dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
-%         saveContourMatCsv(Snakes, dataFileName);
-% 
-%         if TagNo == 1
-%             Snakes =  data.cine.data(TagNo).Ab.Snakes;
-%             dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
-%             dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
-%             saveContourMatCsv(Snakes, dataFileName);
-%         end
-%         
-%         if TagNo == 1
-%             msg = {'Sagittal contour data have been saved.'};
-%         elseif TagNo == 2
-%             msg = {'Coronal contour data have been saved.'};
-%         end
-%         fun_messageBox(msg);
+        %% save .mat .csv
+        Snakes =  data.cine.data(TagNo).Tumor.Snakes;
+        dataFileName.mat = data.cine.data(TagNo).ffn_Tumor_mat;
+        dataFileName.csv = data.cine.data(TagNo).ffn_Tumor_csv;
+        saveContourMatCsv(Snakes, dataFileName);
+
+        Snakes =  data.cine.data(TagNo).Snake.Snakes;
+        dataFileName.mat = data.cine.data(TagNo).ffn_Snake_mat;
+        dataFileName.csv = data.cine.data(TagNo).ffn_Snake_csv;
+        saveContourMatCsv(Snakes, dataFileName);
+
+        if TagNo == 1 | TagNo == 3
+            Snakes =  data.cine.data(TagNo).Ab.Snakes;
+            dataFileName.mat = data.cine.data(TagNo).ffn_Body_mat;
+            dataFileName.csv = data.cine.data(TagNo).ffn_Body_csv;
+            saveContourMatCsv(Snakes, dataFileName);
+        end
+        
+        if TagNo == 1 
+            msg = {'Sagittal contour data have been saved.'};
+        elseif TagNo == 2
+            msg = {'Coronal contour data have been saved.'};
+        elseif TagNo == 3
+            msg = {'Sagittal contour in Sag+Cor data have been saved.'};
+        elseif TagNo == 4
+            msg = {'Coronal contour in Sag+Cor data have been saved.'};
+        end
+        fun_messageBox(msg);
         
         %% OLView
         % tumor
