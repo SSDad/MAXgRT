@@ -25,7 +25,7 @@ for n = 1:nS
                      yA(iP) =  interp1(xu, yu, xA(iP));
                  end
             end
-            yp(n) = mean(yA, 'omitnan');;
+            yp(n) = mean(yA, 'omitnan');
 
         end
     end
@@ -35,7 +35,7 @@ t = 1:nS;
 set(data.cine.Measure(TagNo).hPlotObj.DA(1), 'XData', t, 'YData', yp);
 
 % SnakeTumorLine
-iSlice = round(data.cine.Panel.View.subPanel(TagNo).ssPanel(4).Comp.hSlider.Slice.Value);
+iSlice = round(data.cine.Panel.View.subPanel(min(TagNo, 3)).ssPanel(4).Comp.hSlider.Slice.Value);
 % hL = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine;
 % hT = data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText;
 hL = data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorLine;

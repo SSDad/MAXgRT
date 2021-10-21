@@ -3,20 +3,37 @@ function Callback_Cine_Radiobutton_Measure_(src, evnt)
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
 TagNo = data.cine.ActiveTagNo;
+
 if strcmp(src.Tag, 'Wave')
         hRB = data.cine.Panel.Measure.Comp.Radiobutton.Measure(1);
         if hRB.Value
-            data.cine.Measure(TagNo).hFig.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkLine.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkLine.Visible = 'on';
-
             data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Enable = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbMarkPatch.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeMarkPatch.Visible = 'on';
-
             data.cine.Panel.Measure.Comp.Edit.NoP.Enable = 'on';
-%             data.Panel.Measure.Comp.Text.NoP.Visible = 'on';
             data.cine.Panel.Measure.Comp.Pushbutton.SavePDF.Enable = 'on';
+
+            if TagNo < 3
+                LV = TagNo;
+            else
+                LV = [3 4];
+            end
+            
+            for iV = LV
+                data.cine.Measure(iV).hFig.Visible = 'on';
+                data.cine.hPlotObj(iV).MarkLines.SnakeMarkLine.Visible = 'on';
+                data.cine.hPlotObj(iV).MarkLines.SnakeMarkPatch.Visible = 'on';
+            end
+
+            if  ismember(TagNo, [1 3]) 
+                data.cine.hPlotObj(TagNo).MarkLines.AbMarkPatch.Visible = 'on';
+                data.cine.hPlotObj(TagNo).MarkLines.AbMarkLine.Visible = 'on';
+            end
+
+%             if TagNo == 3
+%                 data.cine.hPlotObj(4).MarkLines.SnakeMarkLine.Visible = 'on';
+%                 data.cine.hPlotObj(4).MarkLines.SnakeMarkPatch.Visible = 'on';
+%                 data.cine.hPlotObj(4).MarkLines.AbMarkPatch.Visible = 'on';
+%                 data.cine.hPlotObj(4).MarkLines.AbMarkLine.Visible = 'on';
+%             end
         else
             CineMeasureWaveOff(data, TagNo)
         end
@@ -24,17 +41,27 @@ end
 
 if strcmp(src.Tag, 'Distance')
         hRB = data.cine.Panel.Measure.Comp.Radiobutton.Measure(2);
-        if hRB.Value
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText.Visible = 'on';
-            
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine.Visible = 'on';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText.Visible = 'on';
-        else
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine.Visible = 'off';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorText.Visible = 'off';
 
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorLine.Visible = 'off';
-            data.cine.Panel.View.subPanel(TagNo).ssPanel(3).Comp.hPlotObj.MarkLines.SnakeTumorText.Visible = 'off';
+        if TagNo < 3
+            LV = TagNo;
+        else
+            LV = [3 4];
+        end
+            
+            for iV = LV
+
+        
+        if hRB.Value
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorLine.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorText.Visible = 'on';
+            
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorLine.Visible = 'on';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorText.Visible = 'on';
+        else
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorLine.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.AbTumorText.Visible = 'off';
+
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorLine.Visible = 'off';
+            data.cine.hPlotObj(TagNo).MarkLines.SnakeTumorText.Visible = 'off';
         end
 end

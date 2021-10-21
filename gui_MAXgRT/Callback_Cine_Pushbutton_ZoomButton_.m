@@ -49,14 +49,17 @@ else
     end
     data.cine.hPlotObj(TagNo).TumorOLView.Visible = 'off';
     data.cine.hPlotObj(TagNo).DiaphragmOLView.Visible = 'off';
-    if TagNo == 1
+    if TagNo == 3
+        data.cine.hPlotObj(4).TumorOLView.Visible = 'off';
+        data.cine.hPlotObj(4).DiaphragmOLView.Visible = 'off';
+    end
+    if ismember(TagNo, [1 3])
         data.cine.hPlotObj(TagNo).AbOLView.Visible = 'off';
     end
     
     %  Measure off
     data.cine.Panel.Measure.Comp.Radiobutton.Measure(1).Value = 0;
     CineMeasureWaveOff(data, TagNo)
-
 
     data.cine.Panel.OLView.hPanel.Visible = 'off';
     data.cine.Panel.Measure.hPanel.Visible = 'off';

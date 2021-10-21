@@ -51,6 +51,7 @@ end
 % 
     %% contours
     if data.cine.data(TagNo).bContourLoaded
+        bDist = data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Value;
         if TagNo < 3
             hPlotObj = data.cine.hPlotObj(TagNo);
             cineData = data.cine.data(TagNo);
@@ -62,7 +63,6 @@ end
             showTumorCenter(hPlotObj, cineData, iSlice)
 
             % distance
-            bDist = data.cine.Panel.Measure.Comp.Radiobutton.Measure(2).Value;
             if TagNo == 1
                 updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
             end
@@ -77,6 +77,11 @@ end
                 end
                 showAllContours(hPlotObj, cineData, iSlice, bShow)
                 showTumorCenter(hPlotObj, cineData, iSlice)
+                % distance
+                if iV == 3
+                    updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
+                end
+                updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
             end
         end
     end

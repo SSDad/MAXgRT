@@ -187,9 +187,9 @@ for TagNo = 1:4
         end
         
         % initialize measure fig
-%         guidata(hFig, data);
-%         createFig_Cine_Measure(TagNo);
-%         data = guidata(hFig);
+        guidata(hFig, data);
+        createFig_Cine_Measure(TagNo);
+        data = guidata(hFig);
     end %isempty(cineData)
 end % TagNo
 

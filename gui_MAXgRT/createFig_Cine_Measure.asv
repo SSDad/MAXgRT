@@ -42,8 +42,8 @@ tFC{1} = [0 1 0];
 tFC{2} = [0 1 1];
 yLoc{1} = 'left';
 yLoc{2} = 'right';
-yLB{1} = 'Horizontal (X) Coordinate (mm)';
-yLB{2} = 'Vertical (Y) Coordinate (mm)';
+yLB{1} = 'Horizontal (X) Coordiante (mm)';
+yLB{2} = 'Vertical (Y) Coordiante (mm)';
                     
 TC = data.cine.data(TagNo).Tumor.Cent;
 xx = 1:size(TC, 1);
@@ -138,8 +138,8 @@ FC(1, :) = [0 1 0];
 FC(2, :) = [0 1 1];
 yLoc{1} = 'left';
 yLoc{2} = 'right';
-yLB{1} = 'Diaphram Vertical Coordinne (mm)';
-yLB{2} = 'Abdomen Horizontal Coordinate (mm)';
+yLB{1} = 'Diaphram Vertical Coordiante (mm)';
+yLB{2} = 'Abdomen Horizontal Coordiante (mm)';
 TT{1} = 'DWave';
 TT{2} = 'AWave';
 
@@ -245,7 +245,7 @@ for n = 1:nA(TagNo)%nButton
                                 'Value', 1, ...
                                 'Visible', 'on', ...
                                 'Enable', 'on', ...
-                                'Tag', [num2str(TagNo), num2str(n)], ...
+                                'Tag', str{n}, ...
                                 'Callback', @Callback_Cine_Radiobutton_DACheckBox_);
 end
 

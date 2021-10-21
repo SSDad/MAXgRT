@@ -27,11 +27,11 @@ y1 = yc - yr/2;
 y2 = yc + yr/2;
 SnakeMarkLinePos(:, :, TagNo) = [x1 y1; x2 y2];
 h.SnakeMarkLine = images.roi.Line(hA, 'Position', SnakeMarkLinePos(:, :, TagNo), 'Color', 'g', 'LineWidth', 1,...
-    'UserData', cineData.Snake.Snakes, 'Tag', 'SnakeMarkLine', 'InteractionsAllowed', 'translate', 'Visible', 'off');
+    'UserData', cineData.Snake.Snakes, 'Tag', num2str(TagNo), 'InteractionsAllowed', 'translate', 'Visible', 'off');
 addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
 
 h.SnakeTumorLine = images.roi.Line(hA, 'Position',[0 0; 0 0], 'Color', 'y', 'LineWidth', 1,...
-   'UserData', cineData.Snake.Snakes,  'Label', '', 'Tag', 'SnakeTumorLine', 'InteractionsAllowed', 'none', 'Visible', 'off');
+   'UserData', cineData.Snake.Snakes,  'Label', '', 'Tag', num2str(TagNo), 'InteractionsAllowed', 'none', 'Visible', 'off');
 
 h.SnakeTumorText = text(hA, 'Position', [inf inf], 'String', ' ',...
     'Color', [1 1 1]*0.01, 'FontSize', 12, 'BackgroundColor', 'y', 'Visible', 'off');
@@ -42,7 +42,7 @@ x4 = [xc-xL xc-xL xc+xL xc+xL];
 h.SnakeMarkPatch = patch(hA, 'XData', x4, 'YData', y4,'FaceColor', 'red', 'FaceAlpha', 0.25, 'Visible', 'off');
 
 %% Ab
-if TagNo == 1
+if ismember(TagNo, [1 3]) 
     m = 0;
     for n = 1:length(cineData.Ab.Snakes)
         S = cineData.Ab.Snakes{n};

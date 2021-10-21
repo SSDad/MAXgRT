@@ -2,14 +2,8 @@ function Callback_Cine_Radiobutton_OLView_(src, evnt)
 
 hFig = ancestor(src, 'Figure');
 data = guidata(hFig);
-Tag = data.cine.ActiveTagNo;
+TagNo = data.cine.ActiveTagNo;
 
-TagN = Tag;
-if Tag ==3
-    TagN = [3 4];
-end
-
-for TagNo = TagN
 if strcmp(src.Tag, 'Tumor')
     hRB = data.cine.Panel.OLView.Comp.Radiobutton.OLView(1);
     if hRB.Value
@@ -38,4 +32,4 @@ elseif strcmp(src.Tag, 'Ab')
         data.cine.hPlotObj(TagNo).AbOLView.Visible = 'off';
     end
 end
-end
+

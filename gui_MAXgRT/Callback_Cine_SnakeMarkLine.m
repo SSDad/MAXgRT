@@ -2,7 +2,8 @@ function Callback_Cine_SnakeMarkLine(src, evnt)
 
 global hFig
 data = guidata(hFig);
-TagNo = data.cine.ActiveTagNo;
+% TagNo = data.cine.ActiveTagNo;
+TagNo = str2num(src.Tag);
 
 global SnakeMarkLinePos
 yp = SnakeMarkLinePos(1:2, 2, TagNo);
