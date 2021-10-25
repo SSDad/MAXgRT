@@ -84,18 +84,20 @@ for TagNo = 1:4
                         junk(:, 1) = (junk(:, 1)-1)*dx+x0;
                         junk(:, 2) = (junk(:, 2)-1)*dy+y0;
                         data.cine.data(TagNo).Tumor.Snakes{n} = junk;
-                    elseif strcmp(CLR, hexCLR.Ab)
-                        data.cine.data(TagNo).Ab.CLR = CLR;
-                        junk = contData.data(n).cont(m).pt*contData.ratio;
-                        junk(:, 1) = (junk(:, 1)-1)*dx+x0;
-                        junk(:, 2) = (junk(:, 2)-1)*dy+y0;
-                        data.cine.data(TagNo).Ab.Snakes{n} = junk;
                     elseif strcmp(CLR, hexCLR.Snake)
                         data.cine.data(TagNo).Snake.CLR = CLR;
                         junk = contData.data(n).cont(m).pt*contData.ratio;
                         junk(:, 1) = (junk(:, 1)-1)*dx+x0;
                         junk(:, 2) = (junk(:, 2)-1)*dy+y0;
                         data.cine.data(TagNo).Snake.Snakes{n} = junk;
+                    elseif isfield(hexCLR, 'Ab')
+                        if strcmp(CLR, hexCLR.Ab)
+                            data.cine.data(TagNo).Ab.CLR = CLR;
+                            junk = contData.data(n).cont(m).pt*contData.ratio;
+                            junk(:, 1) = (junk(:, 1)-1)*dx+x0;
+                            junk(:, 2) = (junk(:, 2)-1)*dy+y0;
+                            data.cine.data(TagNo).Ab.Snakes{n} = junk;
+                        end
                     end
                 end
             end
