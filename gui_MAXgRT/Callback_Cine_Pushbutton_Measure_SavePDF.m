@@ -8,7 +8,7 @@ TagNo = data.cine.ActiveTagNo;
 
 FigName{1} = 'Sagittal';
 FigName{2} = 'Coronal';
-FigName{3} = 'SagSC';
+FigName{3} = 'SagCor';
 
 datafd = data.cine.fd_Cine;
 MRN = data.cine.data(1).dcmInfo.PatientID;
@@ -25,7 +25,10 @@ suffix = fun_inputdlg(prompt, dlgtitle, dims, definput, opts);
 if ~isempty(suffix)
     ffn{1} = fullfile(datafd, [MRN, '_Image_', FigName{TagNo}, '_', suffix{1}, '.pdf']);
     ffn{2} = fullfile(datafd, [MRN, '_Wave_', FigName{TagNo}, '_', suffix{1}, '.pdf']);
-
+    if TagNo == 3
+        ffn{2} = fullfile(datafd, [MRN, '_Wave_SagSC_', suffix{1}, '.pdf']);
+    end
+    
     hF(1) = hFig;
     hF(2) = data.cine.Measure(TagNo).hFig;
     
@@ -36,6 +39,18 @@ if ~isempty(suffix)
         print(hF(m), ffn{m}, '-dpdf', '-r0')
         set(hF(m), 'Units', 'normalized');
     end
+    
+    if TagNo == 3
+        hF(2) = data.cine.Measure(4).hFig;
+        m = 2;
+        set(hF(m), 'Units', 'Inches');
+        pos = get(hF(m), 'Position');
+        set(hF(m), 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)])
+        ffn4 =  fullfile(datafd, [MRN, '_Wave_CorSC_', suffix{1}, '.pdf']);
+        print(hF(m), ffn4, '-dpdf', '-r0')
+        set(hF(m), 'Units', 'normalized');
+    end
+    
     msg{1} = '     Image and Wave have been saved in PDF...';
     msg{2} = ' ';
     msgColor = 'g';
