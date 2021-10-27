@@ -9,7 +9,7 @@ ind{2} = find(contains(fileList,'cor', 'IgnoreCase', true) & ~contains(fileList,
 ind{3} = find(contains(fileList,'cor', 'IgnoreCase', true) & contains(fileList,'sag', 'IgnoreCase', true));
 
 for  iV = 1:4
-    data.cine.data(iV).bContourLoaded = 0;
+    data.cine.data(iV).bContourJustLoaded = 0;
 end
 
 for TagNo = 1:3
@@ -41,8 +41,10 @@ for TagNo = 1:3
         % hexCLR.Ab =   '#FF00FFFF';
         
         data.cine.data(TagNo).bContourLoaded = 1;
+        data.cine.data(TagNo).bContourJustLoaded = 1;
         if TagNo == 3
             data.cine.data(4).bContourLoaded = 1;
+            data.cine.data(4).bContourJustLoaded = 1;
         end
     end
 end
@@ -50,12 +52,12 @@ end
 for TagNo = 1:4
     contData = [];
     if TagNo < 3
-        if data.cine.data(TagNo).bContourLoaded
+        if data.cine.data(TagNo).bContourJustLoaded
             contData = contData3{TagNo};
             hexCLR = contCLR(TagNo);
         end
     else
-        if data.cine.data(TagNo).bContourLoaded
+        if data.cine.data(TagNo).bContourJustLoaded
             nData = length(contData3{3}.data)/2;
             contData.ratio = contData3{3}.ratio;
             hexCLR = contCLR(3);

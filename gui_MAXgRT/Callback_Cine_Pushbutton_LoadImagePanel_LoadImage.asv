@@ -64,8 +64,8 @@ if exist(ffn, 'file')
     data.cine.data(1).dy = cineData.PS(2);
 
     data.cine.data(1).x0 = cineData.IMP(2);
-%     data.cine.data(1).y0 = cineData.IMP(3)- data.cine.data(1).dy*data.cine.data(1).mImg;
-    data.cine.data(1).y0 = cineData.IMP(3);
+    data.cine.data(1).y0 = cineData.IMP(3)- data.cine.data(1).dy*data.cine.data(1).mImg;
+%     data.cine.data(1).y0 = cineData.IMP(3);
     
     data.cine.data(1).dcmInfo = cineData.dcmInfo;
     data.cine.Panel.PtInfo.Comp.Text.PtInfo.String = ['MRN - ', cineData.dcmInfo.PatientID];
@@ -85,8 +85,8 @@ if exist(ffn, 'file')
     data.cine.data(2).dy = cineData.PS(2);
 
     data.cine.data(2).x0 = cineData.IMP(1);
-    data.cine.data(2).y0 = cineData.IMP(3);
-%     data.cine.data(2).y0 = cineData.IMP(3)- data.cine.data(2).dy*data.cine.data(2).mImg;
+%     data.cine.data(2).y0 = cineData.IMP(3);
+    data.cine.data(2).y0 = cineData.IMP(3)- data.cine.data(2).dy*data.cine.data(2).mImg;
     
     data.cine.data(2).dcmInfo = cineData.dcmInfo;
     clearvars cineData;
@@ -106,15 +106,13 @@ if exist(ffn, 'file')
     data.cine.data(3).dx = cineData.ps_sag(1);
     data.cine.data(3).dy = cineData.ps_sag(2);
     data.cine.data(3).x0 = cineData.imp_sag(2);
-%     data.cine.data(3).y0 = cineData.imp_sag(3)- data.cine.data(3).dy*data.cine.data(3).mImg;;
-    data.cine.data(3).y0 = cineData.imp_sag(3);
+    data.cine.data(3).y0 = cineData.imp_sag(3)- data.cine.data(3).dy*data.cine.data(3).mImg;;
 
     data.cine.data(4).IMP = cineData.imp_cor;
     data.cine.data(4).dx = cineData.ps_cor(1);
     data.cine.data(4).dy = cineData.ps_cor(2);
     data.cine.data(4).x0 = cineData.imp_cor(1);
-%     data.cine.data(4).y0 = cineData.imp_cor(3)- data.cine.data(4).dy*data.cine.data(4).mImg;
-    data.cine.data(4).y0 = cineData.imp_cor(3);
+    data.cine.data(4).y0 = cineData.imp_cor(3)- data.cine.data(4).dy*data.cine.data(4).mImg;
     clearvars cineData;
 end
 
@@ -258,7 +256,7 @@ end
 data.cine.Panel.LoadImage.Comp.Pushbutton.LoadContour.Enable = 'on';
 data.cine.Panel.LoadImage.Comp.Pushbutton.SavePDF.Enable = 'on';
 
-for n = 1:4
+for n = 1:3
     data.cine.data(n).bContourLoaded = 0;
 end
 
