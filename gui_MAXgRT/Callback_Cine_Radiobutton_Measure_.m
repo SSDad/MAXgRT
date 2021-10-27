@@ -28,12 +28,6 @@ if strcmp(src.Tag, 'Wave')
                 data.cine.hPlotObj(TagNo).MarkLines.AbMarkLine.Visible = 'on';
             end
 
-%             if TagNo == 3
-%                 data.cine.hPlotObj(4).MarkLines.SnakeMarkLine.Visible = 'on';
-%                 data.cine.hPlotObj(4).MarkLines.SnakeMarkPatch.Visible = 'on';
-%                 data.cine.hPlotObj(4).MarkLines.AbMarkPatch.Visible = 'on';
-%                 data.cine.hPlotObj(4).MarkLines.AbMarkLine.Visible = 'on';
-%             end
         else
             CineMeasureWaveOff(data, TagNo)
         end

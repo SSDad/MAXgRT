@@ -67,11 +67,10 @@ for n = 1:2
     data.cine.Measure(TagNo).hAxis.Tumor(n).XLim =  [xx(1) xx(end)];
 
     % rect
-    pos = [xx(1) min(TC(:, n)) range(xx) range(TC(:, n))];
-    data.cine.Measure(TagNo).hPlotObj.TumorRect(n) = images.roi.Rectangle(data.cine.Measure(TagNo).hAxis.Tumor(n),...
-        'Position', pos, 'Color', tFC{n}, 'LineWidth', 1, 'FaceAlpha', 0.15, 'Visible', 'off', ...
-        'Tag', ['TumorRect_', num2str(TagNo), num2str(n)]);
-    addlistener(data.cine.Measure(TagNo).hPlotObj.TumorRect(n), 'MovingROI', @Callback_Cine_TumorRect_);
+    pos = [xx
+    data.cine.Measure(TagNo).TumorRect(n) = images.roi.Rectangle(data.cine.Measure(TagNo).hAxis.Tumor(n),...
+        'Position',[0, 0, 0, 0], 'Color', tFC{n}, 'LineWidth', 1, 'FaceAlpha', 0.25, 'Tag', ['TumorRect_', num2str(TagNo), num2str(n)]);
+    addlistener(data.cine.Measure(TagNo).TumorRect(n), 'MovingROI', @Callback_Cine_TumorRect_);
 end
 data.cine.Measure(TagNo).hAxis.Tumor(n).XLabel.String = 'Slice';
 linkaxes([data.cine.Measure(TagNo).hAxis.Tumor], 'x')

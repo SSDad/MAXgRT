@@ -1,11 +1,11 @@
-function  [ov, tCent, tLim] = fun_getCineTumorOL(cineData)
+function  [ovAll, tCent, tLim] = fun_getCineTumorOL(cineData)
 
     M = cineData.mImg;
     N = cineData.nImg;
     s = cineData.Tumor.Snakes;
     nS = length(s);
 
-    ov = false(M, N, nS);
+    ov = zeros(M, N, nS);
 
     cent = nan(nS, 2);
     xymin = [inf inf];
@@ -20,10 +20,12 @@ function  [ov, tCent, tLim] = fun_getCineTumorOL(cineData)
 
             xx = (c(:, 1) - cineData.x0)/cineData.dx +1;
             yy = (c(:, 2) -cineData.y0)/cineData.dy +1;
-            ov(:, :, m) =poly2mask(xx, yy, M, N);
+            ov(:, :, m) = ov + poly2mask(xx, yy, M, N);
         end
     end
 
+    ovAll = ov;
+    
     tLim = [xymin; xymax];
     tCent = cent;
     

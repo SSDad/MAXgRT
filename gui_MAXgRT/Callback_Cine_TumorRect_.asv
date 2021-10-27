@@ -1,0 +1,19 @@
+function Callback_Cine_TumorRect_(src, evnt)
+
+global hFig
+data = guidata(hFig);
+TagNo = data.cine.ActiveTagNo;
+
+iHV = str2num(src.Tag(end));
+
+ovA = data.cine.data(TagNo).Tumor.OL;
+cent = data.cine.data(TagNo).Tumor.Cent;
+% , data.cine.data(TagNo).Tumor.Lim]
+
+y0 = src.Position(2);
+y1 = y0+src.Position(4);
+
+yy = cent(:, iHV);
+ind = find(yy >= y0 & yy <= y1);
+
+ov = sum(ovA(:, :, ind), 3);

@@ -14,6 +14,8 @@ n = str2num(src.Tag(2));
 
 if src.Value
     data.cine.Measure(TagNo).hPlotObj.Tumor(n).Visible = 'on';
+    data.cine.Measure(TagNo).hAxis.Tumor(n).Visible = 'on';
 else
     data.cine.Measure(TagNo).hPlotObj.Tumor(n).Visible = 'off';
+    data.cine.Measure(TagNo).hAxis.Tumor(n).Visible = 'off';
 end
