@@ -146,7 +146,7 @@ for TagNo = 1:4
         red = cat(3, I, I, I);
         data.cine.hPlotObj(TagNo).TumorOLView = imshow(red, data.cine.data(TagNo).RA, 'parent', hA);
         set(data.cine.hPlotObj(TagNo).TumorOLView, 'AlphaData', I);
-
+        
         % Tumor center
          data.cine.hPlotObj(TagNo).TumorCenter = ...
                     line(hA, 'XData', [], 'YData', [], 'Color', 'm', 'LineWidth', 1,...
@@ -190,6 +190,8 @@ for TagNo = 1:4
                         'Marker', '+', 'MarkerSize', 25, 'Tag', ['mr', num2str(iM)], 'Visible', 'on');
         end
         
+        axis(hA, 'xy')
+
         % initialize measure fig
         guidata(hFig, data);
         createFig_Cine_Measure(TagNo);

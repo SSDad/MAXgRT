@@ -18,14 +18,19 @@ data.cine.Panel.View.subPanel(TagNo).ssPanel(4).Comp.hText.nImages.String...
 if TagNo ==3
     I1 = data.cine.data(3).v(:, :, iSlice);
     I2 = data.cine.data(4).v(:, :, iSlice);
-    data.cine.hPlotObj(3).Image.CData = I1;
+    I1 =  flipud(I1);
+    I2 =  flipud(I2);
+    data.cine.hPlotObj(3).Image.CData =I1;
     data.cine.hPlotObj(4).Image.CData = I2;
 
     I = [I1 I2];
 else
     I = data.cine.data(TagNo).v(:, :, iSlice);
+    I = flipud(I);
     data.cine.hPlotObj(TagNo).Image.CData = I;
-end    
+end
+axis(data.cine.hAxis(TagNo), 'xy')
+
     %% contrast limit
     maxI = max(I(:));
     minI = min(I(:));

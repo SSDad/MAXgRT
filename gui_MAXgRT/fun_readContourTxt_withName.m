@@ -13,6 +13,8 @@ end
 fclose(fid);
 
 k = strfind(tt{1}, '=');
+nP1 = str2double(tt{1}(k+2:k+4));
+nP2 = str2double(tt{1}(k+6:k+8));
 contData.ratio = eval(tt{1}(k+2:k+8));
 
 tt = tt(1:end-1);
@@ -25,7 +27,7 @@ for n = 1:length(ind_img)-1
     m2 = ind_img(n+1)-1;
     if m2 > m1
         imgTxt = tt(m1:m2);
-        contData.data(n).cont = fun_readImgContour(imgTxt);
+        contData.data(n).cont = fun_readImgContour(imgTxt, nP2);
         
         junk1 = {contData.data(n).cont.CLR}';
         junk2 = {contData.data(n).cont.Name}';
@@ -36,7 +38,7 @@ end
 nLine = length(tt);
 if nLine >  ind_img(end)
     imgTxt = tt(ind_img(end)+1:nLine);
-    contData.data(n+1).cont = fun_readImgContour(imgTxt);
+    contData.data(n+1).cont = fun_readImgContour(imgTxt, nP2);
 
     junk1 = contData.data(n+1).cont.CLR;
     junk2 = contData.data(n+1).cont.Name;
@@ -45,7 +47,7 @@ end
 
 end
 
-function cont =  fun_readImgContour(imgTxt)
+function cont =  fun_readImgContour(imgTxt, nP2)
     ind = find(contains(imgTxt, 'Color = ', 'IgnoreCase', true));
     for n = 1:length(ind)
         idx = strfind(imgTxt{ind(n)}, '#');
@@ -58,5 +60,6 @@ function cont =  fun_readImgContour(imgTxt)
         junk1 = strrep(junk, ',', ' ');
         junk2 = str2num(junk1);
         cont(n).pt = (reshape(junk2, 2, []))';
+        cont(n).pt(:, 2) = nP2-cont(n).pt(:, 2)+1;
     end
 end
