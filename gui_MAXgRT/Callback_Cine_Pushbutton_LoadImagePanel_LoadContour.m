@@ -136,7 +136,8 @@ for TagNo = 1:4
         
         %% OLView
         % tumor
-        [data.cine.data(TagNo).Tumor.OL,  data.cine.data(TagNo).Tumor.Cent, data.cine.data(TagNo).Tumor.Lim] = ...
+        [data.cine.data(TagNo).Tumor.OL, data.cine.data(TagNo).Tumor.OLSum,...
+            data.cine.data(TagNo).Tumor.Cent, data.cine.data(TagNo).Tumor.Lim] =...
             fun_getCineTumorOL(data.cine.data(TagNo));
         data.cine.data(TagNo).bTumorOLDone = 1;
 

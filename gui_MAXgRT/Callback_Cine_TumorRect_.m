@@ -6,6 +6,7 @@ iV = str2num(src.Tag(end-1));
 iHV = str2num(src.Tag(end));
 
 ovA = data.cine.data(iV).Tumor.OL;
+ovSum = data.cine.data(iV).Tumor.OLSum;
 cent = data.cine.data(iV).Tumor.Cent;
 % , data.cine.data(TagNo).Tumor.Lim]
 
@@ -18,4 +19,4 @@ ind = yy >= y0 & yy <= y1;
 ov = sum(ovA(:, :, ind), 3);
 h = data.cine.hPlotObj(iV).TumorOLView;
 h.CData(:, :, 1) = ov;
-h.AlphaData = rescale(ov);
+h.AlphaData = ov./max(ovSum(:));

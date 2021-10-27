@@ -1,4 +1,4 @@
-function  [ov, tCent, tLim] = fun_getCineTumorOL(cineData)
+function  [ov, ovSum, tCent, tLim] = fun_getCineTumorOL(cineData)
 
     M = cineData.mImg;
     N = cineData.nImg;
@@ -24,6 +24,8 @@ function  [ov, tCent, tLim] = fun_getCineTumorOL(cineData)
         end
     end
 
+    ovSum = sum(ov, 3);
+    
     tLim = [xymin; xymax];
     tCent = cent;
     

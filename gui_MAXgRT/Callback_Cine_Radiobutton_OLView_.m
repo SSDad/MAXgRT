@@ -15,9 +15,9 @@ if strcmp(src.Tag, 'Tumor')
     if hRB.Value
         h = data.cine.hPlotObj(TagNo).TumorOLView;
         if isfield(data.cine.data(TagNo).Tumor, 'OL')
-            ov = sum(data.cine.data(TagNo).Tumor.OL, 3);
-            h.CData(:, :, 1) = ov;
-            h.AlphaData = rescale(ov);
+            ovSum = data.cine.data(TagNo).Tumor.OLSum;
+            h.CData(:, :, 1) = ovSum;
+            h.AlphaData = rescale(ovSum);
             h.Visible = 'on';
             for iT = 1:2
                 data.cine.Measure(TagNo).hPlotObj.TumorRect(iT).Visible = 'on';
