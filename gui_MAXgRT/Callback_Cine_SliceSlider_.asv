@@ -94,23 +94,14 @@ axis(data.cine.hAxis(TagNo), 'xy')
 %% slice line on wave
 if data.cine.Panel.Measure.Comp.Radiobutton.Measure(1).Value
     if TagNo ==3
-        data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(1, 1) = iSlice;
-        data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(2, 1) = iSlice;
-        data.cine.Measure(TagNo+1).hPlotObj.TumorSliceLine.Position(1, 1) = iSlice;
-        data.cine.Measure(TagNo+1).hPlotObj.TumorSliceLine.Position(2, 1) = iSlice;
-
-        hA = data.cine.Measure(TagNo).hAxis.DA(1);
-        data.cine.Measure(TagNo).hPlotObj.DASliceLine.Position = [iSlice hA.YLim(1); iSlice hA.YLim(2)];
-
-        hA = data.cine.Measure(TagNo+1).hAxis.DA(1);
-        data.cine.Measure(TagNo+1).hPlotObj.DASliceLine.Position = [iSlice hA.YLim(1); iSlice hA.YLim(2)];
-else
+    else
         data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(1, 1) = iSlice;
         data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(2, 1) = iSlice;
         
         hA = data.cine.Measure(TagNo).hAxis.DA(1);
         data.cine.Measure(TagNo).hPlotObj.DASliceLine.Position = [iSlice hA.YLim(1); iSlice hA.YLim(2)];
+        
     end
 end
     
-guidata(hFig, data)
+    guidata(hFig, data)

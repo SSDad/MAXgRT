@@ -2,6 +2,7 @@ function createFig_Cine_Measure(TagNo)
 
 global hFig
 data = guidata(hFig);
+iSlice = data.cine.data(TagNo).iSlice;
 
 FigName{1} = 'Wave - Sagittal';
 FigName{2} = 'Wave - Coronal';
@@ -61,21 +62,28 @@ for n = 1:2
                                         'Position',                 [0.075 0.1 0.85 0.85]);
     data.cine.Measure(TagNo).hAxis.Tumor(n).YLabel.String = yLB{n};
 
-    data.cine.Measure(TagNo).hPlotObj.Tumor(n) = line(data.cine.Measure(TagNo).hAxis.Tumor(n),...
-                    'XData', xx, 'YData', TC(:, n), ...
+    hA = data.cine.Measure(TagNo).hAxis.Tumor(n);
+    
+    data.cine.Measure(TagNo).hPlotObj.Tumor(n) = line(hA, 'XData', xx, 'YData', TC(:, n), ...
                     'Color', tFC{n}, 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 24);
     data.cine.Measure(TagNo).hAxis.Tumor(n).XLim =  [xx(1) xx(end)];
 
     % rect
     pos = [xx(1) min(TC(:, n)) range(xx) range(TC(:, n))];
-    data.cine.Measure(TagNo).hPlotObj.TumorRect(n) = images.roi.Rectangle(data.cine.Measure(TagNo).hAxis.Tumor(n),...
+    data.cine.Measure(TagNo).hPlotObj.TumorRect(n) = images.roi.Rectangle(hA,...
         'Position', pos, 'Color', tFC{n}, 'LineWidth', 1, 'FaceAlpha', 0.15, 'Visible', 'off', ...
         'Tag', ['TumorRect_', num2str(TagNo), num2str(n)]);
     addlistener(data.cine.Measure(TagNo).hPlotObj.TumorRect(n), 'MovingROI', @Callback_Cine_TumorRect_);
 end
+
+% slice line
+data.cine.Measure(TagNo).hPlotObj.TumorSliceLine =...
+         images.roi.Line(hA, 'Position', [iSlice hA.YLim(1); iSlice hA.YLim(2)], 'Color', [1 1 1]*.99, 'LineWidth', 2,...
+        'Tag', num2str(TagNo), 'InteractionsAllowed', 'none', 'Visible', 'on');
+%     addlistener(h.SnakeMarkLine, 'MovingROI', @Callback_Cine_SnakeMarkLine);
+
 data.cine.Measure(TagNo).hAxis.Tumor(n).XLabel.String = 'Slice';
 linkaxes([data.cine.Measure(TagNo).hAxis.Tumor], 'x')
-%                     data.Measure(TagNo).hAxis.Tumor(1).YLim =  data.cine(TagNo).Snake.xyLim(:, 2);
 
 % Check box                   
 data.cine.Measure(TagNo).hPanel.TumorCheckBox = uipanel('parent', data.cine.Measure(TagNo).hFig,...
@@ -166,6 +174,11 @@ for n = 1:nA(TagNo)
 
 end
 data.cine.Measure(TagNo).hAxis.DA(n).XLabel.String = 'Slice';
+
+% slice line
+data.cine.Measure(TagNo).hPlotObj.DASliceLine =...
+         images.roi.Line(data.cine.Measure(TagNo).hAxis.DA(1), 'Position', [0 0; 0 0], 'Color', [1 1 1]*.99, 'LineWidth', 2,...
+        'Tag', num2str(TagNo), 'InteractionsAllowed', 'none', 'Visible', 'on');
 
 % Snake wave
 data.cine.Measure(TagNo).hAxis.DA(1).YLim =  data.cine.data(TagNo).Snake.xyLim(:, 2);
