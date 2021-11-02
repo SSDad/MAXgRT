@@ -170,8 +170,13 @@ for n = 1:nA(TagNo)
     data.cine.Measure(TagNo).hAxis.DA(n).YLabel.String = yLB{n};
 
     data.cine.Measure(TagNo).hPlotObj.DA(n) = line(data.cine.Measure(TagNo).hAxis.DA(n),  'XData', [], 'YData', [], ...
-                    'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', '.', 'MarkerSize', 24);
+                    'Color', FC(n, :), 'LineStyle', '-', 'LineWidth', 2, 'Marker', 'o', 'MarkerSize', 8);
 
+    data.cine.Measure(TagNo).hPlotObj.DADot(n) = hggroup(data.cine.Measure(TagNo).hAxis.DA(n));
+    for id = 1:data.cine.data(TagNo).nSlice
+        hDot(id) = line(data.cine.Measure(TagNo).hPlotObj.DADot(n),  'XData', [], 'YData', [], ...
+                    'Color', FC(n, :), 'LineStyle', 'none', 'Marker', 'o', 'MarkerSize', 8, 'MarkerEdgeColor', 'none', 'MarkerFaceColor', 'r');
+    end
 end
 data.cine.Measure(TagNo).hAxis.DA(n).XLabel.String = 'Slice';
 

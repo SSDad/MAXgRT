@@ -15,7 +15,7 @@ for n = 1:nS
         if min(yy) <= yp && max(yy) >= yp
             [yu, ia, ~] = unique(yy);
             xu = xx(ia);
-            
+             
             dy = data.cine.data(TagNo).dy;
             yA = yp-dy*nA:dy:yp+dy*nA;
             xA = nan(1, nA*2+1);
@@ -33,7 +33,10 @@ end
 t = 1:nS;
 
 set(data.cine.Measure(TagNo).hPlotObj.DA(2), 'XData', t, 'YData', xp);
-
+hg = data.cine.Measure(TagNo).hPlotObj.DADot(2);
+for id = 1:nS
+    set(hg.Children(id), 'XData', t(id), 'YData', xp(id));
+end
 % AbTumorLine
 iSlice = round(data.cine.Panel.View.subPanel(min(TagNo, 3)).ssPanel(4).Comp.hSlider.Slice.Value);
 % hL = data.cine.Panel.View.subPanel(1).ssPanel(3).Comp.hPlotObj.MarkLines.AbTumorLine;

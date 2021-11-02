@@ -28,6 +28,20 @@ if strcmp(src.Tag, 'Tumor')
         for iT = 1:2
             data.cine.Measure(TagNo).hPlotObj.TumorRect(iT).Visible = 'off';
         end
+        
+        % wave dot
+        hg = data.cine.Measure(TagNo).hPlotObj.DADot(1);
+        for id = 1:length(hg.Children)
+            hg.Children(id).MarkerFaceColor = [0 0 0];
+        end
+        if TagNo == 1 | TagNo == 3
+            hg = data.cine.Measure(TagNo).hPlotObj.DADot(2);
+            for id = 1:length(hg.Children)
+                hg.Children(id).MarkerFaceColor = [0 0 0];
+            end
+        end
+
+        
     end
 elseif strcmp(src.Tag, 'Diaphragm')
     hRB = data.cine.Panel.OLView.Comp.Radiobutton.OLView(2);
