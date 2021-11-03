@@ -1,7 +1,10 @@
 function Callback_Cine_TumorRect_(src, evnt)
 
+updateTumorOLandDAW(src)
+
 global hFig
 data = guidata(hFig);
+
 iV = str2num(src.Tag(end-1));  % index View
 iHV = str2num(src.Tag(end)); % index Horizontal/Vertical
 
@@ -22,7 +25,25 @@ h.CData(:, :, 1) = ov;
 h.AlphaData = ov./max(ovSum(:));
 
 % wave
-hg = data.cine.Measure(TagNo).hPlotObj.DADot(1);
-for id = ind
-    set(hg.Children(id), 'XData', t(id), 'YData', yp(id));
+if iV == 2 | iV == 4
+    if iHV == 1
+        hg = data.cine.Measure(iV).hPlotObj.DADot(iHV);
+        for id = 1:length(yy)
+            hg.Children(id).MarkerFaceColor = [0 0 0];
+        end
+        junk = find(ind);
+        for id = 1:length(junk)
+            hg.Children(junk(id)).MarkerFaceColor = 'r';
+        end
+    end
+else
+        hg = data.cine.Measure(iV).hPlotObj.DADot(iHV);
+        for id = 1:length(yy)
+            hg.Children(id).MarkerFaceColor = [0 0 0];
+        end
+        junk = find(ind);
+        for id = 1:length(junk)
+            hg.Children(junk(id)).MarkerFaceColor = 'r';
+        end
+    end
 end

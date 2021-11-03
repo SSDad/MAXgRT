@@ -21,14 +21,12 @@ if strcmp(src.Tag, 'Tumor')
             h.Visible = 'on';
             
             hCB = data.cine.Measure(TagNo).TumorCheckBox;
-            if hCB(1).Value ~= hCB(2).Value
-                if hCB(1).Value
-                    iR = 1;
-                elseif hCB(2).Value
-                    iR = 2;
-                end
-                data.cine.Measure(TagNo).hPlotObj.TumorRect(iR).Visible = 'on';
-                updateTumorOLandDADot(data.cine.Measure(TagNo).hPlotObj.TumorRect(iR));
+            if hCB(1).Value && hCB(2).Value
+            else
+                if hCB(1
+            
+            for iT = 1:2
+                data.cine.Measure(TagNo).hPlotObj.TumorRect(iT).Visible = 'on';
             end
         end
     else    % TumorOL off

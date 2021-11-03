@@ -27,29 +27,12 @@ else
     data.cine.Measure(TagNo).hPlotObj.TumorRect(n).Visible = 'off';
 
     if data.cine.Panel.OLView.Comp.Radiobutton.OLView(1).Value
-        iR = [];
         if n == 1 &&  data.cine.Measure(TagNo).TumorCheckBox(2).Value
-            iR = 2;
+            data.cine.Measure(TagNo).hPlotObj.TumorRect(2).Visible = 'on';
+            
         elseif n == 2 &&  data.cine.Measure(TagNo).TumorCheckBox(1).Value
-            iR = 1;
+            data.cine.Measure(TagNo).hPlotObj.TumorRect(1).Visible = 'on';
         end
-        if ~isempty(iR)
-            data.cine.Measure(TagNo).hPlotObj.TumorRect(iR).Visible = 'on';
-            updateTumorOLandDADot(data.cine.Measure(TagNo).hPlotObj.TumorRect(iR));
-        end
+        updateTumorOLandDADot( data.cine.Measure(iR).hPlotObj.TumorRect(n));
     end    
-end
-
-% all dots off
-if data.cine.Measure(TagNo).TumorCheckBox(1).Value == data.cine.Measure(TagNo).TumorCheckBox(2).Value
-    hg = data.cine.Measure(TagNo).hPlotObj.DADot(1);
-    for id = 1:length(hg.Children)
-        hg.Children(id).MarkerFaceColor = [0 0 0];
-    end
-    if TagNo == 1 | TagNo == 3
-        hg = data.cine.Measure(TagNo).hPlotObj.DADot(2);
-        for id = 1:length(hg.Children)
-            hg.Children(id).MarkerFaceColor = [0 0 0];
-        end
-    end
 end
