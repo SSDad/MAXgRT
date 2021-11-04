@@ -64,9 +64,12 @@ axis(data.cine.hAxis(TagNo), 'xy')
             if TagNo == 2
                 bShow = [1 1 0];
             end
-            showAllContours(hPlotObj, cineData, iSlice, bShow)
-            showTumorCenter(hPlotObj, cineData, iSlice)
-
+            showAllContours(hPlotObj, cineData, iSlice, bShow);
+            showTumorCenter(hPlotObj, cineData, iSlice);
+            
+            if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+                showTumorMargin(hPlotObj, cineData, iSlice);
+            end
             % distance
             if TagNo == 1
                 updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)

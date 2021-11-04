@@ -19,6 +19,8 @@ if strcmp(src.Tag, 'Tumor')
             h.CData(:, :, 1) = ovSum;
             h.AlphaData = rescale(ovSum);
             h.Visible = 'on';
+            hTM = data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin;
+            hTM.Enable = 'on'; % tumor margin on
             
             hCB = data.cine.Measure(TagNo).TumorCheckBox;
             if hCB(1).Value ~= hCB(2).Value
@@ -36,7 +38,6 @@ if strcmp(src.Tag, 'Tumor')
         for iT = 1:2
             data.cine.Measure(TagNo).hPlotObj.TumorRect(iT).Visible = 'off';
         end
-        
         % wave dot
         hg = data.cine.Measure(TagNo).hPlotObj.DADot(1);
         for id = 1:length(hg.Children)
@@ -48,8 +49,13 @@ if strcmp(src.Tag, 'Tumor')
                 hg.Children(id).MarkerFaceColor = [0 0 0];
             end
         end
-
         
+        hTM = data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin;
+        hTM.Value = 1;
+        hTM.String = 'Tumor Margin on';
+        hTM.ForegroundColor =  'g';
+        hTM.Enable = 'off'; % tumor margin off
+      
     end
 elseif strcmp(src.Tag, 'Diaphragm')
     hRB = data.cine.Panel.OLView.Comp.Radiobutton.OLView(2);

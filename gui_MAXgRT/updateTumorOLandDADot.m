@@ -22,6 +22,9 @@ h = data.cine.hPlotObj(iV).TumorOLView;
 h.CData(:, :, 1) = ov;
 h.AlphaData = ov./max(ovSum(:));
 
+data.cine.data(iV).Tumor.ovAlpha =  h.AlphaData;
+guidata(hFig, data);
+
 % wave
 if iV == 1 | iV == 3
     nDA = [1 2];
