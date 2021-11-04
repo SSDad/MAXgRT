@@ -67,9 +67,11 @@ axis(data.cine.hAxis(TagNo), 'xy')
             showAllContours(hPlotObj, cineData, iSlice, bShow);
             showTumorCenter(hPlotObj, cineData, iSlice);
             
+            % tumor margin
             if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
                 showTumorMargin(hPlotObj, cineData, iSlice);
             end
+            
             % distance
             if TagNo == 1
                 updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
@@ -90,6 +92,12 @@ axis(data.cine.hAxis(TagNo), 'xy')
                     updateAbTumorLine(hPlotObj, cineData, iSlice, bDist)
                 end
                 updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
+
+                % tumor margin
+                if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+                    showTumorMargin(hPlotObj, cineData, iSlice);
+                end
+
             end
         end
     end
@@ -107,7 +115,7 @@ if data.cine.Panel.Measure.Comp.Radiobutton.Measure(1).Value
 
         hA = data.cine.Measure(TagNo+1).hAxis.DA(1);
         data.cine.Measure(TagNo+1).hPlotObj.DASliceLine.Position = [iSlice hA.YLim(1); iSlice hA.YLim(2)];
-else
+    else
         data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(1, 1) = iSlice;
         data.cine.Measure(TagNo).hPlotObj.TumorSliceLine.Position(2, 1) = iSlice;
         

@@ -30,7 +30,7 @@ if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
     hPlotObj = data.cine.hPlotObj(iV);
     cineData = data.cine.data(iV);
 %     ovAlpha = cineData.Tumor.ovAlpha;
-    iSlice = data.cine.data(min(iV, 3)).iSlice;
+    iSlice = data.cine.data(iV).iSlice;
 
     showTumorMargin(hPlotObj, cineData, iSlice);
 end
