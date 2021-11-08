@@ -164,7 +164,7 @@ for TagNo = 1:4
         if TagNo == 1 | TagNo == 3
             cont = data.cine.data(TagNo).Ab.Snakes;
             [I, data.cine.data(TagNo).Ab.xyLim] = fun_getCineContourOL(cont, data.cine.data(TagNo).mImg, data.cine.data(TagNo).nImg, 'A', x0, y0, dx, dy);
-            blue = cat(3, zeros(size(I)), I, I); 
+            blue = cat(3, zeros(size(I)), zeros(size(I)), I); 
             data.cine.hPlotObj(TagNo).AbOLView =...
                 imshow(blue, data.cine.data(TagNo).RA, 'parent', hA);
             set(data.cine.hPlotObj(TagNo).AbOLView,...
