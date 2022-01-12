@@ -11,8 +11,7 @@ BC_PB = [1 1 1]*0.25;
 
 str{1} = 'Wave';
 str{2} = 'Distance';
-str{3} = 'Tumor Margin';
-str{4} = 'dITV';
+str{3} = '';
 
 y = 1;
 for n = 1:4%nButton
@@ -28,12 +27,11 @@ for n = 1:4%nButton
                                 'ForegroundColor', 'c',...
                                 'Value', 0, ...
                                 'Visible', 'on', ...
-                                'Enable', 'off', ...
                                 'Tag', str{n}, ...
                                 'Callback', @Callback_Cine_Radiobutton_Measure_);
     y_Button(n) = y;
 end
-Comp.Radiobutton.Measure(1).Enable = 'on';
+Comp.Radiobutton.Measure(2).Enable = 'off';
 
 % y = y - h_Gap-h_Button;
 % Comp.Togglebutton.TumorMargin = uicontrol('parent', hPanel, ...
@@ -48,8 +46,7 @@ Comp.Radiobutton.Measure(1).Enable = 'on';
 %                                 'Visible', 'off', ...
 %                                 'Callback', @Callback_Cine_Togglebutton_TumorMargin);
 
-% y = y - h_Gap-h_Button;
-y = h_Gap + h_Button;
+y = y - h_Gap-h_Button;
 Comp.Pushbutton.SavePDF = uicontrol('parent', hPanel, ...
                                 'Style', 'pushbutton',...
                                 'String', 'Save PDF',...

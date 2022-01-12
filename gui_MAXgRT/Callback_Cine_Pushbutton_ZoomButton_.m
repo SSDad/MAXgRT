@@ -61,9 +61,9 @@ else % zoom out
     data.cine.Panel.Measure.Comp.Radiobutton.Measure(1).Value = 0;
     CineMeasureWaveOff(data, TagNo)
     
-    hTM = data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin;
-    hTM.String = 'Tumor Margin on';
-    hTM.ForegroundColor =  'g';
+    hTM = data.cine.Panel.Measure.Comp.Radiobutton.Measure(3);
+%     hTM.String = 'Tumor Margin on';
+%     hTM.ForegroundColor =  'g';
     hTM.Value = 0;
     hTM.Enable = 'off';
 

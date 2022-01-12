@@ -68,7 +68,7 @@ axis(data.cine.hAxis(TagNo), 'xy')
             showTumorCenter(hPlotObj, cineData, iSlice);
             
             % tumor margin
-            if data.cine.Panel.Measure.Comp.Radiobutton.Measure(3).Value
+            if data.cine.Panel.Measure(3).value
                 showTumorMargin(hPlotObj, cineData, iSlice);
             end
             

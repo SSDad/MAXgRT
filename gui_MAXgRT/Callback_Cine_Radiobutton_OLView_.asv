@@ -54,7 +54,7 @@ if strcmp(src.Tag, 'Tumor')
         % tumor margin/dITV  off
         for ib = 3:4
             hTM = data.cine.Panel.Measure.Comp.Radiobutton.Measure(ib);
-%             hTM.Value = 1;
+            hTM.Value = 1;
             hTM.Enable = 'off'; 
         end
       
