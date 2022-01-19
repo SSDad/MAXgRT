@@ -94,7 +94,8 @@ axis(data.cine.hAxis(TagNo), 'xy')
                 updateSnakeTumorLine(hPlotObj, cineData, iSlice, bDist)
 
                 % tumor margin
-                if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+%                 if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+                if data.cine.Panel.Measure.Comp.Radiobutton.Measure(3).Value
                     showTumorMargin(hPlotObj, cineData, iSlice);
                 end
 

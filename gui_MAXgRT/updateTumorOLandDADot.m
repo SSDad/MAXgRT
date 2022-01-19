@@ -26,7 +26,8 @@ data.cine.data(iV).Tumor.ovAlpha =  h.AlphaData;
 guidata(hFig, data);
 
 % tumor margin
-if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+% if data.cine.Panel.Measure.Comp.Togglebutton.TumorMargin.Value
+if  data.cine.Panel.Measure.Comp.Radiobutton.Measure(3).Value    
     hPlotObj = data.cine.hPlotObj(iV);
     cineData = data.cine.data(iV);
 %     ovAlpha = cineData.Tumor.ovAlpha;
