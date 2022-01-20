@@ -71,15 +71,11 @@ if strcmp(src.Tag, 'Tumor Margin')
 
         hPlotObj = data.cine.hPlotObj(iV);
         cineData = data.cine.data(iV);
-%         ovAlpha = cineData.Tumor.ovAlpha;
+        ovAlpha = cineData.Tumor.ovAlpha;
 
         if src.Value
-%             src.String = 'Tumor Margin off';
-%             src.ForegroundColor =  'r';
             showTumorMargin(hPlotObj, cineData, iSlice);
         else
-%             src.String = 'Tumor Margin on';
-%             src.ForegroundColor =  'g';
             hPlotObj.TumorOLView.AlphaData = ovAlpha;
         end
 

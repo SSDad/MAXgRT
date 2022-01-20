@@ -32,6 +32,8 @@ if strcmp(src.Tag, 'Tumor')
                 end
                 data.cine.Measure(TagNo).hPlotObj.TumorRect(iR).Visible = 'on';
                 updateTumorOLandDADot(data.cine.Measure(TagNo).hPlotObj.TumorRect(iR));
+            else
+                updateTumorOLAlpha(TagNo);
             end
         end
     else    % TumorOL off
@@ -54,7 +56,7 @@ if strcmp(src.Tag, 'Tumor')
         % tumor margin/dITV  off
         for ib = 3:4
             hTM = data.cine.Panel.Measure.Comp.Radiobutton.Measure(ib);
-%             hTM.Value = 1;
+            hTM.Value = 0;
             hTM.Enable = 'off'; 
         end
       
